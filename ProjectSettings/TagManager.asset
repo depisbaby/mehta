@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - NetworkItem
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Block
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1929296691
+    locked: 0
+  - name: NetworkItems
+    uniqueID: 219489015
+    locked: 0
+  - name: Blocks
+    uniqueID: 2449234805
+    locked: 0
+  - name: Player
+    uniqueID: 2911289113
+    locked: 0
+  - name: Projectiles
+    uniqueID: 2559738771
+    locked: 0
