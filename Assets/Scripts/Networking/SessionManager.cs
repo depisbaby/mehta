@@ -109,7 +109,8 @@ public class SessionManager : MonoBehaviour
         LocalPlayerManager.Instance.TeleportPlayer(LocalPlayerManager.Instance.currentWorld.worldCenterWorldSpace);
 
         ItemManager.Instance.CreateAndGiveLocalItem(ItemManager.Instance.NameToItemId("basichatchet"), 1, "");
-        ItemManager.Instance.CreateAndGiveLocalItem(ItemManager.Instance.NameToItemId("scroll"), 1, ItemManager.Instance.SpellCasterDefaultData());
+        //ItemManager.Instance.CreateAndGiveLocalItem(ItemManager.Instance.NameToItemId("scroll"), 1, ItemManager.Instance.SpellCasterDefaultData());
+        ItemManager.Instance.CreateAndGiveLocalItem(ItemManager.Instance.NameToItemId("tomb_of_basics"), 1, "");
     }
 
 

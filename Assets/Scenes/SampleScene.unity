@@ -4057,6 +4057,7 @@ MonoBehaviour:
   - {fileID: 5210898039212590629, guid: 48f93c19c41098c45b4f394bb4e8eb0e, type: 3}
   - {fileID: 5210898039212590629, guid: 47d8d32abad91c04fa257295d1a9c193, type: 3}
   - {fileID: 4234477166759747882, guid: fe40ed5d62168e943bea55e4bf454c44, type: 3}
+  - {fileID: -3591201683018236886, guid: 23240dfa11634e143ab2fb1c37ce868b, type: 3}
   networkItemPrefab: {fileID: 5115308989623036576, guid: adf066331fb2a448e931724e6ebcc7f7, type: 3}
 --- !u!114 &959545430
 MonoBehaviour:

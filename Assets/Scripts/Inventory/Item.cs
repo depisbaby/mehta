@@ -24,6 +24,7 @@ public class Item : MonoBehaviour
         Placeable = 1,
         Hatchet = 2,
         SpellCaster = 3,
+        Weapon = 4,
 
     }
 
