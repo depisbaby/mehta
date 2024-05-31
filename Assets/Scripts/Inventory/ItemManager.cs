@@ -101,7 +101,7 @@ public class ItemManager : NetworkBehaviour
         //item.transform.parent = transform;
         item.amount = amount;
 
-        //Apply data
+        item.data = data;
 
         return item;
     }
@@ -113,7 +113,20 @@ public class ItemManager : NetworkBehaviour
     }
 
     #region Utility
-        
+    
+    public FixedString128Bytes SpellCasterDefaultData()
+    {
+        FixedString128Bytes fstring = new FixedString128Bytes();
+
+        for (int i = 0; i <18; i++)
+        {
+            fstring = fstring + "-----";
+        }
+
+
+        return fstring;
+    }
+
     public int NameToItemId(string name)
     {
         foreach (var item in items)

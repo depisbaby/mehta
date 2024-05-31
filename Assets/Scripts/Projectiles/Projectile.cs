@@ -26,6 +26,7 @@ public class Projectile : NetworkBehaviour
     public LayerMask hittingLayers;
     public NetworkObject networkObject;
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
 
     private void Awake()
     {
@@ -52,7 +53,7 @@ public class Projectile : NetworkBehaviour
         lastPosition = transform.position;
 
         gameObject.SetActive(true);
-        NetworkSetActiveServerRpc(true);
+        NetworkAppearServerRpc(true, copiedData.projectileId);
 
         active = true;
     }
@@ -60,6 +61,7 @@ public class Projectile : NetworkBehaviour
     public void UpdateProjectile()
     {
         ApplyProjectileMods();
+        animator.Play(copiedData.animName);
         spriteRenderer.sprite = copiedData.sprite;
     }
 
@@ -84,7 +86,7 @@ public class Projectile : NetworkBehaviour
         }
 
         gameObject.SetActive(false);
-        NetworkSetActiveServerRpc(false);
+        NetworkAppearServerRpc(false, 0);
     }
 
     private void Update()
@@ -131,14 +133,19 @@ public class Projectile : NetworkBehaviour
     }
 
     #region SetActive
-    [ServerRpc] public void NetworkSetActiveServerRpc(bool active)
+    [ServerRpc] public void NetworkAppearServerRpc(bool appears, int projectilePrefabId)
     {
-        NetworkSetActiveClientRpc(active);
+        NetworkAppearClientRpc(appears, projectilePrefabId);
     }
 
-    [ClientRpc] public void NetworkSetActiveClientRpc(bool active)
+    [ClientRpc] public void NetworkAppearClientRpc(bool appears, int projectilePrefabId)
     {
-        gameObject.SetActive(active);
+        if (appears)
+        {
+            animator.Play(ProjectileManager.Instance.projectilePrefabs[projectilePrefabId].animName);
+        }
+
+        gameObject.SetActive(appears);
     }
     #endregion
 

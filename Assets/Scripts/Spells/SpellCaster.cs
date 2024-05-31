@@ -13,6 +13,8 @@ public class SpellCaster : Item
 
     [SerializeField]List<Spell> debugSpellQueue;
 
+    public bool onCooldown;
+
     private void Update()
     {
         
@@ -24,8 +26,9 @@ public class SpellCaster : Item
     }
 
     public override void UseRightClick() 
-    { 
-    
+    {
+        if (onCooldown) return;
+        ScriptureMenu.Instance.OpenMenu(this);
     }
 
     public override void CustomMessage(string message)
@@ -63,9 +66,22 @@ public class SpellCaster : Item
 
     void PlayerCastSpell()
     {
+        if (onCooldown) return;
+        
         casterPosition = LocalPlayerManager.Instance.player.transform.position;
         casterDirection = LocalPlayerManager.Instance.lookingAtDirection;
 
+        if(baseSpell == null)
+        {
+            return;
+        }
+
+        onCooldown = true;
         baseSpell.Cast(casterPosition, casterDirection);
+    }
+
+    public void EndCoolDown()
+    {
+        onCooldown = false;
     }
 }

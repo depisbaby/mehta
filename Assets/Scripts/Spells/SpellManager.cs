@@ -13,12 +13,12 @@ public class SpellManager : NetworkBehaviour
 
     public string[] existingCharacters;
     public List<Spell> spells;
-    Dictionary<string, Spell> spellsDict;
+    Dictionary<string, Spell> spellsDict = new Dictionary<string, Spell>();
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GenerateSpells("");
     }
 
     // Update is called once per frame
@@ -36,15 +36,22 @@ public class SpellManager : NetworkBehaviour
         }
     }
 
+    public Spell GetSpellByName(string name)
+    {
+        if (!spellsDict.ContainsKey(name)) return null;
+
+        return spellsDict[name];
+    }
+
     string GetUniqueRunicName()
     {
         while (true)
         {
             string name = string.Empty;
-            int lenght = UnityEngine.Random.Range(1, 8);
+            int length = UnityEngine.Random.Range(1, 6);
             string lastCharacter = string.Empty;
 
-            for (int i = 0; i < lenght; i++) 
+            for (int i = 0; i < length; i++) 
             {
                 string nextCharacter = existingCharacters[UnityEngine.Random.Range(0, existingCharacters.Length)];
                 if (nextCharacter == lastCharacter) continue;
@@ -52,7 +59,17 @@ public class SpellManager : NetworkBehaviour
                 name = name + nextCharacter;
             }
 
-            if(!spellsDict.ContainsKey(name)) 
+            if(name.Length != 5)
+            {
+                for (int i = name.Length; i < 5; i++)
+                {
+                    name = name + "-";
+                }
+            }
+
+            //Debug.Log(name);
+
+            if (!spellsDict.ContainsKey(name)) 
             {
                 return name;
             }

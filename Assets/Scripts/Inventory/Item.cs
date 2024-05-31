@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
     //Network
     [HideInInspector]public int itemId;
     public ushort amount;
-    [HideInInspector]public FixedString128Bytes data;
+    public FixedString128Bytes data;
 
     //Local
     public string itemName;

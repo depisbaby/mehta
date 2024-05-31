@@ -39,7 +39,7 @@ public class UselessOrb : Spell, IProjectileParent
         base.Cast(position, direction);
 
         //Spawn projectile, aura, effect, etc. here...
-        projectile = ProjectileManager.Instance.ShootClientProjectile(1, this, position, direction);
+        projectile = ProjectileManager.Instance.ShootClientProjectile(2, this, position, direction);
 
         if (projectile == null) return;
 

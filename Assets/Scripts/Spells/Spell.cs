@@ -37,16 +37,27 @@ public class Spell : MonoBehaviour
     protected SpellCaster spellCaster;
     protected List<Spell> nextSpells = new List<Spell>();
     [SerializeField]protected SpellMods mods;
+    protected bool isLastSpell;
 
     public virtual void InitializeSpell(Queue<Spell> spells, SpellMods _mods, SpellCaster _spellCaster)
     {
         spellCaster = _spellCaster;
         mods = _mods;
+
+        if(spells.Count == 0)
+        {
+            isLastSpell = true;
+        }
     }
 
     public virtual void Cast(Vector2 position, Vector2 direction)
     {
         //Drain mana
+
+        if(isLastSpell)
+        {
+            spellCaster.EndCoolDown();
+        }
     }
 
     public virtual void EndCast(Vector2 position, Vector2 direction)

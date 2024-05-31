@@ -26,7 +26,12 @@ public class ProjectileManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int j = 1; j < projectilePrefabs.Count; j++)
+        {
+            projectilePrefabs[j].projectileId = j;
+            
+        }
+    
     }
 
     // Update is called once per frame
@@ -80,7 +85,7 @@ public class ProjectileManager : NetworkBehaviour
             NetworkObject no1 = projectile.gameObject.GetComponent<NetworkObject>();
             no1.SpawnWithOwnership(clientId);
             projectile.gameObject.transform.parent = go.transform;
-            projectile.NetworkSetActiveClientRpc(false);
+            projectile.NetworkAppearClientRpc(false, 0);
         }
 
         ClientRpcParams clientRpcParams = new ClientRpcParams

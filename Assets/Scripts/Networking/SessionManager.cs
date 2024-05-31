@@ -8,6 +8,7 @@ using Unity.Netcode;
 using Unity.Networking.Transport;
 using Unity.Networking.Transport.Relay;
 using Unity.Networking.Transport.Utilities;
+using Unity.Collections;
 
 public class SessionManager : MonoBehaviour
 {
@@ -108,7 +109,7 @@ public class SessionManager : MonoBehaviour
         LocalPlayerManager.Instance.TeleportPlayer(LocalPlayerManager.Instance.currentWorld.worldCenterWorldSpace);
 
         ItemManager.Instance.CreateAndGiveLocalItem(ItemManager.Instance.NameToItemId("basichatchet"), 1, "");
-        ItemManager.Instance.CreateAndGiveLocalItem(ItemManager.Instance.NameToItemId("scroll"), 1, "");
+        ItemManager.Instance.CreateAndGiveLocalItem(ItemManager.Instance.NameToItemId("scroll"), 1, ItemManager.Instance.SpellCasterDefaultData());
     }
 
 
