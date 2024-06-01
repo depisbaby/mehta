@@ -8,6 +8,16 @@ public class Hatchet : Item
     [SerializeField] int efficiency;
     public override void UseLeftClick()
     {
+        if (LocalPlayerManager.Instance.player.characterGestures.gestureActive) return;
+
+        float speed = 2;
+        int direction = 1;
+        if(LocalPlayerManager.Instance.lookingAtDirection.x > 0)
+        {
+            direction = -1;
+        }
+        LocalPlayerManager.Instance.player.characterGestures.Swing(direction, speed);
+
         RaycastHit2D hit = Physics2D.Raycast(LocalPlayerManager.Instance.player.transform.position, LocalPlayerManager.Instance.lookingAtDirection, LocalPlayerManager.Instance.chopRange, LocalPlayerManager.Instance.chopLayerMask);
         if (hit)
         {
@@ -19,7 +29,10 @@ public class Hatchet : Item
             if (block.chopsLeft <= 0)
             {
                 WorldBuilder.Instance.RemoveBlockServerRpc(block.parentWorld.worldName, (int)block.transform.position.x, (int)block.transform.position.y);
+                return;
             }
+
+            WorldBuilder.Instance.PokeBlockServerRPC(block.parentWorld.worldName, (int)block.transform.position.x, (int)block.transform.position.y, LocalPlayerManager.Instance.lookingAtDirection);
         }
     }
 }

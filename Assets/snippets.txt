@@ -1,0 +1,21 @@
+﻿
+#region Client to All client RPC Structure
+    [ServerRpc]
+    void MethodServerRPC()
+    {
+        //server validation here
+
+        MethodClientRPC();//send to others
+    }
+    [ClientRpc]
+    void MethodClientRPC()
+    {
+        Method();
+    }
+
+    void Method()
+    {
+        //logic here
+    }
+
+    #endregion

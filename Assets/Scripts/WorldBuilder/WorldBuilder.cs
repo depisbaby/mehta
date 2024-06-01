@@ -101,8 +101,6 @@ public class WorldBuilder : NetworkBehaviour
 
         if(IsClient)RequestWorldChangesServerRpc(NetworkManager.Singleton.LocalClientId);
 
-        
-
     }
 
 
@@ -328,7 +326,7 @@ public class WorldBuilder : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RemoveBlockClientRpc(FixedString128Bytes worldName, int xPosition, int yPosition)
+    void RemoveBlockClientRpc(FixedString128Bytes worldName, int xPosition, int yPosition)
     {
         World world = GetWorldByName(worldName.ToString());
 
@@ -344,6 +342,29 @@ public class WorldBuilder : NetworkBehaviour
         block.parentWorld.blockGrid[(int)block.transform.position.x, (int)block.transform.position.y] = null;
 
         Destroy(block.gameObject);
+    }
+
+    #endregion
+
+    #region Poke Block
+
+    [ServerRpc(RequireOwnership = false)]
+    public void PokeBlockServerRPC(FixedString128Bytes worldName, int xPosition, int yPosition, Vector2 direction)
+    {
+        PokeBlockClientRPC(worldName, xPosition, yPosition, direction);
+    }
+    [ClientRpc]
+    void PokeBlockClientRPC(FixedString128Bytes worldName, int xPosition, int yPosition, Vector2 direction)
+    {
+        World world = GetWorldByName(worldName.ToString());
+
+        if (world == null) return;
+
+        Block block = world.blockGrid[xPosition, yPosition];
+        if (block == null) return;
+
+        block.Poke(direction);
+
     }
 
     #endregion

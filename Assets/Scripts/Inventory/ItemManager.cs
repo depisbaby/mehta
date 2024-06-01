@@ -23,6 +23,7 @@ public class ItemManager : NetworkBehaviour
         for (int i = 1; i < items.Count; i++)
         {
             items[i].itemId = i;
+            MiscLibrary.Instance.AddToSpriteLibrary(items[i].itemSprite);
         }
     }
 

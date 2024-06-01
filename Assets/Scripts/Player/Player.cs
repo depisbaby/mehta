@@ -10,6 +10,7 @@ public class Player : NetworkBehaviour
     public NetworkVariable<int> health = new NetworkVariable<int>();
 
     public Rigidbody2D rb;
+    public CharacterGestures characterGestures;
 
 
     // Start is called before the first frame update
@@ -17,7 +18,6 @@ public class Player : NetworkBehaviour
     {
         if (IsOwner)
         {
-         
             LocalPlayerManager.Instance.player = this;
 
             CameraController.Instance.FollowObject(gameObject);
