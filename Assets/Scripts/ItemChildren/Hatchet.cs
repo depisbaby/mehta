@@ -35,4 +35,17 @@ public class Hatchet : Item
             WorldBuilder.Instance.PokeBlockServerRPC(block.parentWorld.worldName, (int)block.transform.position.x, (int)block.transform.position.y, LocalPlayerManager.Instance.lookingAtDirection);
         }
     }
+
+    public override void CustomMessage(string message)
+    {
+        switch (message)
+        {
+            case "equip":
+                LocalPlayerManager.Instance.player.characterGestures.ChangeSpriteOwner(itemSprite, 0.8f, new Vector2(0f, 0.5f), 0f);
+                break;
+
+            default:
+                break;
+        }
+    }
 }

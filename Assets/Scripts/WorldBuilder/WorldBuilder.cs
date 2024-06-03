@@ -230,7 +230,7 @@ public class WorldBuilder : NetworkBehaviour
     {
         World world = GetWorldByName(worldName.ToString());
         bool placementSuccessful = false;
-        if (world != null)
+        if (world != null && world.blockGrid[xPosition,yPosition] == null)
         {
             worldChanges.Add(new WorldChange(worldName.ToString(), (ushort)xPosition, (ushort)yPosition, blockId));
 
@@ -276,10 +276,10 @@ public class WorldBuilder : NetworkBehaviour
         if(LocalPlayerManager.Instance.blockBeingPlaced.amount == 0)
         {
             DestroyImmediate(LocalPlayerManager.Instance.blockBeingPlaced.gameObject);
-            InventoryMenu.Instance.UpdateInventory();
-            HUD.Instance.UpdateHotbarSlots();
             
         }
+        InventoryMenu.Instance.UpdateInventory();
+        HUD.Instance.UpdateHotbarSlots();
 
         LocalPlayerManager.Instance.blockBeingPlaced = null;
     }

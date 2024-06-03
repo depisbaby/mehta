@@ -33,6 +33,7 @@ public class CharacterGestures : NetworkBehaviour
     {
         if (!IsOwner) return;
         int spriteId = MiscLibrary.Instance.GetSpriteId(sprite);
+        ChangeSprite(spriteId, size, posOffset, rotationOffset);
         ChangeSpriteServerRPC(spriteId, size, posOffset, rotationOffset);
     }
 

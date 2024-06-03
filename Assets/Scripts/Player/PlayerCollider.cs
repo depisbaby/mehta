@@ -17,7 +17,7 @@ public class PlayerCollider : NetworkBehaviour, IHittable
             NetworkItem networkItem = collision.gameObject.GetComponent<NetworkItem>();
             ulong networkId = networkItem.no.NetworkObjectId;
             
-            ItemManager.Instance.AttemptPickingUpServerRpc(networkId, OwnerClientId, InventoryMenu.Instance.CheckFit(networkItem.itemId.Value));
+            ItemManager.Instance.AttemptPickingUpServerRpc(networkId, OwnerClientId, InventoryMenu.Instance.CheckSpaceFor(networkItem.itemId.Value));
         }
     }
 

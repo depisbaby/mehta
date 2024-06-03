@@ -56,7 +56,7 @@ public class HUD : MonoBehaviour
     }
     public void HotbarSelect(int slotIndex)
     {
-        hotbarShow = 3f;
+        hotbarShow = 10f;
         selectTarget = itemSlots[slotIndex].transform.localPosition;
     }
     public void UpdateHotbarSlots()

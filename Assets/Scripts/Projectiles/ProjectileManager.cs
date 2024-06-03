@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-using UnityEditor.PackageManager.Requests;
 using System.Threading.Tasks;
 
 public class ProjectileManager : NetworkBehaviour
@@ -73,7 +72,7 @@ public class ProjectileManager : NetworkBehaviour
     } 
 
     #region 
-    [ServerRpc] public void RequestClientProjectilesServerRpc(ulong clientId)
+    [ServerRpc(RequireOwnership = false)] public void RequestClientProjectilesServerRpc(ulong clientId)
     {
         GameObject go = Instantiate(clientProjectileBase);
         NetworkObject no = go.GetComponent<NetworkObject>();

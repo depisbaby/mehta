@@ -25,6 +25,7 @@ public class InventoryMenu : MenuWindow, IItemSlot
 
     public List<ItemSlot> hotbarItemSlots = new List<ItemSlot>();
     List<ItemSlot> inventoryItemSlots = new List<ItemSlot>();
+    List<ItemSlot> combinedItemSlots = new List<ItemSlot>();
     public ItemSlot equippedSlot;
 
     [SerializeField]
@@ -45,12 +46,17 @@ public class InventoryMenu : MenuWindow, IItemSlot
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    public void EnterInGame()
+    {
         for (int i = 0; i < 9; i++)
         {
             GameObject go = Instantiate(itemSlotPrefab);
             go.name = "hotbarSlot" + i;
             go.transform.parent = hotbarTransform;
-            go.transform.localPosition = new Vector3(i*spacing, 0, 0);
+            go.transform.localPosition = new Vector3(i * spacing, 0, 0);
 
             ItemSlot iS = go.GetComponent<ItemSlot>();
             iS._interface = this;
@@ -74,6 +80,17 @@ public class InventoryMenu : MenuWindow, IItemSlot
                 a++;
             }
         }
+
+        foreach (ItemSlot iS in hotbarItemSlots)
+        {
+            combinedItemSlots.Add(iS);
+        }
+
+        foreach (ItemSlot iS in inventoryItemSlots)
+        {
+            combinedItemSlots.Add(iS);
+        }
+
 
         MenuManager.Instance.CloseWindow("InventoryMenu");
         equippedSlot = hotbarItemSlots[0];
@@ -192,7 +209,7 @@ public class InventoryMenu : MenuWindow, IItemSlot
         Debug.Log("afgasdgasdg");
         item.gameObject.transform.parent = ItemManager.Instance.transform;
 
-        foreach (var slot in inventoryItemSlots)
+        foreach (var slot in combinedItemSlots)
         {
             if (slot.placedItem == null)//Find a empty slot
             {
@@ -219,24 +236,26 @@ public class InventoryMenu : MenuWindow, IItemSlot
                 if (item.amount == 0)
                 {
                     Destroy(item.gameObject);
+                    UpdateInventory();
                     return;
                 }
 
             }
 
         }
-
+        UpdateInventory();
         //If no room, destroy item/amount to prevent duplication exploits
         Console.Instance.ShowMessageInConsole(gameObject, "Excess local items detected!");
 
     }
 
-    public ushort CheckFit(int itemId)
+    public ushort CheckSpaceFor(int itemId)
     {
         Item item = ItemManager.Instance.items[itemId];
 
         ushort res = 0;
-        foreach (var slot in inventoryItemSlots)
+
+        foreach (var slot in combinedItemSlots)
         {
             if (slot.placedItem == null)//Find a empty slot
             {
@@ -263,32 +282,8 @@ public class InventoryMenu : MenuWindow, IItemSlot
 
     public void UpdateInventory()
     {
-        foreach (var item in hotbarItemSlots)
-        {
-            if(item.placedItem != null)
-            {
-                item.icon.color = Color.white;
-                item.icon.sprite = item.placedItem.itemSprite;
 
-                if (item.placedItem.stackable)
-                {
-                    item.amountTmp.text = item.placedItem.amount.ToString();
-
-                }
-                else
-                {
-                    item.amountTmp.text = "";
-                }
-
-            }
-            else
-            {
-                item.icon.color = Color.clear;
-                item.amountTmp.text = "";
-            }
-        }
-
-        foreach (var item in inventoryItemSlots)
+        foreach (var item in combinedItemSlots)
         {
             if (item.placedItem != null)
             {
@@ -311,6 +306,8 @@ public class InventoryMenu : MenuWindow, IItemSlot
                 item.amountTmp.text = "";
             }
         }
+
+        HUD.Instance.UpdateHotbarSlots();
     }
 
     #endregion
@@ -330,8 +327,12 @@ public class InventoryMenu : MenuWindow, IItemSlot
         }
 
         equippedSlot = hotbarItemSlots[selectedHotbarSlotIndex];
+        if(equippedSlot.placedItem != null)
+        {
+            equippedSlot.placedItem.CustomMessage("equip");
+        }
         HUD.Instance.HotbarSelect(selectedHotbarSlotIndex);
-
+        UpdateInventory();
 
     }
 
@@ -364,6 +365,14 @@ public class InventoryMenu : MenuWindow, IItemSlot
             destinationSlot.placedItem = startingSlot.placedItem;
             startingSlot.placedItem = null;
 
+        }
+
+        if(destinationSlot == equippedSlot || startingSlot == equippedSlot)
+        {
+            if (equippedSlot.placedItem != null)
+            {
+                equippedSlot.placedItem.CustomMessage("equip");
+            }
         }
 
         UpdateInventory();
