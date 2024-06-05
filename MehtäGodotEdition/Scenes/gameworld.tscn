@@ -1,17 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=10 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Texture2D" uid="uid://bi8r8q3qrkihb" path="res://Sprites/man1.png" id="1_vt3kw"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="2_aufcd"]
 [ext_resource type="Texture2D" uid="uid://chjy3ky13epnt" path="res://Sprites/pinetree1.png" id="3_oq4aq"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ewugi"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3u276"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ni1p0"]
+size = Vector2(24.875, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6761y"]
+size = Vector2(26, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p05hm"]
+size = Vector2(200, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dakl1"]
+size = Vector2(200, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jx31"]
 
 [node name="root" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
-motion_mode = 1
+disable_mode = 2
+collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 position = Vector2(0, 1)
@@ -21,18 +34,55 @@ texture = ExtResource("1_vt3kw")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(0.25, 0.25)
 
-[node name="PlayerMovement" type="Node2D" parent="Player"]
+[node name="PlayerMovement" type="Node2D" parent="Player" node_paths=PackedStringArray("rightBumper", "leftBumper", "upBumper", "downBumper")]
 script = ExtResource("2_aufcd")
+rightBumper = NodePath("../RightBumper")
+leftBumper = NodePath("../LeftBumper")
+upBumper = NodePath("../UpBumper")
+downBumper = NodePath("../DownBumper")
 movementSpeed = 5.0
 acceleration = 0.07
 movementEnabled = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-scale = Vector2(12.5, 12.5)
-shape = SubResource("CircleShape2D_ewugi")
+[node name="BodyCollision" type="CollisionShape2D" parent="Player"]
+scale = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_3u276")
+
+[node name="RightBumper" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/RightBumper"]
+position = Vector2(112.5, 0)
+shape = SubResource("RectangleShape2D_ni1p0")
+
+[node name="LeftBumper" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/LeftBumper"]
+position = Vector2(-113, 0)
+shape = SubResource("RectangleShape2D_6761y")
+
+[node name="UpBumper" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/UpBumper"]
+position = Vector2(0, -110)
+shape = SubResource("RectangleShape2D_p05hm")
+
+[node name="DownBumper" type="Area2D" parent="Player"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/DownBumper"]
+position = Vector2(0, 110)
+shape = SubResource("RectangleShape2D_dakl1")
 
 [node name="BLOCK_pine_tree" type="StaticBody2D" parent="."]
 position = Vector2(375, 0)
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="BLOCK_pine_tree"]
 texture = ExtResource("3_oq4aq")
