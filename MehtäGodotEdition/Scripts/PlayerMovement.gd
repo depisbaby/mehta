@@ -79,3 +79,7 @@ func Movement(delta):
 	pass
 
 
+
+
+func _on_player_slot_focus_entered():
+	pass # Replace with function body.
