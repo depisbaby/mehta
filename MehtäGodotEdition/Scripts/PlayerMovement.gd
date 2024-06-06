@@ -40,8 +40,6 @@ func Movement(delta):
 	var input: Vector2 
 	var motion: Vector2
 	
-	movingDirection = (parent.global_position - lastFramePosition).normalized()
-	
 	var right = Input.get_action_raw_strength("MoveRight")
 	var left = Input.get_action_raw_strength("MoveLeft")
 	var down = Input.get_action_raw_strength("MoveDown")
@@ -59,14 +57,21 @@ func Movement(delta):
 	input.x = right - left
 	input.y = down - up
 	
+	if input == Vector2.ZERO:
+		motion = movingDirection
+	else:
+		motion = input.normalized()
+		
+	
 	movementSlope = clamp(movementSlope + (acceleration * ((clamp(abs(input.x) + abs(input.y),0.0,1.0)*2)-1)), 0.0, 1.0)
 	
-	parent.velocity = input * delta * movementSpeed * movementSlope * 100
+	parent.velocity = motion * delta * movementSpeed * movementSlope * 100
 	parent.move_and_collide(parent.velocity)
 			
 	
-	if tick > 1:
+	if tick > 0:
 		tick = 0
+		movingDirection = (parent.global_position - lastFramePosition).normalized()
 		lastFramePosition = parent.global_position
 	else:
 		tick = tick + 1

@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=13 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Texture2D" uid="uid://bi8r8q3qrkihb" path="res://Sprites/man1.png" id="1_vt3kw"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="2_aufcd"]
 [ext_resource type="Texture2D" uid="uid://chjy3ky13epnt" path="res://Sprites/pinetree1.png" id="3_oq4aq"]
+[ext_resource type="Texture2D" uid="uid://c8b2m2klra3t" path="res://Sprites/white.png" id="4_h3kp6"]
+[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="5_n5jqb"]
+[ext_resource type="PackedScene" uid="uid://c5wx1aqqcx2h6" path="res://Prefabs/item_slot.tscn" id="5_wvk8h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3u276"]
 
@@ -20,7 +23,7 @@ size = Vector2(200, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8jx31"]
 
-[node name="root" type="Node2D"]
+[node name="root" type="Node"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
 disable_mode = 2
@@ -40,7 +43,7 @@ rightBumper = NodePath("../RightBumper")
 leftBumper = NodePath("../LeftBumper")
 upBumper = NodePath("../UpBumper")
 downBumper = NodePath("../DownBumper")
-movementSpeed = 5.0
+movementSpeed = 10.0
 acceleration = 0.07
 movementEnabled = true
 
@@ -90,3 +93,21 @@ texture = ExtResource("3_oq4aq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BLOCK_pine_tree"]
 scale = Vector2(12.5, 12.5)
 shape = SubResource("RectangleShape2D_8jx31")
+
+[node name="Inventory" type="CanvasLayer" parent="."]
+script = ExtResource("5_n5jqb")
+
+[node name="BackGround" type="TextureRect" parent="Inventory"]
+texture_filter = 1
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 832.0
+offset_bottom = 1024.0
+texture = ExtResource("4_h3kp6")
+
+[node name="PlayerSlot" parent="Inventory/BackGround" instance=ExtResource("5_wvk8h")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 100.0
