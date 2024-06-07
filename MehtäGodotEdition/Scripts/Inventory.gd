@@ -8,7 +8,7 @@ var grid_width = 5
 var grid_height = 5
 
 var inventorySlotScene
-var inventorySlots
+var inventorySlots = []
 
 
 func _ready():
@@ -19,9 +19,12 @@ func _ready():
 		
 		for j in grid_height:
 			var instance = inventorySlotScene.instantiate()
+			var i_inventorySlot = instance as InventorySlot
 			inventorySlots.append(instance)
 			backGround.add_child(instance)
 			instance.position = Vector2(120 * i + 20, 120 * j + 20)
+			i_inventorySlot.id = ((i-1) * grid_width + j) + grid_width
+			print(instance.id)
 			
 			
 	
@@ -61,5 +64,3 @@ func Start():
 	pass
 	
 
-func _on_player_slot_item_dropped(id):
-	pass # Replace with function body.

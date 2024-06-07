@@ -1,12 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=12 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Texture2D" uid="uid://bi8r8q3qrkihb" path="res://Sprites/man1.png" id="1_vt3kw"]
 [ext_resource type="Script" path="res://Scripts/PlayerMovement.gd" id="2_aufcd"]
 [ext_resource type="Texture2D" uid="uid://chjy3ky13epnt" path="res://Sprites/pinetree1.png" id="3_oq4aq"]
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="5_n5jqb"]
 [ext_resource type="Texture2D" uid="uid://c58ast2tjp485" path="res://Sprites/checkerboard.png" id="5_p5s3x"]
-[ext_resource type="PackedScene" uid="uid://c5wx1aqqcx2h6" path="res://Prefabs/item_slot.tscn" id="5_wvk8h"]
-[ext_resource type="Script" path="res://Scripts/InventorySlot.gd" id="7_ith8r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3u276"]
 
@@ -96,7 +94,6 @@ scale = Vector2(12.5, 12.5)
 shape = SubResource("RectangleShape2D_8jx31")
 
 [node name="Inventory" type="CanvasLayer" parent="." node_paths=PackedStringArray("backGround")]
-unique_name_in_owner = true
 script = ExtResource("5_n5jqb")
 backGround = NodePath("BackGround")
 
@@ -107,11 +104,3 @@ offset_top = 60.0
 offset_right = 828.0
 offset_bottom = 1020.0
 texture = ExtResource("5_p5s3x")
-
-[node name="PlayerSlot" parent="Inventory/BackGround" instance=ExtResource("5_wvk8h")]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 120.0
-offset_bottom = 120.0
-script = ExtResource("7_ith8r")

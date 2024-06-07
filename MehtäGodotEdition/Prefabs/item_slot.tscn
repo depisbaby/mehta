@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5wx1aqqcx2h6"]
+[gd_scene load_steps=3 format=3 uid="uid://c5wx1aqqcx2h6"]
 
 [ext_resource type="Texture2D" uid="uid://n7j4tj1wbqfp" path="res://Sprites/gray.png" id="1_evdxw"]
+[ext_resource type="Script" path="res://Scripts/InventorySlot.gd" id="2_ys74u"]
 
 [node name="PlayerSlot" type="TextureRect"]
 offset_left = 24.0
@@ -8,3 +9,4 @@ offset_top = 24.0
 offset_right = 124.0
 offset_bottom = 124.0
 texture = ExtResource("1_evdxw")
+script = ExtResource("2_ys74u")

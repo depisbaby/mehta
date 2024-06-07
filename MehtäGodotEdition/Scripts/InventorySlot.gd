@@ -1,10 +1,11 @@
-extends TextureRect
+extends Node
 
-var id
+class_name InventorySlot
+
+var id: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var inventory = $Inventory
 	
 	pass # Replace with function body.
 
