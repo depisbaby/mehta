@@ -1,22 +1,11 @@
 extends Node
-
-class_name InventorySlot
-
-var id: int
-var placedItem: Item
-
-@export var amountLabel: Label
+class_name Item
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	pass
-	
-
-

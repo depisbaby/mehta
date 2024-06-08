@@ -8,23 +8,26 @@ var grid_width = 5
 var grid_height = 5
 
 var inventorySlotScene
-var inventorySlots = []
+var inventorySlots: Array[InventorySlot] = []
 
 
 func _ready():
 	
 	inventorySlotScene = preload("res://Prefabs/item_slot.tscn")
 	
-	for i in grid_width:
+	for i in grid_height:
 		
-		for j in grid_height:
+		for j in grid_width:
 			var instance = inventorySlotScene.instantiate()
 			var i_inventorySlot = instance as InventorySlot
 			inventorySlots.append(instance)
 			backGround.add_child(instance)
-			instance.position = Vector2(120 * i + 20, 120 * j + 20)
+			instance.position = Vector2(120 * j + 20, 120 * i + 20)
 			i_inventorySlot.id = ((i-1) * grid_width + j) + grid_width
-			print(instance.id)
+			inventorySlots[i_inventorySlot.id] = i_inventorySlot
+			var label: Label = inventorySlots[i_inventorySlot.id].amountLabel
+			
+			
 			
 			
 	

@@ -28,7 +28,7 @@ size = Vector2(200, 20)
 disable_mode = 2
 collision_mask = 3
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="torso" type="Sprite2D" parent="Player"]
 position = Vector2(0, 1)
 scale = Vector2(16, 16)
 texture = ExtResource("1_vt3kw")

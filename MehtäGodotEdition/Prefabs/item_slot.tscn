@@ -3,10 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://n7j4tj1wbqfp" path="res://Sprites/gray.png" id="1_evdxw"]
 [ext_resource type="Script" path="res://Scripts/InventorySlot.gd" id="2_ys74u"]
 
-[node name="PlayerSlot" type="TextureRect"]
+[node name="ItemSlot" type="TextureRect" node_paths=PackedStringArray("amountLabel")]
 offset_left = 24.0
 offset_top = 24.0
 offset_right = 124.0
 offset_bottom = 124.0
 texture = ExtResource("1_evdxw")
 script = ExtResource("2_ys74u")
+amountLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
