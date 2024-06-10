@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://csw2gfwqmsa7q"]
+
+[ext_resource type="Texture2D" uid="uid://c5vkhviw0dqro" path="res://Sprites/Trees/tree3.png" id="1_vssyj"]
+
+[node name="Tree_Type3_" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.0514, -1.4269, 3.72073)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2.70815, 0)
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("1_vssyj")
