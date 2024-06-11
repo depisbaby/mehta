@@ -1,8 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://bimj026worpdx"]
+[gd_scene load_steps=4 format=3 uid="uid://bimj026worpdx"]
 
 [ext_resource type="Texture2D" uid="uid://g8031lg8arv1" path="res://Sprites/items/pedant.png" id="1_bcien"]
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_qpqy8"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jq08f"]
+size = Vector3(0.52121, 0.141663, 0.600937)
+
+[node name="Item_Silvercross" type="Node3D" node_paths=PackedStringArray("sprite") groups=["Item"]]
+script = ExtResource("1_qpqy8")
+itemName = null
+displayName = "Silver Cross"
+description = null
+amount = null
+stackable = null
+sprite = NodePath("Sprite3D")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 
@@ -11,3 +22,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0
 double_sided = false
 texture_filter = 0
 texture = ExtResource("1_bcien")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00196838, 0.0853577, 0.00295258)
+shape = SubResource("BoxShape3D_jq08f")

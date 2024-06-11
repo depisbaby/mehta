@@ -1,14 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=17 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Texture2D" uid="uid://bntqhh626r8xh" path="res://Sprites/fps/hand_empty_open.png" id="1_uee6f"]
 [ext_resource type="Script" path="res://Scripts/fps_controller.gd" id="3_tg7rf"]
 [ext_resource type="Material" uid="uid://brqus26fqck8e" path="res://Materials/ground1.material" id="4_f0sri"]
+[ext_resource type="Script" path="res://Scripts/PlayerInteract.gd" id="5_g86y7"]
 [ext_resource type="Script" path="res://Scripts/Inventory.gd" id="5_n5jqb"]
 [ext_resource type="Texture2D" uid="uid://c58ast2tjp485" path="res://Sprites/checkerboard.png" id="5_p5s3x"]
 [ext_resource type="PackedScene" uid="uid://fvemrwpa34q" path="res://Prefabs/Foliage/tree_type_1_.tscn" id="5_pntuy"]
 [ext_resource type="PackedScene" uid="uid://cv8oto8i8h4ql" path="res://Prefabs/Foliage/tree_type_2_.tscn" id="6_v1il2"]
 [ext_resource type="PackedScene" uid="uid://csw2gfwqmsa7q" path="res://Prefabs/Foliage/tree_type_3_.tscn" id="7_8dber"]
 [ext_resource type="PackedScene" uid="uid://bimj026worpdx" path="res://Prefabs/Items/item_silvercross.tscn" id="9_em2pj"]
+[ext_resource type="ArrayMesh" uid="uid://by2q5jfhtbiyj" path="res://3D Models/map.obj" id="11_k4mlx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kafna"]
 
@@ -17,9 +19,10 @@
 [sub_resource type="BoxMesh" id="BoxMesh_yh11j"]
 
 [sub_resource type="Environment" id="Environment_8yhpw"]
-fog_enabled = true
 fog_light_energy = 2.53
 fog_density = 0.0557
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mh1r2"]
 
 [node name="root" type="Node"]
 
@@ -35,11 +38,22 @@ mouse_filter = 2
 texture = ExtResource("1_uee6f")
 stretch_mode = 4
 
-[node name="Inventory" type="CanvasLayer" parent="." node_paths=PackedStringArray("backGround")]
+[node name="Inventory" type="CanvasLayer" parent="." node_paths=PackedStringArray("inventoryWindow", "pickUpMessage")]
+unique_name_in_owner = true
 script = ExtResource("5_n5jqb")
-backGround = NodePath("BackGround")
+inventoryWindow = NodePath("InventoryWindow")
+pickUpMessage = NodePath("PickUpMessage")
 
-[node name="BackGround" type="TextureRect" parent="Inventory"]
+[node name="PickUpMessage" type="Label" parent="Inventory"]
+offset_left = 90.0
+offset_top = 60.0
+offset_right = 1090.0
+offset_bottom = 1010.0
+theme_override_font_sizes/font_size = 30
+text = "Picked up Silver cross"
+vertical_alignment = 2
+
+[node name="InventoryWindow" type="TextureRect" parent="Inventory"]
 texture_filter = 1
 offset_left = 60.0
 offset_top = 60.0
@@ -48,6 +62,7 @@ offset_bottom = 1020.0
 texture = ExtResource("5_p5s3x")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02604, 0)
 script = ExtResource("3_tg7rf")
 SPEED = 10.0
 CAMERA_CONTROLLER = NodePath("Camera3D")
@@ -55,9 +70,17 @@ CAMERA_CONTROLLER = NodePath("Camera3D")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_kafna")
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" node_paths=PackedStringArray("rayCast")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753529, 0)
 fov = 100.0
+script = ExtResource("5_g86y7")
+rayCast = NodePath("RayCast3D")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -2.5, 0)
+collision_mask = 2
+collide_with_areas = true
 
 [node name="TestArea" type="StaticBody3D" parent="."]
 transform = Transform3D(2.28639, 0, 0, 0, 1, 0, 0, 0, 2.16859, 0, -1.94396, 0)
@@ -67,7 +90,6 @@ transform = Transform3D(14.3516, 0, 0, 0, 1, 0, 0, 0, 18.3563, 0, 0, 0)
 shape = SubResource("BoxShape3D_m6558")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TestArea/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_yh11j")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("4_f0sri")
@@ -93,5 +115,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.08041, -1.44396, -4.39797)
 [node name="Tree_Type3_2" parent="." instance=ExtResource("7_8dber")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.26594, -1.44396, 3.45498)
 
-[node name="Node3D" parent="." instance=ExtResource("9_em2pj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.07084, -1.44396, -0.952177)
+[node name="Item_Silvercross" parent="." instance=ExtResource("9_em2pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.04587, -1.44396, -0.347115)
+
+[node name="Map" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map"]
+shape = SubResource("SphereShape3D_mh1r2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/CollisionShape3D"]
+mesh = ExtResource("11_k4mlx")
