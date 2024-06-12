@@ -25,6 +25,10 @@ window/size/initial_screen=1
 
 project/assembly_name="MehtäGodotEdition"
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 Inventory={
