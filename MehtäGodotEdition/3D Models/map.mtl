@@ -9,7 +9,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd H:/Work/mehta/MehtäGodotEdition/Textures/modeling_texture2.png
+map_Kd C:/Users/lukabra1/mehta/MehtäGodotEdition/Textures/modeling_texture2.png
 
 newmtl coast_road
 Ns 250.000000
@@ -29,7 +29,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd H:/Work/mehta/MehtäGodotEdition/Textures/modeling_texture.png
+map_Kd C:/Users/lukabra1/mehta/MehtäGodotEdition/Textures/modeling_texture.png
 
 newmtl dorms_road
 Ns 250.000000
@@ -48,5 +48,5 @@ Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.500000
 illum 2
-map_Kd H:/Work/mehta/MehtäGodotEdition/Sprites/background/forest.png
-map_d H:/Work/mehta/MehtäGodotEdition/Sprites/background/forest.png
+map_Kd C:/Users/lukabra1/mehta/MehtäGodotEdition/Sprites/background/forest.png
+map_d C:/Users/lukabra1/mehta/MehtäGodotEdition/Sprites/background/forest.png

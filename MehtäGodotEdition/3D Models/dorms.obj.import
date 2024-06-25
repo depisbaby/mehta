@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://7mjbl0ino0eq"
+path="res://.godot/imported/dorms.obj-4081eb5e9001ef46ec30449faa6d4ef0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/dorms.obj-4081eb5e9001ef46ec30449faa6d4ef0.mesh"]
+
+source_file="res://3D Models/dorms.obj"
+dest_files=["res://.godot/imported/dorms.obj-4081eb5e9001ef46ec30449faa6d4ef0.mesh", "res://.godot/imported/dorms.obj-4081eb5e9001ef46ec30449faa6d4ef0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
