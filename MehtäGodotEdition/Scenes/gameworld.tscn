@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=30 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Texture2D" uid="uid://bntqhh626r8xh" path="res://Sprites/fps/hand_empty_open.png" id="1_uee6f"]
 [ext_resource type="Script" path="res://Scripts/fps_controller.gd" id="3_tg7rf"]
@@ -13,19 +13,23 @@
 [ext_resource type="Material" uid="uid://c75alb41v1ds8" path="res://Materials/cliff.material" id="10_snpt4"]
 [ext_resource type="ArrayMesh" uid="uid://by2q5jfhtbiyj" path="res://3D Models/map.obj" id="11_k4mlx"]
 [ext_resource type="PackedScene" uid="uid://cv8oto8i8h4ql" path="res://Prefabs/Foliage/tree_type_2_.tscn" id="11_vkp1c"]
+[ext_resource type="Material" uid="uid://b4lqk6fk3fth2" path="res://Materials/Roads/coast_roads.material" id="11_y4l4w"]
 [ext_resource type="PackedScene" uid="uid://csw2gfwqmsa7q" path="res://Prefabs/Foliage/tree_type_3_.tscn" id="12_pyxwt"]
 [ext_resource type="ArrayMesh" uid="uid://7mjbl0ino0eq" path="res://3D Models/dorms.obj" id="15_s8ke7"]
+[ext_resource type="Material" uid="uid://d0q3q5e7gyo8f" path="res://Materials/tiles1.material" id="16_mmum0"]
 [ext_resource type="Material" uid="uid://bprtthgwla5im" path="res://Materials/wood_floor1.material" id="16_w5fio"]
 [ext_resource type="Material" uid="uid://62krop3yrd5q" path="res://Materials/concrete.material" id="17_nse7o"]
 [ext_resource type="Material" uid="uid://ccypajl8mk2io" path="res://Materials/bathroom.material" id="18_ql4bq"]
+[ext_resource type="Material" uid="uid://cwpaebmn51vkf" path="res://Materials/plaster1.material" id="18_xvutd"]
 [ext_resource type="Material" uid="uid://bjohixoayh7p5" path="res://Materials/brick.material" id="19_3rikw"]
+[ext_resource type="Material" uid="uid://0a5oewqqoaq8" path="res://Materials/invisible.material" id="20_1kiom"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kafna"]
 
 [sub_resource type="Environment" id="Environment_8yhpw"]
 fog_enabled = true
-fog_light_energy = 2.53
-fog_density = 0.0557
+fog_light_energy = 2.31
+fog_density = 0.0374
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_02k8a"]
 
@@ -126,6 +130,7 @@ mesh = SubResource("CylinderMesh_fvd0d")
 mesh = ExtResource("11_k4mlx")
 surface_material_override/0 = ExtResource("4_f0sri")
 surface_material_override/1 = ExtResource("10_cnm62")
+surface_material_override/2 = ExtResource("11_y4l4w")
 surface_material_override/3 = ExtResource("10_snpt4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map"]
@@ -277,12 +282,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.4871, 8.26409, -29.2438)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.5777, 8.22325, -3.96149)
 
 [node name="Dorms" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.972084, 0, 0.234633, 0, 1, 0, -0.234633, 0, 0.972084, 200.891, -0.0195522, -1.17966)
+transform = Transform3D(0.937197, 0, 0.348801, 0, 1, 0, -0.348801, 0, 0.937197, 197.747, -0.0195522, 2.86233)
 mesh = ExtResource("15_s8ke7")
-surface_material_override/0 = ExtResource("16_w5fio")
+surface_material_override/0 = ExtResource("16_mmum0")
 surface_material_override/1 = ExtResource("16_w5fio")
-surface_material_override/2 = ExtResource("17_nse7o")
+surface_material_override/2 = ExtResource("18_xvutd")
 surface_material_override/3 = ExtResource("17_nse7o")
+surface_material_override/4 = ExtResource("20_1kiom")
 surface_material_override/5 = ExtResource("18_ql4bq")
 surface_material_override/6 = ExtResource("19_3rikw")
 
