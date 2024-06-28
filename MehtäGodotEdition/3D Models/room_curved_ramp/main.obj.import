@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://duueyxkmta8qx"
+path="res://.godot/imported/main.obj-8c6a7e2084b5baf9b05d115f1fe74da8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/main.obj-8c6a7e2084b5baf9b05d115f1fe74da8.mesh"]
+
+source_file="res://3D Models/room_curved_ramp/main.obj"
+dest_files=["res://.godot/imported/main.obj-8c6a7e2084b5baf9b05d115f1fe74da8.mesh", "res://.godot/imported/main.obj-8c6a7e2084b5baf9b05d115f1fe74da8.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
