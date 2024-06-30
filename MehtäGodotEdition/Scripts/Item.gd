@@ -24,3 +24,16 @@ func PickUp():
 
 func GetSpriteTexture():
 	return sprite.texture
+	
+func UsePrimaryPressed():
+	print("item")
+	pass
+	
+func UseSecondaryPressed():
+	pass
+	
+func UsePrimaryReleased():
+	pass
+	
+func UseSecondaryReleased():
+	pass

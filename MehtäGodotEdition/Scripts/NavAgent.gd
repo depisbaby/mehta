@@ -14,7 +14,7 @@ var targetMovePosition: Vector3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_tree().get_root().get_node("root").get_node("%Player") as Player
+	player = Global.player as Player
 	sleeping = false
 	pass # Replace with function body.
 
@@ -34,7 +34,8 @@ func MonsterBehaviour():
 	tick = tick + 1
 	
 	if(tick % 10 == 0):
-		targetMovePosition = player.global_position
+		if Global.player != null:
+			targetMovePosition = Global.player.global_position
 		#print("hep")
 		
 	if(tick > 10000):

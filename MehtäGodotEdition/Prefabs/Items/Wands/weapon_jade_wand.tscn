@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy708glhl3n41"]
+
+[ext_resource type="Script" path="res://Scripts/Weapons/GenericWand.gd" id="1_a3adl"]
+[ext_resource type="Texture2D" uid="uid://kvvqeat16ugt" path="res://Sprites/items/wand1.png" id="2_jnrhq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jq08f"]
+size = Vector3(0.52121, 0.141663, 0.600937)
+
+[node name="Weapon_jade_wand" type="Node3D" node_paths=PackedStringArray("sprite") groups=["Item"]]
+script = ExtResource("1_a3adl")
+startSpeed = 30.0
+itemName = "jade_wand"
+displayName = "Jade Wand"
+description = "No description"
+sprite = NodePath("Sprite3D")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0147225, 0)
+double_sided = false
+texture_filter = 0
+texture = ExtResource("2_jnrhq")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00196838, 0.0853577, 0.00295258)
+shape = SubResource("BoxShape3D_jq08f")

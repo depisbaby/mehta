@@ -17,6 +17,9 @@ func _process(delta):
 		if hit.get_parent().is_in_group("Item"):
 			var item = hit.get_parent() as Item
 			item.PickUp()
+		if hit.get_parent().is_in_group("Door"):
+			var door = hit.get_parent() as Door
+			door.Operate()
 		
 		
 		pass

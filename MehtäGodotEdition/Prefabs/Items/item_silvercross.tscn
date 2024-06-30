@@ -8,11 +8,9 @@ size = Vector3(0.52121, 0.141663, 0.600937)
 
 [node name="Item_Silvercross" type="Node3D" node_paths=PackedStringArray("sprite") groups=["Item"]]
 script = ExtResource("1_qpqy8")
-itemName = null
+itemName = "silver_cross"
 displayName = "Silver Cross"
-description = null
-amount = null
-stackable = null
+description = "No description..."
 sprite = NodePath("Sprite3D")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]

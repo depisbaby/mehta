@@ -14,13 +14,13 @@ var inventorySlots: Array[InventorySlot] = []
 var activeInventorySlot: InventorySlot
 var selectedInventorySlot: InventorySlot
 
+var equippedItem: Item
+
 var messageTick: int
 
 
 func _ready():
-	CloseWindow()
-	UpdateInventory()
-	
+	Global.inventory = self
 	inventorySlotScene = preload("res://Prefabs/inventory_slot.tscn")
 	
 	for i in grid_height:
@@ -35,8 +35,8 @@ func _ready():
 			inventorySlots[i_inventorySlot.id] = i_inventorySlot
 			var label: Label = inventorySlots[i_inventorySlot.id].amountLabel
 			
-			
-			
+	UpdateInventory()
+	CloseWindow()
 			
 	
 	print("Inventory size: ", inventorySlots.size())
@@ -88,10 +88,6 @@ func OpenWindow():
 	UpdateInventory()
 	windowOpen = true
 	inventoryWindow.show()
-	
-	pass
-
-func Start():
 	
 	pass
 
@@ -152,6 +148,9 @@ func UpdateInventory():
 		slot.SetSpriteTexture(slot.placedItem.GetSpriteTexture())
 		slot.icon.show()
 		
+	if inventorySlots[0].placedItem != null:
+		equippedItem = inventorySlots[0].placedItem
+	
 	pass
 
 func SelectInventorySlot(index: int):
