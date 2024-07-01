@@ -16,14 +16,13 @@ func _ready():
 	raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),3)
 	raycast.hit_from_inside = false
 	raycast.hit_back_faces = false
+	sprite.hide()
 	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	#if(_awake):
 	MoveProjectile(delta)
 	HitReg()
 	lastPosition = global_position

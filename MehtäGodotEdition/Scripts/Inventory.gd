@@ -150,7 +150,13 @@ func UpdateInventory():
 		
 	if inventorySlots[0].placedItem != null:
 		equippedItem = inventorySlots[0].placedItem
-	
+		if equippedItem.viewModel != null:
+			Global.viewModel.ChangeViewModel(equippedItem.viewModel, equippedItem.viewModelOffset)
+		else:
+			Global.viewModel.ChangeViewModel(null, Vector2(0,0))
+	else :
+		Global.viewModel.ChangeViewModel(null, Vector2(0,0))
+		equippedItem = null
 	pass
 
 func SelectInventorySlot(index: int):

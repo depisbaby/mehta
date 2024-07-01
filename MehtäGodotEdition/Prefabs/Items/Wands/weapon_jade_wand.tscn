@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dy708glhl3n41"]
+[gd_scene load_steps=5 format=3 uid="uid://dy708glhl3n41"]
 
 [ext_resource type="Script" path="res://Scripts/Weapons/GenericWand.gd" id="1_a3adl"]
+[ext_resource type="Texture2D" uid="uid://tnhkamc6bbsf" path="res://Sprites/fps/wand1.png" id="2_baa36"]
 [ext_resource type="Texture2D" uid="uid://kvvqeat16ugt" path="res://Sprites/items/wand1.png" id="2_jnrhq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jq08f"]
@@ -13,6 +14,8 @@ itemName = "jade_wand"
 displayName = "Jade Wand"
 description = "No description"
 sprite = NodePath("Sprite3D")
+viewModel = ExtResource("2_baa36")
+viewModelOffset = Vector2(1280, 184)
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 

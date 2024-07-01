@@ -2,17 +2,17 @@ extends Item
 
 @export var startSpeed: float
 
-
+@onready var projectilePrefab = preload("res://Prefabs/projectile.tscn")
 var projectileQueue: Array[Projectile] = []
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	var projectilePrefab = preload("res://Prefabs/projectile.tscn")
-	for i in 100:
-		var projectile = projectilePrefab.instantiate()
-		get_tree().root.add_child(projectile)
-		projectile.projectilePool = projectileQueue
-		projectileQueue.push_back(projectile)
+	while projectileQueue.is_empty():
+		await get_tree().create_timer(0.1).timeout
+		for i in 100:
+			var projectile = projectilePrefab.instantiate()
+			get_tree().root.add_child(projectile)
+			projectile.projectilePool = projectileQueue
+			projectileQueue.push_back(projectile)
 	
 	
 	pass # Replace with function body.

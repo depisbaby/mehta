@@ -4,18 +4,26 @@ class_name NavAgent
 @export var speed: float
 @export var accel: float
 @export var stoppingDistance: float
+@export var eyes: Node3D
 
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 var player: Player
 
 var tick: int
 var sleeping: bool
+var knowsAboutPlayer: bool
 var targetMovePosition: Vector3
+
+var visionRaycast: PhysicsRayQueryParameters3D
+
+func WakeUp():
+	targetMovePosition = global_position
+	sleeping = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visionRaycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),1)
 	player = Global.player as Player
-	sleeping = false
 	pass # Replace with function body.
 
 
@@ -35,9 +43,13 @@ func MonsterBehaviour():
 	
 	if(tick % 10 == 0):
 		if Global.player != null:
-			targetMovePosition = Global.player.global_position
+			if knowsAboutPlayer == true:
+				targetMovePosition = Global.player.global_position
 		#print("hep")
-		
+	
+	if(tick % 100 == 0):
+		CheckPlayerVisibility()
+	
 	if(tick > 10000):
 		tick = 0
 	
@@ -59,3 +71,15 @@ func Move(delta):
 	move_and_slide()
 	
 	pass
+
+func CheckPlayerVisibility():
+	
+	if knowsAboutPlayer:
+		return
+	
+	visionRaycast.from = eyes.global_position
+	visionRaycast.to = Global.player.global_position
+	
+	var intersection = get_world_3d().direct_space_state.intersect_ray(visionRaycast)
+	if intersection.is_empty():
+		knowsAboutPlayer = true

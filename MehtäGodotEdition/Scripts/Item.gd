@@ -5,6 +5,8 @@ class_name Item
 @export var displayName: String
 @export var description: String
 @export var sprite: Sprite3D
+@export var viewModel: CompressedTexture2D
+@export var viewModelOffset: Vector2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
