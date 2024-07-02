@@ -10,6 +10,7 @@ size = Vector3(0.52121, 0.141663, 0.600937)
 [node name="Weapon_jade_wand" type="Node3D" node_paths=PackedStringArray("sprite") groups=["Item"]]
 script = ExtResource("1_a3adl")
 startSpeed = 30.0
+damage = 30
 itemName = "jade_wand"
 displayName = "Jade Wand"
 description = "No description"

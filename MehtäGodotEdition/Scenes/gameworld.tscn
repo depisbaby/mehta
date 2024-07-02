@@ -1,6 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=23 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Script" path="res://Scripts/ViewModel.gd" id="1_uob2v"]
+[ext_resource type="Texture2D" uid="uid://d12wbgpjg5jlj" path="res://Sprites/ui/healthbar_fill.png" id="2_0uj4p"]
+[ext_resource type="Texture2D" uid="uid://dl4ewr86xiyy7" path="res://Sprites/ui/healthbar_frame.png" id="3_o0vvd"]
 [ext_resource type="Script" path="res://Scripts/fps_controller.gd" id="3_tg7rf"]
 [ext_resource type="Material" uid="uid://brqus26fqck8e" path="res://Materials/ground1.material" id="4_f0sri"]
 [ext_resource type="Script" path="res://Scripts/PlayerInteract.gd" id="5_g86y7"]
@@ -47,8 +49,27 @@ offset_bottom = 1272.0
 mouse_filter = 2
 stretch_mode = 4
 
+[node name="EnemyHealth" type="CanvasLayer" parent="."]
+
+[node name="frame" type="TextureRect" parent="EnemyHealth"]
+texture_filter = 1
+offset_left = 384.0
+offset_top = -34.0
+offset_right = 768.0
+offset_bottom = 62.0
+scale = Vector2(3, 3)
+texture = ExtResource("3_o0vvd")
+
+[node name="fill" type="TextureRect" parent="EnemyHealth"]
+offset_left = 485.0
+offset_top = 66.0
+offset_right = 1435.32
+offset_bottom = 154.22
+texture = ExtResource("2_0uj4p")
+
 [node name="Inventory" type="CanvasLayer" parent="." node_paths=PackedStringArray("inventoryWindow", "pickUpMessage")]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("5_n5jqb")
 inventoryWindow = NodePath("InventoryWindow")
 pickUpMessage = NodePath("PickUpMessage")
@@ -127,9 +148,9 @@ surface_material_override/0 = ExtResource("10_cnm62")
 surface_material_override/1 = ExtResource("4_f0sri")
 surface_material_override/3 = ExtResource("10_snpt4")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="TestLevel/NavigationRegion3D/Main2"]
+[node name="map" type="StaticBody3D" parent="TestLevel/NavigationRegion3D/Main2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TestLevel/NavigationRegion3D/Main2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestLevel/NavigationRegion3D/Main2/map"]
 shape = SubResource("ConcavePolygonShape3D_mdjo5")
 
 [node name="Main" type="MeshInstance3D" parent="TestLevel/NavigationRegion3D"]
@@ -140,9 +161,9 @@ surface_material_override/0 = ExtResource("4_f0sri")
 surface_material_override/1 = ExtResource("10_cnm62")
 surface_material_override/2 = ExtResource("10_snpt4")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="TestLevel/NavigationRegion3D/Main"]
+[node name="map" type="StaticBody3D" parent="TestLevel/NavigationRegion3D/Main"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TestLevel/NavigationRegion3D/Main/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestLevel/NavigationRegion3D/Main/map"]
 shape = SubResource("ConcavePolygonShape3D_mbgh3")
 
 [node name="Weapon_jade_wand" parent="." instance=ExtResource("14_dcj08")]

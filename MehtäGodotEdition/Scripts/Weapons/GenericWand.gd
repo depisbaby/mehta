@@ -1,6 +1,7 @@
 extends Item
 
 @export var startSpeed: float
+@export var damage: int
 
 @onready var projectilePrefab = preload("res://Prefabs/projectile.tscn")
 var projectileQueue: Array[Projectile] = []
@@ -12,6 +13,7 @@ func _ready():
 			var projectile = projectilePrefab.instantiate()
 			get_tree().root.add_child(projectile)
 			projectile.projectilePool = projectileQueue
+			projectile.Init(false)
 			projectileQueue.push_back(projectile)
 	
 	
@@ -29,6 +31,7 @@ func UsePrimaryPressed():
 		shooterData.startPosition = Global.player.camera.global_position
 		shooterData.direction = -Global.player.camera.get_camera_transform().basis.z
 		shooterData.startSpeed = startSpeed
+		shooterData.startDamage = damage
 		projectile.Shoot(shooterData)
 	
 	pass

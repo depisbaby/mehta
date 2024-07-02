@@ -5,6 +5,7 @@ class_name NavAgent
 @export var accel: float
 @export var stoppingDistance: float
 @export var eyes: Node3D
+@export var health: Health
 
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 var player: Player
@@ -17,8 +18,19 @@ var targetMovePosition: Vector3
 var visionRaycast: PhysicsRayQueryParameters3D
 
 func WakeUp():
+	health.health = health.maxHealth
+	if health.health <= 0:
+		health.health = 1
 	targetMovePosition = global_position
 	sleeping = false
+
+func Die():
+	sleeping = true
+	await get_tree().create_timer(5).timeout
+	Despawn()
+	
+func  Despawn():
+	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,6 +44,7 @@ func _process(delta):
 	
 	if(sleeping == false):
 		
+		CheckHealth()
 		MonsterBehaviour()
 		Move(delta)
 		
@@ -83,3 +96,7 @@ func CheckPlayerVisibility():
 	var intersection = get_world_3d().direct_space_state.intersect_ray(visionRaycast)
 	if intersection.is_empty():
 		knowsAboutPlayer = true
+
+func CheckHealth():
+	if health.health <= 0:
+		Die()
