@@ -1,4 +1,5 @@
 1 = environment
-2 = character (projectiles ignore)
+2 = items (projectiles ignore)
 3 = hitbox player
 4 = hitbox enemies
+5 = character (projectiles ignore)

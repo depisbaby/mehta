@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=25 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Script" path="res://Scripts/ViewModel.gd" id="1_uob2v"]
 [ext_resource type="Texture2D" uid="uid://d12wbgpjg5jlj" path="res://Sprites/ui/healthbar_fill.png" id="2_0uj4p"]
+[ext_resource type="Script" path="res://Scripts/EnemyHealthBar.gd" id="2_wpaip"]
 [ext_resource type="Texture2D" uid="uid://dl4ewr86xiyy7" path="res://Sprites/ui/healthbar_frame.png" id="3_o0vvd"]
 [ext_resource type="Script" path="res://Scripts/fps_controller.gd" id="3_tg7rf"]
 [ext_resource type="Material" uid="uid://brqus26fqck8e" path="res://Materials/ground1.material" id="4_f0sri"]
@@ -17,6 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://dy708glhl3n41" path="res://Prefabs/Items/Wands/weapon_jade_wand.tscn" id="14_dcj08"]
 [ext_resource type="PackedScene" uid="uid://c8r5bg5ltpxx2" path="res://Prefabs/MapObjects/EnemySpawn.tscn" id="15_44i8l"]
 [ext_resource type="ArrayMesh" uid="uid://c5wheeg56rmem" path="res://3D Models/room_cave1/main.obj" id="15_mel5a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uo1j0"]
+font_size = 30
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kafna"]
 
@@ -49,9 +53,22 @@ offset_bottom = 1272.0
 mouse_filter = 2
 stretch_mode = 4
 
-[node name="EnemyHealth" type="CanvasLayer" parent="."]
+[node name="EnemyHealthBar" type="CanvasLayer" parent="." node_paths=PackedStringArray("fill", "frame", "healthAmountLabel", "ownerNameLabel")]
+script = ExtResource("2_wpaip")
+fill = NodePath("fill")
+frame = NodePath("frame")
+healthAmountLabel = NodePath("hLabel")
+ownerNameLabel = NodePath("nameLabel")
 
-[node name="frame" type="TextureRect" parent="EnemyHealth"]
+[node name="fill" type="TextureRect" parent="EnemyHealthBar"]
+modulate = Color(0.666668, 0.0711472, 9.62615e-08, 1)
+offset_left = 485.0
+offset_top = 66.0
+offset_right = 1430.88
+offset_bottom = 154.22
+texture = ExtResource("2_0uj4p")
+
+[node name="frame" type="TextureRect" parent="EnemyHealthBar"]
 texture_filter = 1
 offset_left = 384.0
 offset_top = -34.0
@@ -60,12 +77,25 @@ offset_bottom = 62.0
 scale = Vector2(3, 3)
 texture = ExtResource("3_o0vvd")
 
-[node name="fill" type="TextureRect" parent="EnemyHealth"]
-offset_left = 485.0
-offset_top = 66.0
-offset_right = 1435.32
-offset_bottom = 154.22
-texture = ExtResource("2_0uj4p")
+[node name="hLabel" type="Label" parent="EnemyHealthBar"]
+offset_left = 488.0
+offset_top = 72.0
+offset_right = 1432.0
+offset_bottom = 152.0
+text = "100/100"
+label_settings = SubResource("LabelSettings_uo1j0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="nameLabel" type="Label" parent="EnemyHealthBar"]
+offset_left = 488.0
+offset_top = -8.0
+offset_right = 1432.0
+offset_bottom = 72.0
+text = "name"
+label_settings = SubResource("LabelSettings_uo1j0")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Inventory" type="CanvasLayer" parent="." node_paths=PackedStringArray("inventoryWindow", "pickUpMessage")]
 unique_name_in_owner = true
@@ -94,7 +124,7 @@ texture = ExtResource("5_p5s3x")
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1389, 3.66259, 0)
-collision_layer = 2
+collision_layer = 16
 script = ExtResource("3_tg7rf")
 SPEED = 10.0
 CAMERA_CONTROLLER = NodePath("Camera3D")
@@ -102,16 +132,23 @@ CAMERA_CONTROLLER = NodePath("Camera3D")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_kafna")
 
-[node name="Camera3D" type="Camera3D" parent="Player" node_paths=PackedStringArray("rayCast")]
+[node name="Camera3D" type="Camera3D" parent="Player" node_paths=PackedStringArray("interactRayCast", "lookingAtRaycast")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753529, 0)
 fov = 100.0
 script = ExtResource("5_g86y7")
-rayCast = NodePath("RayCast3D")
+interactRayCast = NodePath("InteractRayCast3D")
+lookingAtRaycast = NodePath("LookingAtRayCast3D")
 
-[node name="RayCast3D" type="RayCast3D" parent="Player/Camera3D"]
+[node name="InteractRayCast3D" type="RayCast3D" parent="Player/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -2.5, 0)
 collision_mask = 2
+collide_with_areas = true
+
+[node name="LookingAtRayCast3D" type="RayCast3D" parent="Player/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+target_position = Vector3(0, -50, 0)
+collision_mask = 9
 collide_with_areas = true
 
 [node name="PlayerManager" type="Node3D" parent="Player" node_paths=PackedStringArray("camera")]
@@ -171,3 +208,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4227, -0.878824, -8.31567)
 
 [node name="EnemySpawn" parent="." instance=ExtResource("15_44i8l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60.0671, 9.55759, -29.7876)
+
+[node name="EnemySpawn2" parent="." instance=ExtResource("15_44i8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.9381, 9.55759, -45.25)
+
+[node name="EnemySpawn3" parent="." instance=ExtResource("15_44i8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.2448, 8.34918, -96.2597)

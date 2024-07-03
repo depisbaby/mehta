@@ -1,11 +1,13 @@
 extends CharacterBody3D
 class_name NavAgent
 
+@export var displayName: String
 @export var speed: float
 @export var accel: float
 @export var stoppingDistance: float
 @export var eyes: Node3D
 @export var health: Health
+@export var despawnDelay: float
 
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 var player: Player
@@ -26,16 +28,21 @@ func WakeUp():
 
 func Die():
 	sleeping = true
-	await get_tree().create_timer(5).timeout
+	
+	#death animation here
+	
+	await get_tree().create_timer(despawnDelay).timeout
 	Despawn()
 	
 func  Despawn():
+	queue_free()
 	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	visionRaycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),1)
 	player = Global.player as Player
+	health.ownerName = displayName
 	pass # Replace with function body.
 
 

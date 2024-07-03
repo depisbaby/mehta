@@ -10,9 +10,10 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k163n"]
 
 [node name="enemy_skeleton" type="CharacterBody3D" node_paths=PackedStringArray("eyes", "health")]
-collision_layer = 2
+collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_hea0l")
+displayName = "Skeleton"
 speed = 10.0
 accel = 10.0
 stoppingDistance = 1.0
