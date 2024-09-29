@@ -39,7 +39,7 @@ func _ready():
 	CloseWindow()
 			
 	
-	print("Inventory size: ", inventorySlots.size())
+	#print("Inventory size: ", inventorySlots.size())
 	
 	pass
 			
@@ -47,7 +47,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("Inventory"):
-		print("Inventory button pressed")
+		#wwwwwwwwwwwwwwwwwwwww("Inventory button pressed")
 		
 		if windowOpen:
 			CloseWindow()

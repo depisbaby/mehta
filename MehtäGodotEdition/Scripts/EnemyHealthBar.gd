@@ -29,7 +29,7 @@ func _process(delta):
 		
 		var percentage: float
 		percentage = currentShownHealth.health as float / currentShownHealth.maxHealth as float
-		print(percentage)
+		#print(percentage)
 		fill.size.x = clamp(fullSize * percentage, 0, fullSize)
 	
 	if currentShownHealth == null && showTick != 0:

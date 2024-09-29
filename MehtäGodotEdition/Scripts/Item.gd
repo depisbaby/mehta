@@ -28,7 +28,7 @@ func GetSpriteTexture():
 	return sprite.texture
 	
 func UsePrimaryPressed():
-	print("item")
+	#print("item")
 	pass
 	
 func UseSecondaryPressed():
