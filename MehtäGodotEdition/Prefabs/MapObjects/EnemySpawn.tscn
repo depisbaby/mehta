@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8r5bg5ltpxx2"]
 
 [ext_resource type="Script" path="res://Scripts/EnemySpawn.gd" id="1_btsli"]
-[ext_resource type="PackedScene" uid="uid://dekgvdi48e3rj" path="res://Prefabs/Enemies/enemy_returned.tscn" id="2_bvqq7"]
+[ext_resource type="PackedScene" uid="uid://dekgvdi48e3rj" path="res://Prefabs/Enemies/enemy_golem.tscn" id="2_bvqq7"]
 
 [node name="EnemySpawn" type="Node3D"]
 script = ExtResource("1_btsli")

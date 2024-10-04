@@ -2,16 +2,26 @@ extends Node3D
 class_name Player
 
 @export var camera: Camera3D
+@export var health: Health
+
+var frozen: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Global.player = self
+	Respawn()
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	Global.player = self
+	CheckLife()
 	PlayerInputs(delta)
+	#print(health.health)
+	pass
+
+func Respawn():
+	health.health = 100
+	frozen = false
 	pass
 
 func PlayerInputs(delta):
@@ -37,3 +47,17 @@ func PlayerInputs(delta):
 		pass
 	
 	pass
+
+func DamagePlayer(damageAmount):
+	health.health = health.health - damageAmount
+	pass
+	
+func CheckLife():
+	
+	if health.health < 1: #die
+		frozen = true
+		Global.deathscreen.ShowDeathscreen(true)
+		pass
+	
+	pass
+	

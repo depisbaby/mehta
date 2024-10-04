@@ -8,6 +8,10 @@ class_name NavAgent
 @export var eyes: Node3D
 @export var health: Health
 @export var despawnDelay: float
+@export var rangedRange: float
+@export var meleeWindUp: float
+@export var meleeCooldown: float
+@export var meleeDamage: int
 
 @onready var visuals: AnimatedSprite3D = $AnimatedSprite3D
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
@@ -23,6 +27,9 @@ var isWalking: bool
 var animationsOverridden: bool
 enum PlayerPerspective {FRONT,RIGHT,BACK,LEFT}
 var playerPerspective: PlayerPerspective
+enum Action {NONE, ATTACKING}
+var currentAction: Action
+var distanceToPlayer: float
 
 func WakeUp():
 	health.health = health.maxHealth
@@ -30,9 +37,8 @@ func WakeUp():
 		health.health = 1
 	targetMovePosition = global_position
 	sleeping = false
+	pass
 	
-	
-
 func Die():
 	sleeping = true
 	
@@ -47,13 +53,13 @@ func  Despawn():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	currentAction = Action.NONE
 	facingDirection = Vector3(1,0,0)
 	visionRaycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),1)
 	player = Global.player as Player
 	health.ownerName = displayName
 	pass # Replace with function body.
-
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
@@ -61,27 +67,32 @@ func _process(delta):
 	if(sleeping == false):
 		
 		CheckHealth()
-		MonsterBehaviour()
+		GetDistanceToPlayer()
+		EnemyBehaviour()
 		Move(delta) #this before animations
 		CheckPlayerPerspective()#this before animations
 		Animations()
+		#print(currentAction)
 		
 	pass
 	
-func MonsterBehaviour():
+func EnemyBehaviour():
 	
 	tick = tick + 1
 	
-	if(tick % 10 == 0):
+	if(tick % 10 == 0): #happens often
 		if Global.player != null:
 			if knowsAboutPlayer == true:
 				targetMovePosition = Global.player.global_position
-		#print("hep")
 	
-	if(tick % 100 == 0):
+	if(tick % 100 == 0): #happens less often
 		CheckPlayerVisibility()
-	
-	if(tick > 10000):
+		
+		if currentAction == Action.NONE && knowsAboutPlayer:
+			DoAction()
+			Attack()
+			
+	if(tick > 10000): # reset tick
 		tick = 0
 	
 	pass
@@ -89,6 +100,9 @@ func MonsterBehaviour():
 func Move(delta):
 	
 	isWalking = false
+	
+	if currentAction == Action.ATTACKING:
+		return	
 	
 	if((targetMovePosition - global_position).length() < stoppingDistance):
 		facingDirection = targetMovePosition - global_position
@@ -120,6 +134,11 @@ func CheckPlayerVisibility():
 	var intersection = get_world_3d().direct_space_state.intersect_ray(visionRaycast)
 	if intersection.is_empty():
 		knowsAboutPlayer = true
+
+func GetDistanceToPlayer():
+	distanceToPlayer = (player.global_position - global_position).length()
+	#print(distanceToPlayer)
+	return distanceToPlayer
 
 func CheckHealth():
 	if health.health <= 0:
@@ -172,6 +191,12 @@ func Animations():
 	
 	pass
 	
+func OverrideAnimation(name):
+	animationsOverridden = true
+	visuals.play(name)
+	
+	pass
+
 func ContinueAnimation(name):
 	
 	if visuals.animation == name:
@@ -207,4 +232,49 @@ func CheckPlayerPerspective():
 		return	
 	
 	pass	
-		
+	
+func Attack():
+	
+	if currentAction != Action.NONE:
+		return
+	
+	if distanceToPlayer < stoppingDistance + 1.0: #melee
+		DoMeleeAttack()
+		pass
+	else:
+		DoRangedAttack() 
+	
+	pass
+	
+func DoAction():
+	
+	pass
+
+func DoRangedAttack():
+	
+	pass
+	
+func DoMeleeAttack():
+	currentAction = Action.ATTACKING
+	
+	OverrideAnimation("attack")
+	await get_tree().create_timer(meleeWindUp).timeout
+	
+	if distanceToPlayer < stoppingDistance + 1.0: #melee
+		player.DamagePlayer(meleeDamage)
+		pass
+	
+	EndAction(meleeCooldown)
+	pass
+	
+func EndAction(timeInSeconds):
+	
+	await get_tree().create_timer(timeInSeconds).timeout
+	currentAction = Action.NONE
+	pass
+
+#signals
+func _on_animated_sprite_3d_animation_finished() -> void:
+	if animationsOverridden:
+		animationsOverridden = false
+	pass # Replace with function body.

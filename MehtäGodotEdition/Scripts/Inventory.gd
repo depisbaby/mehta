@@ -43,9 +43,9 @@ func _ready():
 	
 	pass
 			
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	if Input.is_action_just_pressed("Inventory"):
 		#wwwwwwwwwwwwwwwwwwwww("Inventory button pressed")
 		
@@ -60,6 +60,9 @@ func _process(delta):
 	else :
 		pickUpMessage.hide()
 		pickUpMessage.text = ""
+		
+	if Input.is_action_just_pressed("switch"):
+		MoveItem(inventorySlots[0], inventorySlots[1])
 		
 	if Input.is_action_just_pressed("mouse0"):
 		
@@ -108,6 +111,7 @@ func PickUpItem(item: Item):
 	messageTick = 500
 	
 	inventorySlots[targetSlot].placedItem = item
+	UpdateInventory()
 	
 	pass
 
@@ -162,4 +166,3 @@ func UpdateInventory():
 func SelectInventorySlot(index: int):
 	selectedInventorySlot = inventorySlots[index]
 	pass
-
