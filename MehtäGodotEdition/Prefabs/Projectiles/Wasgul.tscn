@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct1dx4bc323yc"]
+
+[ext_resource type="Script" path="res://Scripts/Projectiles/Types/Wasgul.gd" id="1_2midu"]
+[ext_resource type="PackedScene" uid="uid://clqfss7d0evha" path="res://3D Models/Projectiles_FX/wasgul/wasgul.tscn" id="1_nyris"]
+
+[node name="Wasgul" type="Node3D"]
+script = ExtResource("1_2midu")
+
+[node name="wasgul" parent="." instance=ExtResource("1_nyris")]
+transform = Transform3D(-1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 0.0325776, 0, 0.34659)

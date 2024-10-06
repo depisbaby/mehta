@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dg21a0h7hrq3u"
+path="res://.godot/imported/ball_bigger.obj-9fc8899dcaa5dd0ca1a12ffb6c710bbb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ball_bigger.obj-9fc8899dcaa5dd0ca1a12ffb6c710bbb.mesh"]
+
+source_file="res://3D Models/Projectiles_FX/ball_bigger.obj"
+dest_files=["res://.godot/imported/ball_bigger.obj-9fc8899dcaa5dd0ca1a12ffb6c710bbb.mesh", "res://.godot/imported/ball_bigger.obj-9fc8899dcaa5dd0ca1a12ffb6c710bbb.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

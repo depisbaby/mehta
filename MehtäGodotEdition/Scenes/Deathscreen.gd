@@ -15,9 +15,12 @@ func _process(delta: float) -> void:
 
 func ShowDeathscreen(show: bool):
 	if show:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		window.show()
 	else:
 		window.hide()
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	pass
 
 #signals

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dpvva4g4q8anm"
+path="res://.godot/imported/earth_shard.obj-2298901d58ca4fa469369b907e63894e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/earth_shard.obj-2298901d58ca4fa469369b907e63894e.mesh"]
+
+source_file="res://3D Models/Projectiles_FX/earth_shard.obj"
+dest_files=["res://.godot/imported/earth_shard.obj-2298901d58ca4fa469369b907e63894e.mesh", "res://.godot/imported/earth_shard.obj-2298901d58ca4fa469369b907e63894e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

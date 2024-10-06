@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://clqfss7d0evha"]
+
+[ext_resource type="PackedScene" uid="uid://d0rmidse4jtpt" path="res://3D Models/Projectiles_FX/wasgul/wasgul.glb" id="1_ul35x"]
+
+[node name="wasgul" instance=ExtResource("1_ul35x")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(-8.47323e-08, -1.02738e-08, 0.707107, 0.707107)
+bones/1/rotation = Quaternion(0.660223, -7.12126e-08, 1.45537e-08, 0.75107)
+bones/2/rotation = Quaternion(0.230861, -5.79938e-08, -5.13726e-08, 0.972987)
+bones/3/rotation = Quaternion(-0.647781, 5.09825e-09, -6.31132e-08, 0.761827)
+bones/4/rotation = Quaternion(-0.261928, -3.552e-16, -5.09992e-08, 0.965088)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "ArmatureAction"

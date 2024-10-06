@@ -20,6 +20,7 @@ var player: Player
 var tick: int
 var sleeping: bool
 var knowsAboutPlayer: bool
+var seesPlayer: bool
 var targetMovePosition: Vector3
 var visionRaycast: PhysicsRayQueryParameters3D
 var facingDirection: Vector3
@@ -92,7 +93,7 @@ func EnemyBehaviour():
 			DoAction()
 			Attack()
 			
-	if(tick > 10000): # reset tick
+	if(tick > 1000000): # reset tick
 		tick = 0
 	
 	pass
@@ -124,21 +125,23 @@ func Move(delta):
 	pass
 
 func CheckPlayerVisibility():
-	
-	if knowsAboutPlayer:
-		return
+	seesPlayer = false
 	
 	visionRaycast.from = eyes.global_position
 	visionRaycast.to = Global.player.global_position
 	
 	var intersection = get_world_3d().direct_space_state.intersect_ray(visionRaycast)
 	if intersection.is_empty():
+		seesPlayer = true
 		knowsAboutPlayer = true
 
 func GetDistanceToPlayer():
 	distanceToPlayer = (player.global_position - global_position).length()
 	#print(distanceToPlayer)
 	return distanceToPlayer
+	
+func GetVectorToPlayer():
+	return (player.camera.global_position - eyes.global_position).normalized()
 
 func CheckHealth():
 	if health.health <= 0:
@@ -242,7 +245,9 @@ func Attack():
 		DoMeleeAttack()
 		pass
 	else:
-		DoRangedAttack() 
+		if distanceToPlayer > rangedRange && seesPlayer:
+			targetMovePosition = global_position
+			DoRangedAttack() 
 	
 	pass
 	
@@ -261,7 +266,7 @@ func DoMeleeAttack():
 	await get_tree().create_timer(meleeWindUp).timeout
 	
 	if distanceToPlayer < stoppingDistance + 1.0: #melee
-		player.DamagePlayer(meleeDamage)
+		player.health.DealDamage(meleeDamage)
 		pass
 	
 	EndAction(meleeCooldown)
@@ -271,6 +276,39 @@ func EndAction(timeInSeconds):
 	
 	await get_tree().create_timer(timeInSeconds).timeout
 	currentAction = Action.NONE
+	pass
+
+func TracePlayer(projectileSpeed: float) -> Vector3:
+	var aimDirection: Vector3
+	print(Global.player.character._velocity)
+	#copy paste
+	var relativePos = Global.player.camera.global_position - eyes.global_position
+	
+	var a: float = Global.player.character._velocity.length_squared() - projectileSpeed * projectileSpeed
+	var b: float = 2 * Global.player.character._velocity.dot(relativePos)
+	var c: float = relativePos.length_squared()
+	
+	var discriminant: float  = b * b - 4 * a * c
+	if discriminant < 0: #invalid
+		print("1")
+		return Vector3(0,0,0)
+		
+	var sqrtDiscriminant: float = sqrt(discriminant)
+	var t1: float = (-b + sqrtDiscriminant) / (2*a)
+	var t2: float = (-b - sqrtDiscriminant) / (2*a)
+	
+	var t: float = min(t1,t2)
+	if t < 0: #invalid
+		t = max(t1,t2)
+		if t < 0:
+			print("2")
+			return Vector3(0,0,0)
+			
+	var futurePlayerPos: Vector3 = Global.player.camera.global_position + Global.player.character._velocity * t
+	aimDirection = (futurePlayerPos - eyes.global_position).normalized()
+	#copy paste
+	
+	return aimDirection
 	pass
 
 #signals

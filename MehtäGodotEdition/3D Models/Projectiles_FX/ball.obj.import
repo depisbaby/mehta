@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ct1sfqce42keq"
+path="res://.godot/imported/ball.obj-cf4745693942e0e9bf529af212c104e9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ball.obj-cf4745693942e0e9bf529af212c104e9.mesh"]
+
+source_file="res://3D Models/Projectiles_FX/ball.obj"
+dest_files=["res://.godot/imported/ball.obj-cf4745693942e0e9bf529af212c104e9.mesh", "res://.godot/imported/ball.obj-cf4745693942e0e9bf529af212c104e9.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

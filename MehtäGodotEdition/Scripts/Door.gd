@@ -4,14 +4,19 @@ class_name Door
 var open: bool
 @export var doorObject: Node3D
 var targetRotation: Vector3
+var closedRotation : Vector3
+var openRotation : Vector3
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	closedRotation = doorObject.global_rotation
+	openRotation = closedRotation + Vector3(0,2,0)
+	targetRotation = closedRotation
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	doorObject.rotation = lerp(doorObject.rotation, targetRotation, 0.05)
+	doorObject.global_rotation = lerp(doorObject.global_rotation, targetRotation, 0.05)
 	
 	pass
 	
@@ -19,11 +24,11 @@ func Operate():
 	
 	if open:
 		open = false
-		targetRotation = Vector3(0,0,0)
+		targetRotation = closedRotation
 		
 	else:
 		open = true
-		targetRotation = Vector3(0,2,0)
+		targetRotation = openRotation
 	
 	pass
 

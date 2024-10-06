@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ysx1ylijuu0x"]
+
+[ext_resource type="Script" path="res://Scripts/Projectiles/Types/EarthShard.gd" id="1_70jt7"]
+[ext_resource type="ArrayMesh" uid="uid://dpvva4g4q8anm" path="res://3D Models/Projectiles_FX/earth_shard.obj" id="2_flt6f"]
+[ext_resource type="Material" uid="uid://c75alb41v1ds8" path="res://Materials/Environment/cliff.material" id="3_qbgcs"]
+
+[node name="EarthShard" type="Node3D"]
+script = ExtResource("1_70jt7")
+
+[node name="EarthShard" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.255, 0, 2.22928e-08, 0, 0.255, 0, -2.22928e-08, 0, -0.255, -0.00687647, 0, 0.00796056)
+mesh = ExtResource("2_flt6f")
+surface_material_override/0 = ExtResource("3_qbgcs")

@@ -3,19 +3,23 @@ extends Item
 @export var startSpeed: float
 @export var damage: int
 
-@onready var projectilePrefab = preload("res://Prefabs/projectile.tscn")
+@onready var projectilePrefab = preload("res://Prefabs/Projectiles/Windball.tscn")
 var projectileQueue: Array[Projectile] = []
 
 func _ready():
+	#COPY PASTE
+	
 	while projectileQueue.is_empty():
 		await get_tree().create_timer(0.1).timeout
-		for i in 100:
+		for i in 30:
 			var projectile = projectilePrefab.instantiate()
 			get_tree().root.add_child(projectile)
 			projectile.projectilePool = projectileQueue
 			projectile.Init(false)
 			projectileQueue.push_back(projectile)
+			
 	
+	#COPY PASTE	
 	
 	pass # Replace with function body.
 
@@ -29,7 +33,7 @@ func UsePrimaryPressed():
 	if(projectile != null):
 		var shooterData = ShooterData.new()
 		shooterData.startPosition = Global.player.camera.global_position
-		shooterData.direction = -Global.player.camera.get_camera_transform().basis.z
+		shooterData.startDirection = -Global.player.camera.get_camera_transform().basis.z
 		shooterData.startSpeed = startSpeed
 		shooterData.startDamage = damage
 		projectile.Shoot(shooterData)

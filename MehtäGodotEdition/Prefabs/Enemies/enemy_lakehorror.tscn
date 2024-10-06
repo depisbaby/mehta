@@ -1,0 +1,117 @@
+[gd_scene load_steps=18 format=3 uid="uid://cy7tiu6ivqm2j"]
+
+[ext_resource type="Script" path="res://Scripts/AI/LakeHorror.gd" id="1_h87pt"]
+[ext_resource type="Script" path="res://Scripts/Health.gd" id="2_g0gbi"]
+[ext_resource type="Texture2D" uid="uid://bc0ksaom8ajni" path="res://Animations/LakeHorror/frame1.png" id="3_5pgyg"]
+[ext_resource type="Texture2D" uid="uid://cad1khgpel5sk" path="res://Animations/LakeHorror/frame2.png" id="4_ewhw6"]
+[ext_resource type="Texture2D" uid="uid://ca3fme536byhv" path="res://Animations/LakeHorror/frame3.png" id="5_ntc2w"]
+[ext_resource type="Texture2D" uid="uid://38a7456o6vnw" path="res://Animations/LakeHorror/frame4.png" id="6_a7mf1"]
+[ext_resource type="Texture2D" uid="uid://5ed2uslpd7s2" path="res://Animations/LakeHorror/frame5.png" id="7_mrbxv"]
+[ext_resource type="Texture2D" uid="uid://cryqafycq0lkk" path="res://Animations/LakeHorror/frame6.png" id="8_mux68"]
+[ext_resource type="Texture2D" uid="uid://rq5kfdcfj5n3" path="res://Animations/LakeHorror/frame7.png" id="9_0fyin"]
+[ext_resource type="Texture2D" uid="uid://clur1a80yyj8m" path="res://Animations/LakeHorror/frame8.png" id="10_cpjqd"]
+[ext_resource type="ArrayMesh" uid="uid://dg21a0h7hrq3u" path="res://3D Models/Projectiles_FX/ball_bigger.obj" id="11_bpc8n"]
+[ext_resource type="Material" uid="uid://c1u5tgihhk7j4" path="res://Materials/Projectiles/lakehorroraura.material" id="12_b63x4"]
+[ext_resource type="Script" path="res://Scripts/Projectiles/ProjectilePool.gd" id="13_f8ar4"]
+[ext_resource type="PackedScene" uid="uid://ct1dx4bc323yc" path="res://Prefabs/Projectiles/Wasgul.tscn" id="14_biq37"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_02k8a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rtwsu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k5f0x"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": ExtResource("3_5pgyg")
+}, {
+"duration": 6.0,
+"texture": ExtResource("4_ewhw6")
+}, {
+"duration": 6.0,
+"texture": ExtResource("5_ntc2w")
+}, {
+"duration": 6.0,
+"texture": ExtResource("6_a7mf1")
+}, {
+"duration": 6.0,
+"texture": ExtResource("7_mrbxv")
+}, {
+"duration": 6.0,
+"texture": ExtResource("8_mux68")
+}, {
+"duration": 6.0,
+"texture": ExtResource("9_0fyin")
+}, {
+"duration": 6.0,
+"texture": ExtResource("10_cpjqd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="enemy_lakehorror" type="CharacterBody3D" node_paths=PackedStringArray("ball1", "ball2", "projectilePool", "eyes", "health")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_h87pt")
+ball1 = NodePath("BallBigger")
+ball2 = NodePath("BallBigger2")
+projectilePool = NodePath("ProjectilePool")
+displayName = "Lake Horror"
+speed = 3.0
+accel = 10.0
+stoppingDistance = 5.0
+eyes = NodePath("Eyes")
+health = NodePath("LakeHorrorHitbox")
+rangedRange = -1.0
+meleeWindUp = 0.1
+meleeCooldown = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.986212, 0)
+shape = SubResource("CapsuleShape3D_02k8a")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Eyes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53657, 0)
+
+[node name="LakeHorrorHitbox" type="Area3D" parent="." groups=["Hitbox"]]
+transform = Transform3D(1.51, 0, 0, 0, 1.51, 0, 0, 0, 1.51, 0, 1.05987, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_g0gbi")
+maxHealth = 300
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LakeHorrorHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988639, 0)
+shape = SubResource("SphereShape3D_rtwsu")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(2.29, 0, 0, 0, 2.29, 0, 0, 0, 2.29, 0, 0.483367, 0)
+offset = Vector2(0, 60.645)
+billboard = 2
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_k5f0x")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.0780836
+
+[node name="BallBigger" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, -8.66025, 0, 8.66025, 5, 0, 0, 0, 10, 0, 2.4, 0)
+mesh = ExtResource("11_bpc8n")
+surface_material_override/0 = ExtResource("12_b63x4")
+
+[node name="BallBigger2" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.71751, 6.71751, 0, -6.71751, 6.71751, 0, 0, 0, 9.5, 0, 2.4, 0)
+mesh = ExtResource("11_bpc8n")
+skeleton = NodePath("../BallBigger")
+surface_material_override/0 = ExtResource("12_b63x4")
+
+[node name="ProjectilePool" type="Node3D" parent="."]
+script = ExtResource("13_f8ar4")
+projectilePrefab = ExtResource("14_biq37")
+poolSize = 5
+
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

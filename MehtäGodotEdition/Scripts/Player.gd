@@ -3,8 +3,10 @@ class_name Player
 
 @export var camera: Camera3D
 @export var health: Health
+@export var character: CharacterBody3D
 
 var frozen: bool
+var blindness: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,7 +18,8 @@ func _ready():
 func _process(delta):
 	CheckLife()
 	PlayerInputs(delta)
-	#print(health.health)
+	
+	
 	pass
 
 func Respawn():
@@ -48,9 +51,6 @@ func PlayerInputs(delta):
 	
 	pass
 
-func DamagePlayer(damageAmount):
-	health.health = health.health - damageAmount
-	pass
 	
 func CheckLife():
 	
