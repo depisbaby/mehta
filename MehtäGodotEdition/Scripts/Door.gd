@@ -3,9 +3,13 @@ class_name Door
 
 var open: bool
 @export var doorObject: Node3D
+@export var lockedWithId: String #"" is not locked
 var targetRotation: Vector3
 var closedRotation : Vector3
 var openRotation : Vector3
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	closedRotation = doorObject.global_rotation
@@ -21,6 +25,11 @@ func _process(delta):
 	pass
 	
 func Operate():
+	
+	if lockedWithId != "":
+		if !Global.inventory.CheckForKey(lockedWithId):
+			Global.inventory.ShowMessage("Door is locked.")
+			return
 	
 	if open:
 		open = false

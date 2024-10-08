@@ -64,7 +64,8 @@ accel = 10.0
 stoppingDistance = 5.0
 eyes = NodePath("Eyes")
 health = NodePath("LakeHorrorHitbox")
-rangedRange = -1.0
+desiredRangedRange = 1.0
+goToMeleeRange = 5.0
 meleeWindUp = 0.1
 meleeCooldown = 0.1
 
@@ -77,12 +78,13 @@ shape = SubResource("CapsuleShape3D_02k8a")
 [node name="Eyes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53657, 0)
 
-[node name="LakeHorrorHitbox" type="Area3D" parent="." groups=["Hitbox"]]
+[node name="LakeHorrorHitbox" type="Area3D" parent="." node_paths=PackedStringArray("ai") groups=["Hitbox"]]
 transform = Transform3D(1.51, 0, 0, 0, 1.51, 0, 0, 0, 1.51, 0, 1.05987, 0)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_g0gbi")
 maxHealth = 300
+ai = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LakeHorrorHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988639, 0)

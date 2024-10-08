@@ -3,3 +3,4 @@
 3 = hitbox player
 4 = hitbox enemies
 5 = character (projectiles ignore)
+6 = environment dynamic

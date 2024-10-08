@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name Deathscreen
 
-@onready var window: ColorRect = $ColorRect
+@onready var window: TextureRect = $TextureRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,7 +16,13 @@ func _process(delta: float) -> void:
 func ShowDeathscreen(show: bool):
 	if show:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		window.self_modulate.a = 0.0
 		window.show()
+		
+		while window.self_modulate.a < 1.0:
+			await get_tree().create_timer(0.2).timeout
+			window.self_modulate.a += 0.01
+		
 	else:
 		window.hide()
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

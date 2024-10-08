@@ -40,11 +40,13 @@ shape = SubResource("ConcavePolygonShape3D_o6si3")
 shape = SubResource("ConcavePolygonShape3D_l6m1w")
 
 [node name="DoorMain" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00228953, -0.0186388, 0.86682)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00228953, -0.0106331, 0.86682)
 mesh = ExtResource("2_w3dy8")
 surface_material_override/0 = ExtResource("4_iyy56")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="DoorMain"]
+collision_layer = 32
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DoorMain/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_8ujuc")

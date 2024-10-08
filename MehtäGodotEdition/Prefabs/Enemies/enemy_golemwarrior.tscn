@@ -171,18 +171,20 @@ animations = [{
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_07t12")
-earthShardSpeed = 120.0
-rangedDamage = 27
+earthShardSpeed = 50.0
+rangedDamage = 15
 displayName = "Golem Warrior"
 speed = 7.0
 accel = 10.0
 stoppingDistance = 2.0
 eyes = NodePath("Eyes")
 health = NodePath("GolemWarriorHitbox")
-rangedRange = 20.0
+despawnDelay = 5.0
+desiredRangedRange = 200.0
+goToMeleeRange = 5.0
 meleeWindUp = 0.4
 meleeCooldown = 0.6
-meleeDamage = 46
+meleeDamage = 35
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.986212, 0)
@@ -193,11 +195,12 @@ shape = SubResource("CapsuleShape3D_02k8a")
 [node name="Eyes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73749, 0)
 
-[node name="GolemWarriorHitbox" type="Area3D" parent="." groups=["Hitbox"]]
+[node name="GolemWarriorHitbox" type="Area3D" parent="." node_paths=PackedStringArray("ai") groups=["Hitbox"]]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_mqmbl")
 maxHealth = 100
+ai = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GolemWarriorHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988639, 0)
@@ -209,7 +212,7 @@ offset = Vector2(0, 60.645)
 billboard = 2
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_k5f0x")
-animation = &"attack"
+animation = &"idle_side"
 autoplay = "walk_front"
 
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

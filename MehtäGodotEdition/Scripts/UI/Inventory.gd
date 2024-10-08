@@ -166,3 +166,18 @@ func UpdateInventory():
 func SelectInventorySlot(index: int):
 	selectedInventorySlot = inventorySlots[index]
 	pass
+	
+func CheckForKey(id: String) -> bool:
+	var result = false
+	for slot in inventorySlots:
+		if slot.placedItem != null && slot.placedItem.customData.size() == 2:
+			if slot.placedItem.customData[0] == "key" && slot.placedItem.customData[1] == id:
+				result = true
+			
+	return result
+	pass
+
+func ShowMessage(message: String):
+	pickUpMessage.text = message
+	messageTick = 500
+	

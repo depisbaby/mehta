@@ -2,9 +2,13 @@ extends Item
 
 @export var startSpeed: float
 @export var damage: int
+@export var coolDown: float
 
 @onready var projectilePrefab = preload("res://Prefabs/Projectiles/Windball.tscn")
 var projectileQueue: Array[Projectile] = []
+
+var cooldownTick: float
+
 
 func _ready():
 	#COPY PASTE
@@ -23,12 +27,20 @@ func _ready():
 	
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	super._process(delta)
+	cooldownTick = clamp(cooldownTick - delta,0.0, 100.0)
+	
+	
+
 	
 func UsePrimaryPressed():
+	
+	if cooldownTick != 0:
+		return
+	
+	cooldownTick = coolDown
+	
 	var projectile = projectileQueue.pop_front()
 	if(projectile != null):
 		var shooterData = ShooterData.new()

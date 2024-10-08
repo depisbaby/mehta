@@ -83,9 +83,9 @@ func MoveProjectile(delta):
 	
 func Init(ignoreEnemies: bool):
 	if ignoreEnemies:
-		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),5)
+		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),37)
 	else:
-		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),13)
+		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),45)
 		
 	raycast.hit_from_inside = false
 	raycast.hit_back_faces = false

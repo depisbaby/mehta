@@ -7,10 +7,11 @@ extends NavAgent
 var direction1: Vector3
 var direction2: Vector3
 
+var healTick: float
 
 func _ready():
 	super._ready()
-	
+	customActionTick = 50
 	pass
 
 func Animations():
@@ -32,23 +33,13 @@ func _process(delta):
 		
 		if distanceToPlayer < 10.0:
 			Global.hud.MakeBlinder(delta)
-		
-	if tick % 1000 == 0 && seesPlayer:
-		
-		var projectile: Projectile = projectilePool.GetProjectile()
-		if projectile == null:
-			return
-		
-		projectile.objectToHomeTo = Global.player.camera
 			
-		var shooterData = ShooterData.new()
-		shooterData.startPosition = eyes.global_position 
-		shooterData.startDamage = 41
-		shooterData.startSpeed = 5
-		shooterData.startDirection = Vector3(0.0,1.0,0.0)
-		shooterData.ignoreEnemies = true
-		projectile.Shoot(shooterData)
+		healTick += delta
+		if healTick > 3.0:
+			healTick = 0.0
+			health.health = clamp(health.health + 10, 0, health.maxHealth)
 		
+	
 	
 	pass
 	
@@ -59,4 +50,24 @@ func CheckPlayerPerspective():
 func Despawn():
 	projectilePool.DeletePool()	
 	super.Despawn()
+	
+func DoCustomAction():
+	
+	if !seesPlayer || player.health.health <= 0:
+		return
+	
+	var projectile: Projectile = projectilePool.GetProjectile()
+	if projectile == null:
+		return
+	
+	projectile.objectToHomeTo = Global.player.camera
+		
+	var shooterData = ShooterData.new()
+	shooterData.startPosition = eyes.global_position 
+	shooterData.startDamage = 41
+	shooterData.startSpeed = 7
+	shooterData.startDirection = Vector3(0,1,0)
+	shooterData.ignoreEnemies = true
+	projectile.Shoot(shooterData)
+	pass
 	

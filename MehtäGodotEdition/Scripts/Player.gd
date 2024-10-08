@@ -7,6 +7,7 @@ class_name Player
 
 var frozen: bool
 var blindness: float
+var walking: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,18 +17,21 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	CheckLife()
 	PlayerInputs(delta)
 	
 	
 	pass
 
 func Respawn():
-	health.health = 100
+	health.maxHealth = 100
+	health.SetHealth(health.maxHealth)
 	frozen = false
 	pass
 
 func PlayerInputs(delta):
+	
+	if health.health <= 0 || frozen:
+		return
 	
 	if(Global.inventory != null):
 		
@@ -35,9 +39,11 @@ func PlayerInputs(delta):
 			return
 		
 		if(Input.is_action_just_pressed("mouse0")):
+			Global.viewModel.UseItem()
 			Global.inventory.equippedItem.UsePrimaryPressed()
 			pass
 		if(Input.is_action_just_pressed("mouse1")):
+			Global.viewModel.UseItem()
 			Global.inventory.equippedItem.UseSecondaryPressed()
 			pass
 		if(Input.is_action_just_released("mouse0")):
@@ -52,11 +58,13 @@ func PlayerInputs(delta):
 	pass
 
 	
-func CheckLife():
+func CheckHealth():
 	
 	if health.health < 1: #die
 		frozen = true
 		Global.deathscreen.ShowDeathscreen(true)
+		
+			
 		pass
 	
 	pass

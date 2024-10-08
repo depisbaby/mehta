@@ -56,6 +56,9 @@ func _ready():
 
 func _physics_process(delta):
 	
+	if Global.player.health.health <= 0 || Global.player.frozen:
+		return
+	
 	# Update camera movement based on mouse movement
 	_update_camera(delta)
 	
@@ -70,6 +73,10 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	
+	Global.player.walking = false
+	if input_dir.length() != 0.0:
+		Global.player.walking = true
 	
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	

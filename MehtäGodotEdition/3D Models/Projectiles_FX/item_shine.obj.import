@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dh86i0un67oe"
+path="res://.godot/imported/item_shine.obj-9efe880735a868f84a5b005afe5e49a9.mesh"
+
+[deps]
+
+files=["res://.godot/imported/item_shine.obj-9efe880735a868f84a5b005afe5e49a9.mesh"]
+
+source_file="res://3D Models/Projectiles_FX/item_shine.obj"
+dest_files=["res://.godot/imported/item_shine.obj-9efe880735a868f84a5b005afe5e49a9.mesh", "res://.godot/imported/item_shine.obj-9efe880735a868f84a5b005afe5e49a9.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

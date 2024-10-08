@@ -8,6 +8,7 @@ var projectileQueue: Array[Projectile] = []
 
 func _ready() -> void:
 	super._ready()
+	customActionTick = 4
 	
 	while projectileQueue.is_empty():
 		await get_tree().create_timer(0.1).timeout
@@ -25,6 +26,7 @@ func _process(delta: float) -> void:
 	pass
 
 func DoRangedAttack():
+	
 	if projectileQueue.is_empty():
 		return
 	
@@ -32,6 +34,10 @@ func DoRangedAttack():
 	
 	OverrideAnimation("ranged_attack")
 	await get_tree().create_timer(0.2 * 9.0).timeout
+	
+	if sleeping:
+		currentAction = Action.NONE
+		return
 	
 	var projectile = projectileQueue.pop_front()
 	if(projectile != null):
@@ -49,3 +55,23 @@ func DoRangedAttack():
 	
 	EndAction(1.2)
 	pass
+
+func ReactToDamage():
+	
+	if rng.randi_range(0, 2) == 0:
+		return
+	
+	MoveToRandomPlace()
+	
+	pass
+
+func DoCustomAction():
+	
+	if currentAction != Action.NONE:
+		return
+		
+	if rng.randi_range(0,10) == 0:
+		MoveToRandomPlace()
+	
+	pass
+	

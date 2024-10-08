@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://drmmhpsyvexn5"]
+
+[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_w2ys3"]
+[ext_resource type="Texture2D" uid="uid://c66mqqw3f3mi4" path="res://Sprites/items/key.png" id="2_sndn6"]
+[ext_resource type="ArrayMesh" uid="uid://dh86i0un67oe" path="res://3D Models/Projectiles_FX/item_shine.obj" id="3_hntf1"]
+[ext_resource type="Material" uid="uid://d3bj38yviriyq" path="res://Materials/FX/item_shine.material" id="4_ptyln"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jq08f"]
+size = Vector3(0.52121, 0.141663, 0.600937)
+
+[node name="Item_key" type="Node3D" node_paths=PackedStringArray("sprite", "itemShine") groups=["Item"]]
+script = ExtResource("1_w2ys3")
+itemName = "key_default"
+displayName = "Key"
+description = "No description..."
+sprite = NodePath("Sprite3D")
+itemShine = NodePath("ItemShine")
+customData = Array[String](["key", "1"])
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0.0147225, 0)
+double_sided = false
+texture_filter = 0
+texture = ExtResource("2_sndn6")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00196838, 0.0853577, 0.00295258)
+shape = SubResource("BoxShape3D_jq08f")
+
+[node name="ItemShine" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.30899, 0, 0, 0, 2.30899, 0, 0, 0, 2.30899, -0.0104558, 0.000125296, 0.0170672)
+mesh = ExtResource("3_hntf1")
+skeleton = NodePath("../Area3D/CollisionShape3D")
+surface_material_override/0 = ExtResource("4_ptyln")

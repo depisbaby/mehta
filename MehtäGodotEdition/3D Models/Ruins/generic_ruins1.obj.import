@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b8t88pl18bta4"
+path="res://.godot/imported/generic_ruins1.obj-4e2b3e6f0e3023ff013aabfd363b5803.mesh"
+
+[deps]
+
+files=["res://.godot/imported/generic_ruins1.obj-4e2b3e6f0e3023ff013aabfd363b5803.mesh"]
+
+source_file="res://3D Models/Ruins/generic_ruins1.obj"
+dest_files=["res://.godot/imported/generic_ruins1.obj-4e2b3e6f0e3023ff013aabfd363b5803.mesh", "res://.godot/imported/generic_ruins1.obj-4e2b3e6f0e3023ff013aabfd363b5803.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8dh20dyc40mi"]
+
+[ext_resource type="Material" uid="uid://bjohixoayh7p5" path="res://Materials/Environment/brick.material" id="1_nqpba"]
+[ext_resource type="ArrayMesh" uid="uid://ct1sfqce42keq" path="res://3D Models/Projectiles_FX/ball.obj" id="2_x20a1"]
+
+[node name="Debugsphere" type="Node3D"]
+
+[node name="Ball" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = ExtResource("1_nqpba")
+mesh = ExtResource("2_x20a1")
