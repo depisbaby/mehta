@@ -1,11 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://coum3kicfxli5"]
-
-[sub_resource type="TileSet" id="TileSet_v78fy"]
+[gd_scene format=3 uid="uid://coum3kicfxli5"]
 
 [node name="Test" type="Node2D"]
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_v78fy")
-format = 2
-
-[node name="Camera2D" type="Camera2D" parent="."]
