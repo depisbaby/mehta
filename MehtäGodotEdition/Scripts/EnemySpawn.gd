@@ -1,7 +1,14 @@
 extends Node3D
 
 @export var enemyScene: PackedScene
+
+@onready var devSprite: Sprite3D = $Sprite3D
+
 var exhausted: bool
+
+func _ready():
+	devSprite.visible = false
+	pass
 
 func _process(delta):
 	

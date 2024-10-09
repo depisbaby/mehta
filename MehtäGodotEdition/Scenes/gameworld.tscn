@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=65 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ViewModel.gd" id="1_uob2v"]
 [ext_resource type="Texture2D" uid="uid://d12wbgpjg5jlj" path="res://Sprites/ui/healthbar_fill.png" id="2_0uj4p"]
@@ -25,7 +25,13 @@
 [ext_resource type="PackedScene" uid="uid://dnhns4clo4hsy" path="res://Prefabs/MapObjects/Door.tscn" id="13_8chcx"]
 [ext_resource type="Texture2D" uid="uid://b6t3fph7gbrij" path="res://Sprites/ui/deathscreen.png" id="13_iohnm"]
 [ext_resource type="PackedScene" uid="uid://dy708glhl3n41" path="res://Prefabs/Items/Wands/item_vitutus.tscn" id="14_dcj08"]
+[ext_resource type="Script" path="res://Scripts/UI/ToolTips.gd" id="14_pdof7"]
 [ext_resource type="ArrayMesh" uid="uid://c5wheeg56rmem" path="res://3D Models/room_cave1/main.obj" id="15_mel5a"]
+[ext_resource type="Texture2D" uid="uid://cuskou6xkdu5y" path="res://Sprites/ui/button1.png" id="15_psqno"]
+[ext_resource type="Texture2D" uid="uid://l3bt6dq0ykjk" path="res://Sprites/ui/button5.png" id="16_p0ny1"]
+[ext_resource type="Texture2D" uid="uid://blnaisbcinud7" path="res://Sprites/ui/button3.png" id="17_unwb2"]
+[ext_resource type="Texture2D" uid="uid://c1yllootrqr60" path="res://Sprites/ui/button4.png" id="18_erm33"]
+[ext_resource type="Texture2D" uid="uid://df7hqju3ktf1u" path="res://Sprites/ui/tooltipsframe.png" id="19_6e8d8"]
 [ext_resource type="ArrayMesh" uid="uid://drhcv3oxwjwnq" path="res://3D Models/room_chasm/main.obj" id="21_jv5i1"]
 [ext_resource type="ArrayMesh" uid="uid://cra1x62jqk1ng" path="res://3D Models/room_cave1/bridge.obj" id="21_t8xi7"]
 [ext_resource type="ArrayMesh" uid="uid://gdgq3kk08nhr" path="res://3D Models/room_chasm/bridge.obj" id="22_6phql"]
@@ -50,6 +56,10 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_23daw"]
 font = ExtResource("11_8u5pi")
 font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_4vexg"]
+font = ExtResource("11_8u5pi")
+font_size = 31
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kafna"]
 
@@ -259,6 +269,135 @@ offset_top = 60.0
 offset_right = 828.0
 offset_bottom = 1020.0
 texture = ExtResource("5_p5s3x")
+
+[node name="ToolTips" type="CanvasLayer" parent="." node_paths=PackedStringArray("labels", "moreLabel")]
+script = ExtResource("14_pdof7")
+labels = [NodePath("base/item1/label"), NodePath("base/item2/label"), NodePath("base/item3/label")]
+moreLabel = NodePath("base/item4/label")
+
+[node name="base" type="Control" parent="ToolTips"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1354.0
+offset_top = 505.0
+offset_right = 1394.0
+offset_bottom = 545.0
+mouse_filter = 2
+
+[node name="item1" type="Control" parent="ToolTips/base"]
+anchors_preset = 0
+offset_left = -122.0
+offset_top = -126.0
+offset_right = -82.0
+offset_bottom = -86.0
+mouse_filter = 2
+
+[node name="sprite" type="TextureRect" parent="ToolTips/base/item1"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 16.0
+scale = Vector2(4, 4)
+texture = ExtResource("15_psqno")
+
+[node name="label" type="Label" parent="ToolTips/base/item1"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Drop"
+label_settings = SubResource("LabelSettings_4vexg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="item2" type="Control" parent="ToolTips/base"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -122.0
+offset_top = -62.0
+offset_right = -82.0
+offset_bottom = -22.0
+mouse_filter = 2
+
+[node name="sprite" type="TextureRect" parent="ToolTips/base/item2"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 16.0
+scale = Vector2(4, 4)
+texture = ExtResource("16_p0ny1")
+
+[node name="label" type="Label" parent="ToolTips/base/item2"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Desc."
+label_settings = SubResource("LabelSettings_4vexg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="item3" type="Control" parent="ToolTips/base"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -122.0
+offset_top = 2.0
+offset_right = -82.0
+offset_bottom = 42.0
+mouse_filter = 2
+
+[node name="sprite" type="TextureRect" parent="ToolTips/base/item3"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 16.0
+scale = Vector2(4, 4)
+texture = ExtResource("17_unwb2")
+
+[node name="label" type="Label" parent="ToolTips/base/item3"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "Runes"
+label_settings = SubResource("LabelSettings_4vexg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="item4" type="Control" parent="ToolTips/base"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -122.0
+offset_top = 66.0
+offset_right = -82.0
+offset_bottom = 106.0
+mouse_filter = 2
+
+[node name="sprite" type="TextureRect" parent="ToolTips/base/item4"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 16.0
+scale = Vector2(4, 4)
+texture = ExtResource("18_erm33")
+
+[node name="label" type="Label" parent="ToolTips/base/item4"]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 64.0
+text = "More"
+label_settings = SubResource("LabelSettings_4vexg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="frame" type="TextureRect" parent="ToolTips/base"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -130.0
+offset_top = -134.0
+offset_right = -62.0
+offset_bottom = -66.0
+scale = Vector2(4, 4)
+mouse_filter = 2
+texture = ExtResource("19_6e8d8")
 
 [node name="Deathscreen" type="CanvasLayer" parent="."]
 script = ExtResource("7_x1svj")
@@ -521,4 +660,12 @@ shape = SubResource("ConcavePolygonShape3D_5as5e")
 [node name="Weapon_jade_wand" parent="." instance=ExtResource("14_dcj08")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -237.977, -19.851, -52.1025)
 
+[connection signal="mouse_entered" from="ToolTips/base/item1/sprite" to="ToolTips" method="_on_sprite_mouse_entered" binds= [0]]
+[connection signal="mouse_exited" from="ToolTips/base/item1/sprite" to="ToolTips" method="_on_sprite_mouse_exited" binds= [0]]
+[connection signal="mouse_entered" from="ToolTips/base/item2/sprite" to="ToolTips" method="_on_sprite_mouse_entered" binds= [1]]
+[connection signal="mouse_exited" from="ToolTips/base/item2/sprite" to="ToolTips" method="_on_sprite_mouse_exited" binds= [1]]
+[connection signal="mouse_entered" from="ToolTips/base/item3/sprite" to="ToolTips" method="_on_sprite_mouse_entered" binds= [2]]
+[connection signal="mouse_exited" from="ToolTips/base/item3/sprite" to="ToolTips" method="_on_sprite_mouse_exited" binds= [2]]
+[connection signal="mouse_entered" from="ToolTips/base/item4/sprite" to="ToolTips" method="_on_sprite_mouse_entered" binds= [3]]
+[connection signal="mouse_exited" from="ToolTips/base/item4/sprite" to="ToolTips" method="_on_sprite_mouse_exited" binds= [3]]
 [connection signal="button_down" from="Deathscreen/TextureRect/Button" to="Deathscreen" method="_on_button_button_down"]

@@ -10,9 +10,18 @@ class_name Item
 @export var itemShine : Node3D
 @export var customData: Array[String]
 
+var actions: Array[String] = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	actions.push_back("Drop")
+	actions.push_back("Test 1")
+	actions.push_back("Test 2")
+	actions.push_back("Test 3")
+	actions.push_back("Test 4")
+	actions.push_back("Test 5")
+	actions.push_back("Test 6")
+	actions.push_back("Test 7")
 	pass # Replace with function body.
 
 
@@ -41,4 +50,9 @@ func UsePrimaryReleased():
 	pass
 	
 func UseSecondaryReleased():
+	pass
+	
+#interfaces
+func ToolTipsResult(result : String):
+	print(result)
 	pass

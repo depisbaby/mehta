@@ -75,8 +75,12 @@ func _process(delta):
 			MoveItem(activeInventorySlot, selectedInventorySlot)
 		
 		activeInventorySlot = null
-		
-	pass
+	
+	if Input.is_action_just_released("mouse1"):
+		if selectedInventorySlot != null:
+			if selectedInventorySlot.placedItem != null:
+				Global.toolTips.ShowToolTips(selectedInventorySlot.placedItem.actions, selectedInventorySlot.placedItem as Item)
+	
 
 func CloseWindow():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

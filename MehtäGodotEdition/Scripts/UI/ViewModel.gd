@@ -62,3 +62,4 @@ func UseItemAnimation(delta):
 func UseItem():
 	useItemWeight1 = 1.0
 	pass
+	

@@ -11,6 +11,7 @@ var cooldownTick: float
 
 
 func _ready():
+	super._ready()
 	#COPY PASTE
 	
 	while projectileQueue.is_empty():

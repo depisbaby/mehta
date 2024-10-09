@@ -10,6 +10,6 @@ enemyScene = ExtResource("2_nfbrc")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.479599, 0)
-modulate = Color(0.571185, 0.327518, 0.231127, 1)
+modulate = Color(0.284098, 0.334704, 0.395251, 1)
 billboard = 1
 texture = ExtResource("3_8wb0o")

@@ -4,12 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://dekgvdi48e3rj" path="res://Prefabs/Enemies/enemy_golemwarrior.tscn" id="2_bvqq7"]
 [ext_resource type="Texture2D" uid="uid://enow5icockka" path="res://Sprites/Debug/enemyspawn.png" id="3_6e610"]
 
-[node name="ES_LakeHorror" type="Node3D"]
+[node name="ES_GolemWarrior" type="Node3D"]
 script = ExtResource("1_btsli")
 enemyScene = ExtResource("2_bvqq7")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.479599, 0)
-modulate = Color(0.230331, 0.217158, 0.304788, 1)
+modulate = Color(0.373052, 0.333856, 0.156172, 1)
 billboard = 1
 texture = ExtResource("3_6e610")
