@@ -30,7 +30,7 @@ func _ready():
 			var i_inventorySlot = instance as InventorySlot
 			inventorySlots.append(instance)
 			inventoryWindow.add_child(instance)
-			instance.position = Vector2(120 * j + 20, 120 * i + 20)
+			instance.position = Vector2(128 * j + 70, 128 * i + 70)
 			i_inventorySlot.id = ((i-1) * grid_width + j) + grid_width
 			inventorySlots[i_inventorySlot.id] = i_inventorySlot
 			var label: Label = inventorySlots[i_inventorySlot.id].amountLabel

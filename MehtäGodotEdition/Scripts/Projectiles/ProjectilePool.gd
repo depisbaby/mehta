@@ -10,6 +10,9 @@ var projectileQueue: Array[Projectile] = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
+	if projectilePrefab == null:
+		return
+	
 	while projectileQueue.is_empty():
 		await get_tree().create_timer(0.1).timeout
 		for i in poolSize:
@@ -34,3 +37,20 @@ func GetProjectile() -> Projectile:
 func DeletePool():
 	for i in projectilePool:
 		i.DeleteFromMemory()
+		
+func ReinitializePool(_projectilePrefab:PackedScene, size:int):
+	
+	if !projectilePool.is_empty():
+		DeletePool()
+		projectilePool.clear()
+		projectileQueue.clear()
+	
+	for i in size:
+		var projectile = _projectilePrefab.instantiate()
+		get_tree().root.add_child(projectile)
+		projectile.projectilePool = projectileQueue
+		projectile.Init(false)
+		projectileQueue.push_back(projectile)
+		projectilePool.push_back(projectile)
+		
+	pass

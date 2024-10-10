@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=67 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ViewModel.gd" id="1_uob2v"]
 [ext_resource type="Texture2D" uid="uid://d12wbgpjg5jlj" path="res://Sprites/ui/healthbar_fill.png" id="2_0uj4p"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://d1kpau0gsbduw" path="res://Sprites/ui/bloodbar.png" id="5_5bp1x"]
 [ext_resource type="Script" path="res://Scripts/PlayerInteract.gd" id="5_g86y7"]
 [ext_resource type="Script" path="res://Scripts/UI/Inventory.gd" id="5_n5jqb"]
-[ext_resource type="Texture2D" uid="uid://c58ast2tjp485" path="res://Sprites/checkerboard.png" id="5_p5s3x"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="6_e1hps"]
 [ext_resource type="Script" path="res://Scripts/UI/Deathscreen.gd" id="7_x1svj"]
 [ext_resource type="Texture2D" uid="uid://0hmfx3r70xik" path="res://Sprites/ui/healthbar_background.png" id="8_qmudk"]
@@ -23,6 +22,7 @@
 [ext_resource type="Material" uid="uid://c75alb41v1ds8" path="res://Materials/Environment/cliff.material" id="10_snpt4"]
 [ext_resource type="FontFile" uid="uid://dgvp540c2rb0h" path="res://Fonts/Moria_DF.TTF" id="11_8u5pi"]
 [ext_resource type="PackedScene" uid="uid://dnhns4clo4hsy" path="res://Prefabs/MapObjects/Door.tscn" id="13_8chcx"]
+[ext_resource type="Texture2D" uid="uid://utksdwktjst3" path="res://Sprites/ui/inventory.png" id="13_ai3qp"]
 [ext_resource type="Texture2D" uid="uid://b6t3fph7gbrij" path="res://Sprites/ui/deathscreen.png" id="13_iohnm"]
 [ext_resource type="PackedScene" uid="uid://dy708glhl3n41" path="res://Prefabs/Items/Wands/item_vitutus.tscn" id="14_dcj08"]
 [ext_resource type="Script" path="res://Scripts/UI/ToolTips.gd" id="14_pdof7"]
@@ -35,8 +35,10 @@
 [ext_resource type="ArrayMesh" uid="uid://drhcv3oxwjwnq" path="res://3D Models/room_chasm/main.obj" id="21_jv5i1"]
 [ext_resource type="ArrayMesh" uid="uid://cra1x62jqk1ng" path="res://3D Models/room_cave1/bridge.obj" id="21_t8xi7"]
 [ext_resource type="ArrayMesh" uid="uid://gdgq3kk08nhr" path="res://3D Models/room_chasm/bridge.obj" id="22_6phql"]
+[ext_resource type="Script" path="res://Scripts/Magic/MagicManager.gd" id="22_7ns2v"]
 [ext_resource type="Material" uid="uid://d3pl4sua0k0gk" path="res://Materials/Environment/planks.material" id="22_d4m33"]
 [ext_resource type="Material" uid="uid://wfgd4uny40ci" path="res://Materials/Environment/bricks2.material" id="23_5yjb4"]
+[ext_resource type="PackedScene" uid="uid://8h4wmpppedvl" path="res://Prefabs/Projectiles/Windball.tscn" id="23_a3jgk"]
 [ext_resource type="Material" uid="uid://0a5oewqqoaq8" path="res://Materials/Environment/invisible.material" id="24_j8l5x"]
 [ext_resource type="ArrayMesh" uid="uid://b8t88pl18bta4" path="res://3D Models/Ruins/generic_ruins1.obj" id="25_8i0et"]
 [ext_resource type="ArrayMesh" uid="uid://d20448oretcw0" path="res://3D Models/Ruins/wall_section1.obj" id="26_aiuxa"]
@@ -248,10 +250,10 @@ vertical_alignment = 1
 [node name="Inventory" type="CanvasLayer" parent="." node_paths=PackedStringArray("inventoryWindow", "pickUpMessage")]
 unique_name_in_owner = true
 script = ExtResource("5_n5jqb")
-inventoryWindow = NodePath("InventoryWindow")
-pickUpMessage = NodePath("PickUpMessage")
+inventoryWindow = NodePath("TextureRect")
+pickUpMessage = NodePath("inventoryWindow")
 
-[node name="PickUpMessage" type="Label" parent="Inventory"]
+[node name="inventoryWindow" type="Label" parent="Inventory"]
 offset_left = 22.0
 offset_top = -101.0
 offset_right = 1022.0
@@ -261,14 +263,19 @@ text = "Picked up Silver cross"
 label_settings = SubResource("LabelSettings_23daw")
 vertical_alignment = 2
 
-[node name="InventoryWindow" type="TextureRect" parent="Inventory"]
-visible = false
+[node name="TextureRect" type="TextureRect" parent="Inventory"]
 texture_filter = 1
-offset_left = 60.0
-offset_top = 60.0
-offset_right = 828.0
-offset_bottom = 1020.0
-texture = ExtResource("5_p5s3x")
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/TextureRect"]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+pivot_offset = Vector2(1, 1)
+mouse_filter = 2
+texture = ExtResource("13_ai3qp")
 
 [node name="ToolTips" type="CanvasLayer" parent="." node_paths=PackedStringArray("labels", "moreLabel")]
 script = ExtResource("14_pdof7")
@@ -423,6 +430,12 @@ offset_bottom = 487.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "revive"
+
+[node name="Managers" type="Node3D" parent="."]
+
+[node name="MagicManager" type="Node3D" parent="Managers"]
+script = ExtResource("22_7ns2v")
+spells = Array[PackedScene]([ExtResource("23_a3jgk")])
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER")]
 unique_name_in_owner = true

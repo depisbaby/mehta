@@ -7,3 +7,4 @@ var enemyHealthBar: EnemyHealthBar
 var deathscreen: Deathscreen
 var hud: HUD
 var toolTips: ToolTips
+var magicManager: MagicManager

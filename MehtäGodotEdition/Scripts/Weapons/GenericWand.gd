@@ -33,8 +33,6 @@ func _process(delta):
 	cooldownTick = clamp(cooldownTick - delta,0.0, 100.0)
 	
 	
-
-	
 func UsePrimaryPressed():
 	
 	if cooldownTick != 0:
