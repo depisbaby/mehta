@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name Inventory
 
-@export var inventoryWindow: Node
+@export var inventoryWindow: TextureRect
 @export var pickUpMessage: Label
 
 var windowOpen: bool
@@ -18,10 +18,14 @@ var equippedItem: Item
 
 var messageTick: int
 
+#stations
+@export var wandTunerSlot: InventorySlot
+
 
 func _ready():
 	Global.inventory = self
-	inventorySlotScene = preload("res://Prefabs/inventory_slot.tscn")
+	Global.dataPersistenceManager.Subscribe(self)
+	inventorySlotScene = preload("res://PackedScenes/inventory_slot.tscn")
 	
 	for i in grid_height:
 		
@@ -36,7 +40,7 @@ func _ready():
 			var label: Label = inventorySlots[i_inventorySlot.id].amountLabel
 			
 	UpdateInventory()
-	CloseWindow()
+	CloseView()
 			
 	
 	#print("Inventory size: ", inventorySlots.size())
@@ -50,9 +54,10 @@ func _process(delta):
 		#wwwwwwwwwwwwwwwwwwwww("Inventory button pressed")
 		
 		if windowOpen:
-			CloseWindow()
+			Global.uiManager.CloseView("Inventory")
+			Global.uiManager.CloseView("WandTuner")
 		else:
-			OpenWindow()
+			Global.uiManager.OpenView("Inventory")
 		
 	if messageTick > 0:
 		pickUpMessage.show()
@@ -82,7 +87,7 @@ func _process(delta):
 				Global.toolTips.ShowToolTips(selectedInventorySlot.placedItem.actions, selectedInventorySlot.placedItem as Item)
 	
 
-func CloseWindow():
+func CloseView():
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	windowOpen = false
@@ -90,7 +95,7 @@ func CloseWindow():
 	
 	pass
 	
-func OpenWindow():
+func OpenView():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	UpdateInventory()
 	windowOpen = true
@@ -98,7 +103,7 @@ func OpenWindow():
 	
 	pass
 
-func PickUpItem(item: Item):
+func PickUpItem(item: Item, notifyPlayer: bool):
 	
 	if windowOpen:
 		return
@@ -109,10 +114,14 @@ func PickUpItem(item: Item):
 		messageTick = 500
 		return
 	
+	item.PickUp()
+	
 	item.hide()
 	item.global_position = Vector3.ZERO
-	pickUpMessage.text = str(pickUpMessage.text,"Picked up ", item.displayName, "\n")
-	messageTick = 500
+	
+	if notifyPlayer:
+		pickUpMessage.text = str(pickUpMessage.text,"Picked up ", item.displayName, "\n")
+		messageTick = 500
 	
 	inventorySlots[targetSlot].placedItem = item
 	UpdateInventory()
@@ -146,6 +155,12 @@ func FindSlot():
 	
 func UpdateInventory():
 	
+	#stations
+	wandTunerSlot.icon.hide()
+	if wandTunerSlot.placedItem != null:
+		wandTunerSlot.SetSpriteTexture(wandTunerSlot.placedItem.GetSpriteTexture())
+		wandTunerSlot.icon.show()
+	
 	for i in inventorySlots.size():
 		var slot = inventorySlots[i]
 		
@@ -168,7 +183,13 @@ func UpdateInventory():
 	pass
 
 func SelectInventorySlot(index: int):
+	
+	if(index == 30):#is wand tuner
+		selectedInventorySlot = wandTunerSlot
+		return	
+		
 	selectedInventorySlot = inventorySlots[index]
+	
 	pass
 	
 func CheckForKey(id: String) -> bool:
@@ -184,4 +205,32 @@ func CheckForKey(id: String) -> bool:
 func ShowMessage(message: String):
 	pickUpMessage.text = message
 	messageTick = 500
+
+func IsOpen() -> bool:
 	
+	return inventoryWindow.visible
+	pass
+	
+#data persistence interface	
+func Save(data: PersistentData):
+	
+	for i in inventorySlots.size():
+		if inventorySlots[i].placedItem != null:
+			var scene = PackedScene.new()
+			scene.pack(inventorySlots[i].placedItem)
+			data.inventory[i] = scene
+			print("saved player inventory item ", inventorySlots[i].placedItem.name)
+		else:
+			data.inventory[i] = null
+	pass
+	
+func Load(data: PersistentData):
+	
+	for i in data.inventory.size():
+		if data.inventory[i] != null:
+			var _item = data.inventory[i].instantiate()
+			get_tree().root.add_child(_item)
+			inventorySlots[i].placedItem = _item
+			print("loaded player inventory item ", _item.name)
+		
+	pass

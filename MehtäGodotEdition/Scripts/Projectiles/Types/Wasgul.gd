@@ -1,13 +1,28 @@
 extends Projectile
+var overrideSpeed: float
 
-var objectToHomeTo: Node3D
-
+func Shoot(startPosition: Vector3, startDirection: Vector3):
+	super.Shoot(startPosition, startDirection)
+	overrideSpeed = 2.0
+	velocity = startDirection * overrideSpeed
+	pass
+	
+func _process(delta: float):
+	super._process(delta)
+	
+	if _awake:
+		overrideSpeed = move_toward(overrideSpeed, spellMods.speed,delta)
+		
+	
 
 func MoveProjectile(delta):
 	
-	var targetDirection: Vector3 = (objectToHomeTo.global_position - global_position).normalized() * speed
+	if(objectHoming == null):
+		return
 	
-	velocity = velocity.move_toward(targetDirection,delta * 2)
+	var targetDirection: Vector3 = (objectHoming.global_position - global_position).normalized() * overrideSpeed
+	
+	velocity = velocity.move_toward(targetDirection,delta * 2.0)
 	
 	var nextPosition: Vector3 = global_position + velocity * delta
 	

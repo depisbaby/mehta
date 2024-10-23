@@ -2,7 +2,7 @@ extends TextureRect
 
 class_name InventorySlot
 
-var id: int
+@export var id: int
 var placedItem: Item
 
 @export var amountLabel: Label
@@ -27,4 +27,5 @@ func SetSpriteTexture(texture: CompressedTexture2D):
 func _on_mouse_entered():
 	var inventory = get_tree().get_root().get_node("root").get_node("%Inventory") as Inventory
 	inventory.SelectInventorySlot(id)
+	
 	pass 

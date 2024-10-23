@@ -3,7 +3,9 @@ extends NavAgent
 @export var ball1: MeshInstance3D
 @export var ball2: MeshInstance3D
 @export var projectilePool: ProjectilePool
+@export var spellMods: Node
 
+var wasgul: Projectile
 var direction1: Vector3
 var direction2: Vector3
 
@@ -11,6 +13,9 @@ var healTick: float
 
 func _ready():
 	super._ready()
+	
+	projectilePool.ReinitializePool(Global.magicManager.GetSpell("Wasgul", spellMods), 5)
+	
 	customActionTick = 50
 	pass
 
@@ -32,7 +37,8 @@ func _process(delta):
 		ball2.rotate_object_local(Vector3(0.0,1.0, 0.0),-delta)
 		
 		if distanceToPlayer < 10.0:
-			Global.hud.MakeBlinder(delta)
+			#Global.hud.MakeBlinder(delta)
+			pass
 			
 		healTick += delta
 		if healTick > 3.0:
@@ -48,7 +54,7 @@ func CheckPlayerPerspective():
 	pass
 	
 func Despawn():
-	projectilePool.DeletePool()	
+	projectilePool.DeleteProjectiles()	
 	super.Despawn()
 	
 func DoCustomAction():
@@ -57,17 +63,12 @@ func DoCustomAction():
 		return
 	
 	var projectile: Projectile = projectilePool.GetProjectile()
+	
 	if projectile == null:
 		return
 	
-	projectile.objectToHomeTo = Global.player.camera
-		
-	var shooterData = ShooterData.new()
-	shooterData.startPosition = eyes.global_position 
-	shooterData.startDamage = 41
-	shooterData.startSpeed = 7
-	shooterData.startDirection = Vector3(0,1,0)
-	shooterData.ignoreEnemies = true
-	projectile.Shoot(shooterData)
+	projectile.objectHoming = Global.player.camera
+	projectile.Shoot(eyes.global_position, Vector3(0,1,0))
+	
 	pass
 	

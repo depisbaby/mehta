@@ -1,18 +1,24 @@
 extends Node3D
 class_name Projectile
 
-var speed: float
-var ignoreEnemies: bool
-var bounces: int
+#override
+@export var overrideSpellMods: Node
 
+#modded variables
+var spellMods: Node
+
+#on shooting variables
+var objectHoming: Node3D
+
+#other
 var raycast: PhysicsRayQueryParameters3D
 var _awake: bool
-var bouncesRemaining: int
 var velocity: Vector3
 var projectilePool: Array[Projectile]
-var damage: int
-
 var lastPosition: Vector3
+var remainingBounces: int
+var remainingPenetration: int
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -29,20 +35,26 @@ func _process(delta):
 	lastPosition = global_position
 	pass
 	
-func Shoot(shooterData: ShooterData):
+func Shoot(startPosition: Vector3, startDirection: Vector3):
 	
-	global_position = shooterData.startPosition
-	velocity = shooterData.startDirection * shooterData.startSpeed
+	global_position = startPosition
+	velocity = startDirection * spellMods.speed
 	lastPosition = global_position
-	damage = shooterData.startDamage
-	ignoreEnemies = shooterData.ignoreEnemies
-	speed = shooterData.startSpeed
+	look_at(global_position + startDirection)
+	remainingBounces = spellMods.bounces
+	remainingPenetration = spellMods.penetration
+	
+	DespawnAfterTime(spellMods.lifeSpan)
 	
 	visible = true
 	_awake = true
 	pass
 	
 func Despawn():
+	
+	if !_awake:
+		return
+	
 	_awake = false
 	if projectilePool != null:
 		projectilePool.push_back(self)
@@ -58,31 +70,46 @@ func HitReg():
 	var intersection = get_world_3d().direct_space_state.intersect_ray(raycast)
 	if !intersection.is_empty():
 		print(intersection.collider.name)
-		if intersection.collider.is_in_group("Hitbox"):
+		if intersection.collider.is_in_group("Hitbox"): #hit character
 			
 			var health = intersection.collider as Health
-			health.DealDamage(damage)
-			hitSolid = false
+			health.DealDamage(spellMods.damage)
 			
-		if bouncesRemaining == 0:
-			await AfterHit(hitSolid)
-			Despawn()
-			return
+			if remainingPenetration == 0:
+				await AfterHit(false)
+				Despawn()
+				return
+				
+			remainingPenetration = remainingPenetration - 1
+			
+		else: #hit environment
+			
+			if remainingBounces == 0:
+				await AfterHit(true)
+				Despawn()
+				return
 		
-		global_position = intersection.position
-		var normal = intersection.normal.normalized()
-		velocity = velocity - 2 * velocity.dot(normal) * normal
-	
-		bouncesRemaining = bouncesRemaining - 1
+			global_position = intersection.position
+			var normal = intersection.normal.normalized()
+			velocity = velocity - 2 * velocity.dot(normal) * normal
+		
+			remainingBounces = remainingBounces - 1
 			
 	pass
 
 func MoveProjectile(delta):
-	global_position = global_position + velocity * delta
+	
+	if spellMods.homing && objectHoming != null:
+		var targetVector:Vector3 = (objectHoming.global_position - global_position).normalized()
+		velocity = velocity.move_toward(targetVector, spellMods.speed * delta)
+	else:
+		velocity.y = clamp(velocity.y - spellMods.weight * delta, -spellMods.speed, spellMods.speed)
+		global_position = global_position + velocity * delta
+		
 	pass
 	
-func Init(ignoreEnemies: bool):
-	if ignoreEnemies:
+func Init():
+	if spellMods.ignoreEnemies:
 		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),37)
 	else:
 		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),45)
@@ -95,11 +122,10 @@ func Init(ignoreEnemies: bool):
 	
 func AfterHit(hitSolid: bool):
 	
-	
-	return
 	pass
 	
-func DespawnAfter(time: float):
+func DespawnAfterTime(time: float):
+	
 	await get_tree().create_timer(time).timeout
 	if _awake:
 		Despawn()
@@ -108,3 +134,7 @@ func DespawnAfter(time: float):
 func DeleteFromMemory():
 	queue_free()
 
+func ApplySpellMods(_spellMods):
+	spellMods = _spellMods
+	pass
+	

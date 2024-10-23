@@ -32,7 +32,6 @@ func _process(delta):
 
 func PickUp():
 	var inventory = %Inventory as Inventory
-	inventory.PickUpItem(self)
 	
 	pass
 

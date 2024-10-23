@@ -2,22 +2,14 @@ extends NavAgent
 
 @export var earthShardSpeed: float
 @export var rangedDamage: int
-
-@onready var projectilePrefab = preload("res://Prefabs/Projectiles/EarthShard.tscn")
-var projectileQueue: Array[Projectile] = []
+@export var spellMods: Node
+@export var projectilePool: ProjectilePool
 
 func _ready() -> void:
 	super._ready()
 	customActionTick = 4
 	
-	while projectileQueue.is_empty():
-		await get_tree().create_timer(0.1).timeout
-		for i in 5:
-			var projectile = projectilePrefab.instantiate()
-			get_tree().root.add_child(projectile)
-			projectile.projectilePool = projectileQueue
-			projectile.Init(false)
-			projectileQueue.push_back(projectile)
+	#projectilePool.ReinitializePool(Global.magicManager.GetSpell("EarthShard", spellMods), 5)
 	
 	pass
 
@@ -27,7 +19,7 @@ func _process(delta: float) -> void:
 
 func DoRangedAttack():
 	
-	if projectileQueue.is_empty():
+	if projectilePool.projectileQueue.is_empty():
 		return
 	
 	currentAction = Action.ATTACKING
@@ -39,19 +31,12 @@ func DoRangedAttack():
 		currentAction = Action.NONE
 		return
 	
-	var projectile = projectileQueue.pop_front()
-	if(projectile != null):
-		var shooterData = ShooterData.new()
-		shooterData.startPosition = eyes.global_position
-		var dir: Vector3 = TracePlayer(earthShardSpeed)
-		shooterData.startDirection = dir
-		shooterData.startSpeed = earthShardSpeed
-		shooterData.startDamage = rangedDamage
-		shooterData.ignoreEnemies = true
-		projectile.global_position = eyes.global_position
-		projectile.look_at(Global.player.global_position)
-		projectile.Shoot(shooterData)
+	var projectile: Projectile = projectilePool.GetProjectile()
 	
+	if projectile == null:
+		return
+		
+	projectile.Shoot(eyes.global_position, TracePlayer(earthShardSpeed))
 	
 	EndAction(1.2)
 	pass

@@ -1,30 +1,18 @@
 extends Item
+class_name GenericWand
 
-@export var startSpeed: float
-@export var damage: int
-@export var coolDown: float
+#default spellmods
+@export var defaultSpellMods: Node
 
-@onready var projectilePrefab = preload("res://Prefabs/Projectiles/Windball.tscn")
-var projectileQueue: Array[Projectile] = []
+@onready var projectilePool: ProjectilePool = $ProjectilePool
 
 var cooldownTick: float
-
+var primaryHeld: bool
 
 func _ready():
 	super._ready()
-	#COPY PASTE
 	
-	while projectileQueue.is_empty():
-		await get_tree().create_timer(0.1).timeout
-		for i in 30:
-			var projectile = projectilePrefab.instantiate()
-			get_tree().root.add_child(projectile)
-			projectile.projectilePool = projectileQueue
-			projectile.Init(false)
-			projectileQueue.push_back(projectile)
-			
 	
-	#COPY PASTE	
 	
 	pass # Replace with function body.
 
@@ -38,20 +26,17 @@ func UsePrimaryPressed():
 	if cooldownTick != 0:
 		return
 	
-	cooldownTick = coolDown
+	cooldownTick = defaultSpellMods.coolDown
 	
-	var projectile = projectileQueue.pop_front()
+	var projectile = projectilePool.GetProjectile()
 	if(projectile != null):
-		var shooterData = ShooterData.new()
-		shooterData.startPosition = Global.player.camera.global_position
-		shooterData.startDirection = -Global.player.camera.get_camera_transform().basis.z
-		shooterData.startSpeed = startSpeed
-		shooterData.startDamage = damage
-		projectile.Shoot(shooterData)
-	
+		projectile.Shoot(Global.player.hand.global_position, (Global.player.aimPoint - Global.player.hand.global_position).normalized())
+		
+		
 	pass
 	
 func UseSecondaryPressed():
+	
 	pass
 	
 func UsePrimaryReleased():
@@ -59,3 +44,7 @@ func UsePrimaryReleased():
 	
 func UseSecondaryReleased():
 	pass
+	
+func PickUp():
+	super.PickUp()
+	#print("speed ", defaultSpellMods.speed)

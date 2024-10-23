@@ -7,8 +7,8 @@ func _ready():
 	visible = false
 	pass # Replace with function body.
 
-func Shoot(shooterData: ShooterData):
-	super.Shoot(shooterData)
+func Shoot(startPosition: Vector3, startDirection: Vector3):
+	super.Shoot(startPosition, startDirection)
 	visible = true
 	pass
 	

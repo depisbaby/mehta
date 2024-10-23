@@ -10,9 +10,8 @@ func _ready():
 	super._ready()
 	pass # Replace with function body.
 
-func Shoot(shooterData: ShooterData):
-	super.Shoot(shooterData)
-	DespawnAfter(5.0)
+func Shoot(startPosition: Vector3, startDirection: Vector3):
+	super.Shoot(startPosition, startDirection)
 	rotate(Vector3(0,1,0),rng.randf_range(-90.0, 90.0))
 	
 	ball.rotate(Vector3(1,0,0), rng.randf_range(-90.0, 90.0))

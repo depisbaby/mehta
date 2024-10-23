@@ -77,6 +77,9 @@ func NextPage():
 	
 	UpdateLabels()
 
+func Close():
+	base.visible = false
+
 func _on_sprite_mouse_entered(extra_arg_0):
 	if extra_arg_0 == 3:
 		currentHoveredButton = -2
