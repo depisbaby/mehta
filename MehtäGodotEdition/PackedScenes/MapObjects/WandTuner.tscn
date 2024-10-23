@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://pl0utrdh1jha"]
+
+[ext_resource type="Material" uid="uid://bxej3ju0bje3t" path="res://Materials/debug/wandtuner_debug.material" id="1_ybnhm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_p5idi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c7xmg"]
+
+[node name="WandTuner" type="Node3D" groups=["WandTuner"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_p5idi")
+surface_material_override/0 = ExtResource("1_ybnhm")
+
+[node name="Area3D" type="Area3D" parent="." groups=["WandTuner"]]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_c7xmg")

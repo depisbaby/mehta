@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cy7tiu6ivqm2j"]
+[gd_scene load_steps=18 format=3 uid="uid://bptrygk761rva"]
 
 [ext_resource type="Script" path="res://Scripts/AI/LakeHorror.gd" id="1_h87pt"]
 [ext_resource type="Script" path="res://Scripts/Health.gd" id="2_g0gbi"]
@@ -13,7 +13,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dg21a0h7hrq3u" path="res://3D Models/Projectiles_FX/ball_bigger.obj" id="11_bpc8n"]
 [ext_resource type="Material" uid="uid://c1u5tgihhk7j4" path="res://Materials/Projectiles/lakehorroraura.material" id="12_b63x4"]
 [ext_resource type="Script" path="res://Scripts/Projectiles/ProjectilePool.gd" id="13_f8ar4"]
-[ext_resource type="PackedScene" uid="uid://ct1dx4bc323yc" path="res://Prefabs/Projectiles/Wasgul.tscn" id="14_biq37"]
+[ext_resource type="Script" path="res://Scripts/Magic/SpellMods.gd" id="14_b1jq5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_02k8a"]
 
@@ -51,13 +51,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="enemy_lakehorror" type="CharacterBody3D" node_paths=PackedStringArray("ball1", "ball2", "projectilePool", "eyes", "health")]
+[node name="enemy_lakehorror" type="CharacterBody3D" node_paths=PackedStringArray("ball1", "ball2", "projectilePool", "spellMods", "eyes", "health")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_h87pt")
 ball1 = NodePath("BallBigger")
 ball2 = NodePath("BallBigger2")
 projectilePool = NodePath("ProjectilePool")
+spellMods = NodePath("SpellMods")
 displayName = "Lake Horror"
 speed = 3.0
 accel = 10.0
@@ -113,7 +114,12 @@ surface_material_override/0 = ExtResource("12_b63x4")
 
 [node name="ProjectilePool" type="Node3D" parent="."]
 script = ExtResource("13_f8ar4")
-projectilePrefab = ExtResource("14_biq37")
-poolSize = 5
+
+[node name="SpellMods" type="Node" parent="."]
+script = ExtResource("14_b1jq5")
+ignoreEnemies = true
+damage = 42
+speed = 7.0
+lifeSpan = 120.0
 
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

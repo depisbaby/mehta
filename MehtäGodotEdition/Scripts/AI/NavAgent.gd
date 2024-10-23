@@ -38,7 +38,7 @@ var currentAction: Action
 var distanceToPlayer: float
 var wasDamaged: bool
 
-@onready var debug: PackedScene = preload("res://Prefabs/Debug/debugsphere.tscn")
+@onready var debug: PackedScene = preload("res://PackedScenes/Debug/debugsphere.tscn")
 
 func WakeUp():
 	health.SetHealth(health.maxHealth)

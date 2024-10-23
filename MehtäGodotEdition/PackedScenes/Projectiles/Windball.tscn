@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://bvghibe1w57wr" path="res://Materials/Projectiles/Windball.material" id="1_sag31"]
 [ext_resource type="ArrayMesh" uid="uid://ct1sfqce42keq" path="res://3D Models/Projectiles_FX/ball.obj" id="1_thi41"]
 
-[node name="Windball" type="Node3D" node_paths=PackedStringArray("ball", "ball2", "ball3", "ball4")]
+[node name="windball" type="Node3D" node_paths=PackedStringArray("ball", "ball2", "ball3", "ball4")]
 script = ExtResource("1_mm4lq")
 ball = NodePath("Ball")
 ball2 = NodePath("Ball2")

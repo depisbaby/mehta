@@ -7,6 +7,7 @@ extends CharacterBody3D
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
 @export var CAMERA_CONTROLLER : Camera3D
 
+
 var _mouse_input : bool = false
 var _rotation_input : float
 var _tilt_input : float
@@ -67,12 +68,14 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("jump"):# and is_on_floor():
+	if Input.is_action_just_pressed("jump") && !Global.uiManager.viewOpen:# and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	var input_dir: Vector2 = Vector2(0,0)
+	if !Global.uiManager.viewOpen:
+		input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	
 	Global.player.walking = false
 	if input_dir.length() != 0.0:

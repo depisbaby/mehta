@@ -1,5 +1,6 @@
-extends Node
+extends Node3D
 
+@export var player: Player
 @export var interactRayCast: RayCast3D
 @export var lookingAtRaycast: RayCast3D
 
@@ -17,19 +18,27 @@ func _process(delta):
 		var hit = interactRayCast.get_collider() as Node
 		if hit.get_parent().is_in_group("Item"):
 			var item = hit.get_parent() as Item
-			item.PickUp()
+			Global.inventory.PickUpItem(item, true)
 		if hit.get_parent().is_in_group("Door"):
 			var door = hit.get_parent() as Door
 			door.Operate()
+		if hit.get_parent().is_in_group("WandTuner"):
+			Global.wandTuner.OpenView()
 		
 		pass
 		
 	if lookingAtRaycast.is_colliding():
-		var hit = lookingAtRaycast.get_collider() as Node
+		var hit = lookingAtRaycast.get_collider() as Node3D
 		if hit == null:
-			return
-		if hit.is_in_group("Hitbox") && Global.enemyHealthBar != null:
-			Global.enemyHealthBar.ShowHealth(hit)
+			pass
+		else	:
+			if hit.is_in_group("Hitbox") && Global.enemyHealthBar != null:
+				Global.enemyHealthBar.ShowHealth(hit)
+			
+		player.aimPoint = lookingAtRaycast.get_collision_point()
+	else:	
+		player.aimPoint = global_position + transform.basis.z.normalized() * 100	
+		
 			
 		
 		pass

@@ -4,21 +4,24 @@ class_name Player
 @export var camera: Camera3D
 @export var health: Health
 @export var character: CharacterBody3D
+@export var hand: Node3D
 
 var frozen: bool
 var blindness: float
 var walking: bool
+var aimPoint: Vector3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Global.player = self
+	Global.dataPersistenceManager.Subscribe(self)
 	Respawn()
+	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	PlayerInputs(delta)
-	
 	
 	pass
 
@@ -30,7 +33,7 @@ func Respawn():
 
 func PlayerInputs(delta):
 	
-	if health.health <= 0 || frozen:
+	if health.health <= 0 || frozen || Global.uiManager.viewOpen:
 		return
 	
 	if(Global.inventory != null):
@@ -68,4 +71,14 @@ func CheckHealth():
 		pass
 	
 	pass
+
+#data persistence interface
+func Save(data: PersistentData):
+	data.playerPosition = global_position
+	print("player position saved ", data.playerPosition)
+	pass
 	
+func Load(data: PersistentData):
+	get_parent_node_3d().global_position = data.playerPosition
+	print("player position loaded ", data.playerPosition)
+	pass

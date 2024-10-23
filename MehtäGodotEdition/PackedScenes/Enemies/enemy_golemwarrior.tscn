@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dekgvdi48e3rj"]
+[gd_scene load_steps=37 format=3 uid="uid://blh0gcm0ojmry"]
 
 [ext_resource type="Script" path="res://Scripts/AI/GolemWarrior.gd" id="1_07t12"]
 [ext_resource type="Script" path="res://Scripts/Health.gd" id="2_mqmbl"]
@@ -30,6 +30,9 @@
 [ext_resource type="Texture2D" uid="uid://d2xfoa6nbbptm" path="res://Animations/Golem/Default/walk_side/walk_side_3.png" id="24_r6u8c"]
 [ext_resource type="Texture2D" uid="uid://bhrb4s2w7opy4" path="res://Animations/Golem/Default/walk_side/walk_side_4.png" id="25_ve2d2"]
 [ext_resource type="Texture2D" uid="uid://comlqu6w6cxj1" path="res://Animations/Golem/Default/walk_side/walk_side_5.png" id="26_rvt8b"]
+[ext_resource type="Script" path="res://Scripts/Magic/SpellMods.gd" id="31_oq7k5"]
+[ext_resource type="Script" path="res://Scripts/Projectiles/ProjectilePool.gd" id="32_6km8g"]
+[ext_resource type="PackedScene" uid="uid://ysx1ylijuu0x" path="res://PackedScenes/Projectiles/EarthShard.tscn" id="33_gh8md"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_02k8a"]
 
@@ -167,12 +170,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="enemy_golemwarrior" type="CharacterBody3D" node_paths=PackedStringArray("eyes", "health")]
+[node name="enemy_golemwarrior" type="CharacterBody3D" node_paths=PackedStringArray("spellMods", "projectilePool", "eyes", "health")]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("1_07t12")
 earthShardSpeed = 50.0
 rangedDamage = 15
+spellMods = NodePath("SpellMods")
+projectilePool = NodePath("ProjectilePool")
 displayName = "Golem Warrior"
 speed = 7.0
 accel = 10.0
@@ -214,5 +219,18 @@ texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_k5f0x")
 animation = &"idle_side"
 autoplay = "walk_front"
+
+[node name="SpellMods" type="Node" parent="."]
+script = ExtResource("31_oq7k5")
+ignoreEnemies = true
+damage = 34
+speed = 50.0
+lifeSpan = 60.0
+
+[node name="ProjectilePool" type="Node" parent="." node_paths=PackedStringArray("spellModsOverride")]
+script = ExtResource("32_6km8g")
+poolSizeOverride = 5
+spellModsOverride = NodePath("../SpellMods")
+projectilePackedScene = ExtResource("33_gh8md")
 
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

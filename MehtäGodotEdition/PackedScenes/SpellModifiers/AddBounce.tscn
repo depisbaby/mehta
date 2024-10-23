@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://fj2siqobe1dp"]
+
+[ext_resource type="Script" path="res://Scripts/Magic/SpellMods.gd" id="1_4ou5r"]
+
+[node name="add bounce" type="Node"]
+script = ExtResource("1_4ou5r")
+bounces = 1

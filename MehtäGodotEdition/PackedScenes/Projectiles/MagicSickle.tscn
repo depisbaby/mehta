@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://brmj7rgif4hbx"]
+
+[ext_resource type="Script" path="res://Scripts/Projectiles/Types/MagicSickle.gd" id="1_suuvg"]
+[ext_resource type="Material" uid="uid://dsoflbtvmju1f" path="res://Materials/Projectiles/magicsickle.material" id="2_vc5bd"]
+[ext_resource type="Script" path="res://Scripts/Magic/SpellMods.gd" id="3_bdyyw"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_04nex"]
+
+[node name="magic sickle" type="Node3D" node_paths=PackedStringArray("overrideSpellMods")]
+script = ExtResource("1_suuvg")
+overrideSpellMods = NodePath("SpellMods")
+
+[node name="axis1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.995145, 0.0984165, 0, -0.0984165, -0.995145, 0, 0, 0)
+
+[node name="axis2" type="Node3D" parent="axis1"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="axis1/axis2"]
+transform = Transform3D(-5.55135e-08, -8.27215e-16, -1.27, 7.45058e-09, 1.27, -1.33227e-15, 1.27, -7.45058e-09, -5.55135e-08, 0, 0.138668, -0.160441)
+material_override = ExtResource("2_vc5bd")
+mesh = SubResource("QuadMesh_04nex")
+
+[node name="SpellMods" type="Node" parent="."]
+script = ExtResource("3_bdyyw")
+damage = 45
+speed = 5.0
+coolDown = 0.5
+lifeSpan = 5.0

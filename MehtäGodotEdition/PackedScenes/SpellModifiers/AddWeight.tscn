@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://drb2s25xa1jm6"]
+
+[ext_resource type="Script" path="res://Scripts/Magic/SpellMods.gd" id="1_2wfnb"]
+
+[node name="add weight" type="Node"]
+script = ExtResource("1_2wfnb")
+weight = 1.0
