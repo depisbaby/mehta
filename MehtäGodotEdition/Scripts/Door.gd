@@ -40,5 +40,3 @@ func Operate():
 		targetRotation = openRotation
 	
 	pass
-
-

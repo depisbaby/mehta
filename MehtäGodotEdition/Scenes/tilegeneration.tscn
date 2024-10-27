@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://fwipcglwac6r"]
+
+[ext_resource type="Script" path="res://MapGeneration/MapGenerator.gd" id="1_vpskj"]
+[ext_resource type="PackedScene" uid="uid://thjw25unjf83" path="res://MapGeneration/player.tscn" id="2_qruxx"]
+
+[sub_resource type="Sky" id="Sky_eriu0"]
+
+[sub_resource type="Environment" id="Environment_hkbf5"]
+sky = SubResource("Sky_eriu0")
+ssao_enabled = true
+fog_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_tvfh6"]
+
+[sub_resource type="Compositor" id="Compositor_h37v3"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_vpskj")
+blockSize = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hkbf5")
+camera_attributes = SubResource("CameraAttributesPractical_tvfh6")
+compositor = SubResource("Compositor_h37v3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.381232, 0.92448, 0, -0.92448, 0.381232, 0, 2.99888, 0)
+light_indirect_energy = 16.0
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_qruxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 2, 150)
+visible = true

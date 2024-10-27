@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://du31dki2icw7u"
+path="res://.godot/imported/floor.obj-31d5297c2122ba71195b9e12b34c45ce.mesh"
+
+[deps]
+
+files=["res://.godot/imported/floor.obj-31d5297c2122ba71195b9e12b34c45ce.mesh"]
+
+source_file="res://3D Models/DungeonParts/floor.obj"
+dest_files=["res://.godot/imported/floor.obj-31d5297c2122ba71195b9e12b34c45ce.mesh", "res://.godot/imported/floor.obj-31d5297c2122ba71195b9e12b34c45ce.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

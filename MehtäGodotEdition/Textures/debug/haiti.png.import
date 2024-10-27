@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cynfmyp8s3310"
-path.s3tc="res://.godot/imported/combat_crosshair.png-5b671c42725655d1c708b8fb4df0beae.s3tc.ctex"
+uid="uid://cuvhk2te4q74o"
+path.s3tc="res://.godot/imported/haiti.png-b4cde944d2962454c935823294b802b2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sprites/ui/combat_crosshair.png"
-dest_files=["res://.godot/imported/combat_crosshair.png-5b671c42725655d1c708b8fb4df0beae.s3tc.ctex"]
+source_file="res://Textures/debug/haiti.png"
+dest_files=["res://.godot/imported/haiti.png-b4cde944d2962454c935823294b802b2.s3tc.ctex"]
 
 [params]
 

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://thjw25unjf83"]
+
+[ext_resource type="Script" path="res://Scripts/Player/fps_controller_debug.gd" id="1_t7kh1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8x7g2"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.41824, 10.2466, 3.40196)
+visible = false
+collision_layer = 16
+collision_mask = 33
+script = ExtResource("1_t7kh1")
+SPEED = 10.0
+MOUSE_SENSITIVITY = 0.3
+CAMERA_CONTROLLER = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_8x7g2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753529, 0)
+fov = 100.0

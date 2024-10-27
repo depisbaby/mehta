@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b27yowodmo5uu"]
+
+[ext_resource type="Texture2D" uid="uid://cynfmyp8s3310" path="res://Sprites/ui/combat_crosshair.png" id="1_ydjxq"]
+
+[node name="MapGenDebug" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = ExtResource("1_ydjxq")
