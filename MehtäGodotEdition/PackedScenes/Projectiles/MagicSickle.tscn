@@ -6,9 +6,9 @@
 
 [sub_resource type="QuadMesh" id="QuadMesh_04nex"]
 
-[node name="magic sickle" type="Node3D" node_paths=PackedStringArray("overrideSpellMods")]
+[node name="magic sickle" type="Node3D" node_paths=PackedStringArray("spellMods")]
 script = ExtResource("1_suuvg")
-overrideSpellMods = NodePath("SpellMods")
+spellMods = NodePath("SpellMods")
 
 [node name="axis1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.995145, 0.0984165, 0, -0.0984165, -0.995145, 0, 0, 0)
@@ -23,6 +23,5 @@ mesh = SubResource("QuadMesh_04nex")
 [node name="SpellMods" type="Node" parent="."]
 script = ExtResource("3_bdyyw")
 damage = 45
-speed = 5.0
 coolDown = 0.5
 lifeSpan = 5.0

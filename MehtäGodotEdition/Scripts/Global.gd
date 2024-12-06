@@ -12,3 +12,7 @@ var wandTuner: WandTuner
 var uiManager: UIManager
 var dataPersistenceManager : DataPersistenceManager
 var itemLibrary: ItemLibrary
+var mainMenu: MainMenu
+var mapGenerator : MapGenerator
+var gameManager: GameManager
+var navMesh: NavMesh

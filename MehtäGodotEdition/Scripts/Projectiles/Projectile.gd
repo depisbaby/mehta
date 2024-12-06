@@ -1,11 +1,8 @@
 extends Node3D
 class_name Projectile
 
-#override
-@export var overrideSpellMods: Node
-
 #modded variables
-var spellMods: Node
+@export var spellMods: Node
 
 #on shooting variables
 var objectHoming: Node3D
@@ -21,7 +18,7 @@ var remainingPenetration: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	visible = false
 	pass # Replace with function body.
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -110,9 +107,9 @@ func MoveProjectile(delta):
 	
 func Init():
 	if spellMods.ignoreEnemies:
-		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),37)
+		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),5)
 	else:
-		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),45)
+		raycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),13)
 		
 	raycast.hit_from_inside = false
 	raycast.hit_back_faces = false

@@ -1,6 +1,8 @@
 1 = environment
-2 = items (projectiles ignore)
+2 = items 
 3 = hitbox player
 4 = hitbox enemies
-5 = character (projectiles ignore)
-6 = environment dynamic
+5 = character 
+6 = interactable
+7 = room overlap area
+8 = projectile passing

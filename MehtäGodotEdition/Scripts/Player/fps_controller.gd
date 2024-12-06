@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @export var SPEED : float = 5.0
-@export var JUMP_VELOCITY : float = 4.5
+@export var JUMP_VELOCITY : float = 7.0
 @export var MOUSE_SENSITIVITY : float = 0.5
 @export var TILT_LOWER_LIMIT := deg_to_rad(-90.0)
 @export var TILT_UPPER_LIMIT := deg_to_rad(90.0)
@@ -51,9 +51,8 @@ func _update_camera(delta):
 	_tilt_input = 0.0
 	
 func _ready():
-
 	# Get mouse input
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	pass
 
 func _physics_process(delta):
 	

@@ -8,7 +8,7 @@ class_name WandTuner
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Global.wandTuner = self
-	CloseView()
+	base.visible = false
 	pass # Replace with function body.
 
 
@@ -40,15 +40,19 @@ func ApplySpell(inputName:String):
 	
 	#translate language
 	
-	var spell = Global.magicManager.GetSpell(inputName, slot.placedItem.defaultSpellMods)
+	var spell = Global.magicManager.GetSpell(inputName)
 	
 	if spell != null && spell is SpellMods: #is a spell modifier
-		slot.placedItem.defaultSpellMods.CombineSpellMods(spell)
+		slot.placedItem.projectilePool.projectilePrefab.spellMods.CombineSpellMods(spell)
+		slot.placedItem.projectilePool.SavePool()
 		spell.queue_free()
 		print(inputName, " applied")
 	
 	if spell != null && spell is Projectile: #is projectile based
-		slot.placedItem.projectilePool.ReinitializePool(spell, 100)
+		slot.placedItem.projectilePool.ReinitializePool(spell, slot.placedItem.projectilePool.poolSizeOverride)
+		slot.placedItem.projectilePool.projectilePrefab.spellMods.CombineSpellMods(slot.placedItem.defaultSpellMods)
+		slot.placedItem.projectilePool.SavePool()
+		
 		print(inputName, " applied")
 		
 		

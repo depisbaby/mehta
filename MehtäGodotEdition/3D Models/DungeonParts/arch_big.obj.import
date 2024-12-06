@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dm0xefsb33pcr"
+path="res://.godot/imported/arch_big.obj-e1d5d2ba5a05d26b421b1956577ef04b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/arch_big.obj-e1d5d2ba5a05d26b421b1956577ef04b.mesh"]
+
+source_file="res://3D Models/DungeonParts/arch_big.obj"
+dest_files=["res://.godot/imported/arch_big.obj-e1d5d2ba5a05d26b421b1956577ef04b.mesh", "res://.godot/imported/arch_big.obj-e1d5d2ba5a05d26b421b1956577ef04b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -51,11 +51,11 @@ func ReactToDamage():
 	pass
 
 func DoCustomAction():
-	
+	return
 	if currentAction != Action.NONE:
 		return
 		
-	if rng.randi_range(0,10) == 0:
+	if rng.randi_range(0,20) == 0:
 		MoveToRandomPlace()
 	
 	pass

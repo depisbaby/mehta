@@ -12,6 +12,9 @@ func _ready():
 
 func _process(delta):
 	
+	if !Global.navMesh.navMeshBaked:
+		return
+	
 	if exhausted:
 		return
 	

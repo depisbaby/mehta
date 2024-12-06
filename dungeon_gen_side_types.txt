@@ -1,0 +1,14 @@
+horizontal
+
+0 = empty
+1 = wall
+2 = corridor
+3 = recess top edge
+4 = recess top
+5 = recess bottom
+6 = recess bottom wall
+
+vertical
+0 = none
+1 = recess edge
+2 = recess

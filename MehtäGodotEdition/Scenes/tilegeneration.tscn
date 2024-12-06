@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://fwipcglwac6r"]
 
-[ext_resource type="Script" path="res://MapGeneration/MapGenerator.gd" id="1_vpskj"]
-[ext_resource type="PackedScene" uid="uid://thjw25unjf83" path="res://MapGeneration/player.tscn" id="2_qruxx"]
+[ext_resource type="Script" path="res://MapGeneration(old)/MapGenerator.gd" id="1_vpskj"]
+[ext_resource type="PackedScene" uid="uid://thjw25unjf83" path="res://MapGeneration(old)/player.tscn" id="2_qruxx"]
 
 [sub_resource type="Sky" id="Sky_eriu0"]
 

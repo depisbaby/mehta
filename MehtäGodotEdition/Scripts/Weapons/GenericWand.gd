@@ -2,9 +2,7 @@ extends Item
 class_name GenericWand
 
 #default spellmods
-@export var defaultSpellMods: Node
-
-@onready var projectilePool: ProjectilePool = $ProjectilePool
+@export var projectilePool: ProjectilePool
 
 var cooldownTick: float
 var primaryHeld: bool
@@ -12,6 +10,7 @@ var primaryHeld: bool
 func _ready():
 	super._ready()
 	
+		
 	
 	
 	pass # Replace with function body.
@@ -23,10 +22,13 @@ func _process(delta):
 	
 func UsePrimaryPressed():
 	
+	if projectilePool.projectilePrefab == null:
+		return
+	
 	if cooldownTick != 0:
 		return
 	
-	cooldownTick = defaultSpellMods.coolDown
+	cooldownTick = projectilePool.projectilePrefab.spellMods.coolDown
 	
 	var projectile = projectilePool.GetProjectile()
 	if(projectile != null):
@@ -47,4 +49,9 @@ func UseSecondaryReleased():
 	
 func PickUp():
 	super.PickUp()
+	
 	#print("speed ", defaultSpellMods.speed)
+	
+func ProjectilePoolReadyDone(): #Projectile pool message
+	
+	pass

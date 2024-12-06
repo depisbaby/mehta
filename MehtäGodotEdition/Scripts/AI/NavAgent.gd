@@ -66,7 +66,7 @@ func _ready():
 		customActionTick = 1
 	currentAction = Action.NONE
 	facingDirection = Vector3(1,0,0)
-	visionRaycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),33)
+	visionRaycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),1)
 	player = Global.player as Player
 	health.ownerName = displayName
 	pass # Replace with function body.
@@ -145,6 +145,7 @@ func Move(delta):
 	nav.target_position = targetMovePosition
 	
 	if !nav.is_target_reachable():
+		#print("not reachable")
 		currentAction = Action.NONE
 		return
 	

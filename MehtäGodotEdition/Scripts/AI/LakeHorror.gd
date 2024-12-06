@@ -14,7 +14,7 @@ var healTick: float
 func _ready():
 	super._ready()
 	
-	projectilePool.ReinitializePool(Global.magicManager.GetSpell("Wasgul", spellMods), 5)
+	#projectilePool.ReinitializePool(Global.magicManager.GetSpell("Wasgul", spellMods), 5)
 	
 	customActionTick = 50
 	pass
@@ -37,7 +37,7 @@ func _process(delta):
 		ball2.rotate_object_local(Vector3(0.0,1.0, 0.0),-delta)
 		
 		if distanceToPlayer < 10.0:
-			#Global.hud.MakeBlinder(delta)
+			Global.hud.MakeBlinder(delta)
 			pass
 			
 		healTick += delta

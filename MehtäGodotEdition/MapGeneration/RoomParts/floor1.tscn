@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdq4mvpdpa2w5"]
+
+[ext_resource type="Material" uid="uid://bt6yimpba3xjn" path="res://Materials/Environment/tiles2.material" id="1_14arl"]
+[ext_resource type="ArrayMesh" uid="uid://du31dki2icw7u" path="res://3D Models/DungeonParts/floor.obj" id="1_bwpiy"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a6tyg"]
+data = PackedVector3Array(-5, -4, 5, -5, -5, 5, -5, -4, -5, -5, -4, -5, -5, -5, 5, -5, -5, -5, -5, -4, -5, -5, -5, -5, 5, -4, -5, 5, -4, -5, -5, -5, -5, 5, -5, -5, 5, -4, -5, 5, -5, -5, 5, -4, 5, 5, -4, 5, 5, -5, -5, 5, -5, 5, 5, -4, 5, 5, -5, 5, -5, -4, 5, -5, -4, 5, 5, -5, 5, -5, -5, 5, 5, -5, -5, -5, -5, -5, 5, -5, 5, 5, -5, 5, -5, -5, -5, -5, -5, 5, -5, -4, -5, 5, -4, -5, -5, -4, 5, -5, -4, 5, 5, -4, -5, 5, -4, 5)
+
+[node name="Floor1" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="." groups=["navmesh"]]
+material_override = ExtResource("1_14arl")
+mesh = ExtResource("1_bwpiy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_a6tyg")

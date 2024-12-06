@@ -6,15 +6,15 @@
 [ext_resource type="ArrayMesh" uid="uid://dh86i0un67oe" path="res://3D Models/Projectiles_FX/item_shine.obj" id="4_cdgoc"]
 [ext_resource type="Material" uid="uid://d3bj38yviriyq" path="res://Materials/FX/item_shine.material" id="5_8wtcr"]
 [ext_resource type="Script" path="res://Scripts/Projectiles/ProjectilePool.gd" id="6_4u4ta"]
-[ext_resource type="PackedScene" uid="uid://8h4wmpppedvl" path="res://PackedScenes/Projectiles/Windball.tscn" id="7_imw6s"]
+[ext_resource type="PackedScene" uid="uid://8h4wmpppedvl" path="res://PackedScenes/Projectiles/Windball.tscn" id="7_otc4a"]
 [ext_resource type="Script" path="res://Scripts/Magic/SpellMods.gd" id="7_xmg0t"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jq08f"]
 size = Vector3(0.52121, 0.141663, 0.600937)
 
-[node name="item_vitutus" type="Node3D" node_paths=PackedStringArray("defaultSpellMods", "sprite", "itemShine") groups=["Item"]]
+[node name="item_vitutus" type="Node3D" node_paths=PackedStringArray("projectilePool", "sprite", "itemShine") groups=["Item"]]
 script = ExtResource("1_a3adl")
-defaultSpellMods = NodePath("DefaultSpellMods")
+projectilePool = NodePath("ProjectilePool")
 itemName = "vitutus"
 displayName = "Vitutus"
 description = "No description"
@@ -44,15 +44,16 @@ transform = Transform3D(2.30899, 0, 0, 0, 2.30899, 0, 0, 0, 2.30899, -0.0124242,
 mesh = ExtResource("4_cdgoc")
 surface_material_override/0 = ExtResource("5_8wtcr")
 
-[node name="ProjectilePool" type="Node3D" parent="." node_paths=PackedStringArray("spellModsOverride")]
+[node name="ProjectilePool" type="Node3D" parent="." node_paths=PackedStringArray("spellModOverride", "parentScript")]
 script = ExtResource("6_4u4ta")
 poolSizeOverride = 100
-spellModsOverride = NodePath("../DefaultSpellMods")
-projectilePackedScene = ExtResource("7_imw6s")
+spellModOverride = NodePath("../DefaultSpellMods")
+parentScript = NodePath("..")
+projectilePackedScene = ExtResource("7_otc4a")
 
 [node name="DefaultSpellMods" type="Node" parent="."]
 script = ExtResource("7_xmg0t")
-damage = 12
+damage = 11
 speed = 30.0
-coolDown = 0.3
-lifeSpan = 3.0
+coolDown = 0.2
+lifeSpan = 5.0

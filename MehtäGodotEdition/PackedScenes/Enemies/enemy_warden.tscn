@@ -1,0 +1,202 @@
+[gd_scene load_steps=27 format=3 uid="uid://b7my1t21wxjbq"]
+
+[ext_resource type="Script" path="res://Scripts/AI/Warden.gd" id="1_0xipi"]
+[ext_resource type="PackedScene" uid="uid://dmckyihk8guui" path="res://PackedScenes/Abilities/warden_cage.tscn" id="2_e8ovw"]
+[ext_resource type="Script" path="res://Scripts/Health.gd" id="2_gck7q"]
+[ext_resource type="Texture2D" uid="uid://cr2c8omibjru5" path="res://Animations/Warden/attack/ss1.png" id="3_ik7jm"]
+[ext_resource type="Texture2D" uid="uid://3w2ltcfm0d0f" path="res://Animations/Warden/attack/ss2.png" id="4_pd5up"]
+[ext_resource type="Texture2D" uid="uid://dp6q7gkjol1nv" path="res://Animations/Warden/dealth/ss1.png" id="5_xi8pa"]
+[ext_resource type="Texture2D" uid="uid://daks0g0vko1g0" path="res://Animations/Warden/dealth/ss2.png" id="6_j35aw"]
+[ext_resource type="Texture2D" uid="uid://5e1r3yq3llg3" path="res://Animations/Warden/dealth/ss3.png" id="7_xwjo6"]
+[ext_resource type="Texture2D" uid="uid://bdbadgaix24fm" path="res://Animations/Warden/idle/ss3.png" id="8_tr56j"]
+[ext_resource type="Texture2D" uid="uid://cqbb1bon4ryyg" path="res://Animations/Warden/idle/ss1.png" id="9_ucuaa"]
+[ext_resource type="Texture2D" uid="uid://cn7wcccdp7vcy" path="res://Animations/Warden/idle/ss4.png" id="10_nadr2"]
+[ext_resource type="Texture2D" uid="uid://bqk7y2w0t355h" path="res://Animations/Warden/walk_back/ss1.png" id="11_6jlru"]
+[ext_resource type="Texture2D" uid="uid://c04hb4tc668ts" path="res://Animations/Warden/walk_back/ss2.png" id="12_272dk"]
+[ext_resource type="Texture2D" uid="uid://d0qexkdta0142" path="res://Animations/Warden/walk_back/ss3.png" id="13_swfdi"]
+[ext_resource type="Texture2D" uid="uid://bm80i5cv4pmj1" path="res://Animations/Warden/walk_front/ss1.png" id="14_pnty6"]
+[ext_resource type="Texture2D" uid="uid://42cmovprqbkk" path="res://Animations/Warden/walk_front/ss2.png" id="15_hppmc"]
+[ext_resource type="Texture2D" uid="uid://ui353v4s3iit" path="res://Animations/Warden/walk_front/ss3.png" id="16_km6on"]
+[ext_resource type="Texture2D" uid="uid://cqvwdyhuy3qaf" path="res://Animations/Warden/walk_side/ss1.png" id="17_ol2mi"]
+[ext_resource type="Texture2D" uid="uid://b6tdd86w0o6vh" path="res://Animations/Warden/walk_side/ss2.png" id="18_s4lre"]
+[ext_resource type="Texture2D" uid="uid://bfygiokvgulf7" path="res://Animations/Warden/walk_side/ss3.png" id="19_dcw1k"]
+[ext_resource type="PackedScene" uid="uid://bj6brnnekupj" path="res://PackedScenes/Projectiles/ManCatcher.tscn" id="22_akapg"]
+[ext_resource type="Script" path="res://Scripts/Magic/SpellMods.gd" id="31_vf4le"]
+[ext_resource type="Script" path="res://Scripts/Projectiles/ProjectilePool.gd" id="32_6odb7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_02k8a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k163n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k5f0x"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": ExtResource("3_ik7jm")
+}, {
+"duration": 3.0,
+"texture": ExtResource("4_pd5up")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("5_xi8pa")
+}, {
+"duration": 2.0,
+"texture": ExtResource("6_j35aw")
+}, {
+"duration": 2.0,
+"texture": ExtResource("7_xwjo6")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_tr56j")
+}],
+"loop": true,
+"name": &"idle_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ucuaa")
+}],
+"loop": true,
+"name": &"idle_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_nadr2")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("11_6jlru")
+}, {
+"duration": 2.0,
+"texture": ExtResource("12_272dk")
+}, {
+"duration": 2.0,
+"texture": ExtResource("13_swfdi")
+}, {
+"duration": 2.0,
+"texture": ExtResource("12_272dk")
+}],
+"loop": true,
+"name": &"walk_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("14_pnty6")
+}, {
+"duration": 2.0,
+"texture": ExtResource("15_hppmc")
+}, {
+"duration": 2.0,
+"texture": ExtResource("16_km6on")
+}, {
+"duration": 2.0,
+"texture": ExtResource("15_hppmc")
+}],
+"loop": true,
+"name": &"walk_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("17_ol2mi")
+}, {
+"duration": 2.0,
+"texture": ExtResource("18_s4lre")
+}, {
+"duration": 2.0,
+"texture": ExtResource("19_dcw1k")
+}, {
+"duration": 2.0,
+"texture": ExtResource("18_s4lre")
+}],
+"loop": true,
+"name": &"walk_side",
+"speed": 5.0
+}]
+
+[node name="enemy_warden" type="CharacterBody3D" node_paths=PackedStringArray("mancatcherProjectilePool", "eyes", "health")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_0xipi")
+mancatcherSpeed = 60.0
+mancatcherProjectilePool = NodePath("ManCatcherProjectilePool")
+cageAbility = ExtResource("2_e8ovw")
+displayName = "Warden"
+speed = 3.0
+accel = 10.0
+stoppingDistance = 2.0
+eyes = NodePath("Eyes")
+health = NodePath("Hitbox")
+despawnDelay = 5.0
+desiredRangedRange = 200.0
+goToMeleeRange = 5.0
+meleeWindUp = 0.6
+meleeCooldown = 0.6
+meleeDamage = 27
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.986212, 0)
+shape = SubResource("CapsuleShape3D_02k8a")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+height = 0.1
+radius = 0.1
+
+[node name="Eyes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73749, 0)
+
+[node name="Hitbox" type="Area3D" parent="." node_paths=PackedStringArray("ai") groups=["Hitbox"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_gck7q")
+maxHealth = 100
+ai = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988639, 0)
+shape = SubResource("CapsuleShape3D_k163n")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1.975, 0, 0, 0, 1.975, 0, 0, 0, 1.975, 0, -0.169969, 0)
+offset = Vector2(0, 60.645)
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_k5f0x")
+animation = &"idle_back"
+autoplay = "walk_front"
+frame_progress = 0.263118
+
+[node name="SpellMods" type="Node" parent="."]
+script = ExtResource("31_vf4le")
+ignoreEnemies = true
+damage = 24
+speed = 40.0
+lifeSpan = 10.0
+
+[node name="ManCatcherProjectilePool" type="Node" parent="." node_paths=PackedStringArray("spellModOverride")]
+script = ExtResource("32_6odb7")
+poolSizeOverride = 5
+spellModOverride = NodePath("../SpellMods")
+projectilePackedScene = ExtResource("22_akapg")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://7y1mhvi4j4pe"]
+
+[ext_resource type="Script" path="res://Scripts/Magic/SpellMods.gd" id="1_6cclo"]
+
+[node name="faster spell" type="Node"]
+script = ExtResource("1_6cclo")
+speed = 10.0

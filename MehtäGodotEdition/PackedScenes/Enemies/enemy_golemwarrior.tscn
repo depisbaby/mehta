@@ -196,6 +196,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.986212, 0)
 shape = SubResource("CapsuleShape3D_02k8a")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+height = 0.1
+radius = 0.1
+debug_enabled = true
 
 [node name="Eyes" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73749, 0)
@@ -212,9 +215,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988639, 0)
 shape = SubResource("CapsuleShape3D_k163n")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1.695, 0, 0, 0, 1.695, 0, 0, 0, 1.695, 0, 0.0236201, 0)
+transform = Transform3D(1.695, 0, 0, 0, 1.695, 0, 0, 0, 1.695, 0, -0.0712047, 0)
 offset = Vector2(0, 60.645)
 billboard = 2
+shaded = true
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_k5f0x")
 animation = &"idle_side"
@@ -225,12 +229,12 @@ script = ExtResource("31_oq7k5")
 ignoreEnemies = true
 damage = 34
 speed = 50.0
-lifeSpan = 60.0
+lifeSpan = 5.0
 
-[node name="ProjectilePool" type="Node" parent="." node_paths=PackedStringArray("spellModsOverride")]
+[node name="ProjectilePool" type="Node" parent="." node_paths=PackedStringArray("spellModOverride")]
 script = ExtResource("32_6km8g")
 poolSizeOverride = 5
-spellModsOverride = NodePath("../SpellMods")
+spellModOverride = NodePath("../SpellMods")
 projectilePackedScene = ExtResource("33_gh8md")
 
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

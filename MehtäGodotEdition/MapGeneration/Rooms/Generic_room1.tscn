@@ -1,0 +1,141 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfx7hqs2tog5m"]
+
+[ext_resource type="Script" path="res://MapGeneration/Room.gd" id="1_y3fwa"]
+[ext_resource type="PackedScene" uid="uid://dv72humn7nsu1" path="res://MapGeneration/RoomParts/ceiling1.tscn" id="1_yuj3h"]
+[ext_resource type="PackedScene" uid="uid://cdq4mvpdpa2w5" path="res://MapGeneration/RoomParts/floor1.tscn" id="2_gxjjv"]
+[ext_resource type="PackedScene" uid="uid://42v12vak3wak" path="res://MapGeneration/RoomParts/wall1.tscn" id="3_wx68m"]
+[ext_resource type="PackedScene" uid="uid://cld0cmejecjhh" path="res://MapGeneration/RoomParts/wall_with_door1.tscn" id="4_6y2fm"]
+[ext_resource type="PackedScene" uid="uid://bhm4x42jwa8hg" path="res://MapGeneration/RoomParts/pilar1.tscn" id="5_puogf"]
+[ext_resource type="PackedScene" uid="uid://dnhns4clo4hsy" path="res://PackedScenes/MapObjects/Door.tscn" id="6_f0fti"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pvnvg"]
+size = Vector3(40.0202, 10.0701, 12.7001)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xop56"]
+size = Vector3(10.0959, 10.0907, 8.46652)
+
+[node name="GenericRoom1" type="Node3D" node_paths=PackedStringArray("doors", "overlapBoxes")]
+script = ExtResource("1_y3fwa")
+doors = [NodePath("Door"), NodePath("Door2"), NodePath("Door3")]
+overlapBoxes = [NodePath("OverlapBox"), NodePath("OverlapBox2")]
+
+[node name="Parts" type="Node3D" parent="."]
+
+[node name="Ceiling5" parent="Parts" instance=ExtResource("1_yuj3h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="Ceiling2" parent="Parts" instance=ExtResource("1_yuj3h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="Ceiling6" parent="Parts" instance=ExtResource("1_yuj3h")]
+
+[node name="Ceiling3" parent="Parts" instance=ExtResource("1_yuj3h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Ceiling4" parent="Parts" instance=ExtResource("1_yuj3h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="Floor1" parent="Parts" instance=ExtResource("2_gxjjv")]
+
+[node name="Floor5" parent="Parts" instance=ExtResource("2_gxjjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="Wall1" parent="Parts" instance=ExtResource("3_wx68m")]
+
+[node name="WallWithDoor1" parent="Parts" instance=ExtResource("4_6y2fm")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
+
+[node name="WallWithDoor3" parent="Parts" instance=ExtResource("4_6y2fm")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 0, -9.6165e-07)
+
+[node name="WallWithDoor2" parent="Parts" instance=ExtResource("4_6y2fm")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5.24537e-07, 0, 10)
+
+[node name="Floor2" parent="Parts" instance=ExtResource("2_gxjjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="Floor3" parent="Parts" instance=ExtResource("2_gxjjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="Floor4" parent="Parts" instance=ExtResource("2_gxjjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Wall2" parent="Parts" instance=ExtResource("3_wx68m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="Wall3" parent="Parts" instance=ExtResource("3_wx68m")]
+
+[node name="Wall9" parent="Parts" instance=ExtResource("3_wx68m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+
+[node name="Wall10" parent="Parts" instance=ExtResource("3_wx68m")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -10, 0, 0)
+
+[node name="Wall4" parent="Parts" instance=ExtResource("3_wx68m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Wall5" parent="Parts" instance=ExtResource("3_wx68m")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 20, 0, -8.74228e-07)
+
+[node name="Wall6" parent="Parts" instance=ExtResource("3_wx68m")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10, 0, -8.74228e-07)
+
+[node name="Wall7" parent="Parts" instance=ExtResource("3_wx68m")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 1.31134e-06, 0, 10)
+
+[node name="Wall8" parent="Parts" instance=ExtResource("3_wx68m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.31134e-06, 0, 10)
+
+[node name="Pilar1" parent="Parts" instance=ExtResource("5_puogf")]
+
+[node name="Pilar3" parent="Parts" instance=ExtResource("5_puogf")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Pilar7" parent="Parts" instance=ExtResource("5_puogf")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -10, 0, 0)
+
+[node name="Pilar4" parent="Parts" instance=ExtResource("5_puogf")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 0, 0)
+
+[node name="Pilar5" parent="Parts" instance=ExtResource("5_puogf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Pilar6" parent="Parts" instance=ExtResource("5_puogf")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 0, 0)
+
+[node name="Door" parent="." node_paths=PackedStringArray("seal") instance=ExtResource("6_f0fti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.0468, -2.87335, 0)
+seal = NodePath("../Seal")
+
+[node name="Door2" parent="." node_paths=PackedStringArray("seal") instance=ExtResource("6_f0fti")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -15.0633, -2.89221, 0)
+seal = NodePath("../Seal2")
+
+[node name="Door3" parent="." node_paths=PackedStringArray("seal") instance=ExtResource("6_f0fti")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.0238624, -2.89221, 15.0262)
+seal = NodePath("../Seal3")
+
+[node name="OverlapBox" type="Area3D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OverlapBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.99581, -0.000610352, 0.0181713)
+shape = SubResource("BoxShape3D_pvnvg")
+
+[node name="OverlapBox2" type="Area3D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OverlapBox2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00239563, 0.00286865, 10.7845)
+shape = SubResource("BoxShape3D_xop56")
+
+[node name="Seal" parent="." instance=ExtResource("3_wx68m")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 18.9136, 0, -1.1607e-06)
+
+[node name="Seal2" parent="." instance=ExtResource("3_wx68m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.90648, 0, -4.77994e-08)
+
+[node name="Seal3" parent="." instance=ExtResource("3_wx68m")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.21761e-06, 0, 8.9278)

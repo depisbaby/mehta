@@ -11,9 +11,12 @@ var blindness: float
 var walking: bool
 var aimPoint: Vector3
 
+func _enter_tree():
+	Global.player = self
+	Global.player.frozen = true
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Global.player = self
 	Global.dataPersistenceManager.Subscribe(self)
 	Respawn()
 	

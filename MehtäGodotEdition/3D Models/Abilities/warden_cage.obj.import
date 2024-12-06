@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://2blj3naw80ag"
+path="res://.godot/imported/warden_cage.obj-9c775b7117dc914fbc1b4ba3d31c73dd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/warden_cage.obj-9c775b7117dc914fbc1b4ba3d31c73dd.mesh"]
+
+source_file="res://3D Models/Abilities/warden_cage.obj"
+dest_files=["res://.godot/imported/warden_cage.obj-9c775b7117dc914fbc1b4ba3d31c73dd.mesh", "res://.godot/imported/warden_cage.obj-9c775b7117dc914fbc1b4ba3d31c73dd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

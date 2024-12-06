@@ -40,7 +40,8 @@ func _ready():
 			var label: Label = inventorySlots[i_inventorySlot.id].amountLabel
 			
 	UpdateInventory()
-	CloseView()
+	windowOpen = false
+	inventoryWindow.hide()
 			
 	
 	#print("Inventory size: ", inventorySlots.size())

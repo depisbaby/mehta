@@ -3,9 +3,12 @@ class_name UIManager
 @export var UIViews: Array[CanvasLayer]
 
 var viewOpen
+func _enter_tree():
+	Global.uiManager = self
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Global.uiManager = self
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	pass # Replace with function body.
 
 

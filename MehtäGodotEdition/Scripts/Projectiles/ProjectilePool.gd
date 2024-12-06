@@ -2,9 +2,10 @@ extends Node
 class_name ProjectilePool
 
 @export var poolSizeOverride: int
-@export var spellModsOverride: Node
+@export var spellModOverride: Node
+@export var parentScript: Node
 
-var projectilePrefab: Projectile
+@export var projectilePrefab: Projectile
 var poolSize: int
 var projectilePool: Array[Projectile] = []
 var projectileQueue: Array[Projectile] = []
@@ -14,12 +15,16 @@ var projectileQueue: Array[Projectile] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	await get_tree().create_timer(0.1).timeout
 	if projectilePackedScene != null:
-		await get_tree().create_timer(0.1).timeout
 		var instance = projectilePackedScene.instantiate()
+		if spellModOverride != null:
+			instance.ApplySpellMods(spellModOverride)
 		get_tree().root.add_child(instance)
-		instance.ApplySpellMods(spellModsOverride)
 		ReinitializePool(instance, poolSizeOverride)
+	
+	if parentScript != null:
+		parentScript.ProjectilePoolReadyDone()
 	
 	pass # Replace with function body.
 
@@ -63,10 +68,10 @@ func ReinitializePool(_projectilePrefab:Projectile, size:int):
 		projectileQueue.push_back(projectile)
 		projectilePool.push_back(projectile)
 	
-	#make a packed scene out of the projectile prefab. This is used for
-	#loading/saving this projectile pool
+	
+	pass
+	
+func SavePool():
 	var packedScene = PackedScene.new()
 	packedScene.pack(projectilePrefab)
 	projectilePackedScene = packedScene
-	
-	pass

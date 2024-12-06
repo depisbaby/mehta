@@ -8,19 +8,31 @@ var targetRotation: Vector3
 var closedRotation : Vector3
 var openRotation : Vector3
 
+#mapgen
+var parentRoom: Room
+var filled: bool
+@export var seal: Node3D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	closedRotation = doorObject.global_rotation
-	openRotation = closedRotation + Vector3(0,2,0)
-	targetRotation = closedRotation
+	
+	Global.gameManager.doors.push_back(self)
+	
+	if doorObject == null:
+		return
+	closedRotation = doorObject.rotation_degrees
+	openRotation = closedRotation + Vector3(0,90,0)
+	targetRotation = openRotation
+	
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	doorObject.global_rotation = lerp(doorObject.global_rotation, targetRotation, 0.05)
+	if doorObject == null:
+		return
+	doorObject.rotation_degrees = lerp(doorObject.rotation_degrees, targetRotation, delta*5)
 	
 	pass
 	
@@ -40,3 +52,14 @@ func Operate():
 		targetRotation = openRotation
 	
 	pass
+
+func Remove():
+	queue_free() 
+	pass
+	
+func RemoveSeal():
+	seal.queue_free()
+	
+func Close():
+	open = false
+	targetRotation = closedRotation
