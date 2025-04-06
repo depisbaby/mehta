@@ -6,3 +6,4 @@
 6 = interactable
 7 = room overlap area
 8 = projectile passing
+9 = ladder

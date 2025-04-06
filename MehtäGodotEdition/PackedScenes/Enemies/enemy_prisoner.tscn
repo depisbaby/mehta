@@ -1,0 +1,194 @@
+[gd_scene load_steps=29 format=3 uid="uid://buc8h4l8cgk48"]
+
+[ext_resource type="Script" path="res://Scripts/AI/Prisoner.gd" id="1_0it1j"]
+[ext_resource type="Script" path="res://Scripts/Health.gd" id="2_cas6u"]
+[ext_resource type="Texture2D" uid="uid://d04pw1homxqt8" path="res://Animations/Prisoner/attack/1.png" id="3_nanjs"]
+[ext_resource type="Texture2D" uid="uid://bqfqk2thtysvd" path="res://Animations/Prisoner/attack/2.png" id="4_fscps"]
+[ext_resource type="Texture2D" uid="uid://oyrqhp34ep53" path="res://Animations/Prisoner/attack/3.png" id="5_hps50"]
+[ext_resource type="Texture2D" uid="uid://bhi3q3wh22oif" path="res://Animations/Prisoner/die/2.png" id="6_eyxf0"]
+[ext_resource type="Texture2D" uid="uid://24u5npyyt3ku" path="res://Animations/Prisoner/die/1.png" id="7_4jbow"]
+[ext_resource type="Texture2D" uid="uid://c6y3wy7ogmdon" path="res://Animations/Prisoner/die/3.png" id="8_tyqtu"]
+[ext_resource type="Texture2D" uid="uid://chb3lef6psyu3" path="res://Animations/Prisoner/die/4.png" id="9_wsd7o"]
+[ext_resource type="Texture2D" uid="uid://ca83c04bgeiws" path="res://Animations/Prisoner/die/5.png" id="10_uph5d"]
+[ext_resource type="Texture2D" uid="uid://dxwwy0ikfqy5w" path="res://Animations/Prisoner/idle/back.png" id="11_73k2i"]
+[ext_resource type="Texture2D" uid="uid://cmwpfsetb2bk8" path="res://Animations/Prisoner/idle/front.png" id="12_rpli0"]
+[ext_resource type="Texture2D" uid="uid://cpqk00i6yy4ct" path="res://Animations/Prisoner/idle/side.png" id="13_xw1tv"]
+[ext_resource type="Texture2D" uid="uid://dbci4lvycdmo2" path="res://Animations/Prisoner/walk/back/1.png" id="14_6c6pf"]
+[ext_resource type="Texture2D" uid="uid://d32f5k1i34wtg" path="res://Animations/Prisoner/walk/back/2.png" id="15_vmcno"]
+[ext_resource type="Texture2D" uid="uid://cxobl26t8nija" path="res://Animations/Prisoner/walk/back/3.png" id="16_md6fy"]
+[ext_resource type="Texture2D" uid="uid://cgrg5ecp7xr54" path="res://Animations/Prisoner/walk/back/4.png" id="17_hkdoh"]
+[ext_resource type="Texture2D" uid="uid://c0058iusffs53" path="res://Animations/Prisoner/walk/front/1.png" id="18_f8g8d"]
+[ext_resource type="Texture2D" uid="uid://cvu6h8ud1nwdx" path="res://Animations/Prisoner/walk/front/2.png" id="19_v86f6"]
+[ext_resource type="Texture2D" uid="uid://cgxx5o5vn0qg4" path="res://Animations/Prisoner/walk/front/3.png" id="20_5b12u"]
+[ext_resource type="Texture2D" uid="uid://cblm18ticfde3" path="res://Animations/Prisoner/walk/front/4.png" id="21_gve3b"]
+[ext_resource type="Texture2D" uid="uid://dn3cxu4dtgw13" path="res://Animations/Prisoner/walk/side/1.png" id="22_ahry3"]
+[ext_resource type="Texture2D" uid="uid://dib1osgq7nriq" path="res://Animations/Prisoner/walk/side/2.png" id="23_wme4l"]
+[ext_resource type="Texture2D" uid="uid://bux7wkqokhts0" path="res://Animations/Prisoner/walk/side/3.png" id="24_exe0i"]
+[ext_resource type="Texture2D" uid="uid://ceqlebtw7gdd4" path="res://Animations/Prisoner/walk/side/4.png" id="25_4v24t"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_02k8a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k163n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k5f0x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nanjs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fscps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hps50")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_eyxf0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4jbow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tyqtu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wsd7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_uph5d")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_73k2i")
+}],
+"loop": true,
+"name": &"idle_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_rpli0")
+}],
+"loop": true,
+"name": &"idle_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_xw1tv")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_6c6pf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_vmcno")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_md6fy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_hkdoh")
+}],
+"loop": true,
+"name": &"walk_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_f8g8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_v86f6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_5b12u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_gve3b")
+}],
+"loop": true,
+"name": &"walk_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_ahry3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_wme4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_exe0i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_4v24t")
+}],
+"loop": true,
+"name": &"walk_side",
+"speed": 5.0
+}]
+
+[node name="enemy_prisoner" type="CharacterBody3D" node_paths=PackedStringArray("eyes", "health")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_0it1j")
+displayName = "Prisoner"
+speed = 10.0
+accel = 10.0
+stoppingDistance = 2.0
+eyes = NodePath("Eyes")
+health = NodePath("PrisonerHitbox")
+despawnDelay = 5.0
+goToMeleeRange = 100.0
+meleeWindUp = 0.4
+meleeCooldown = 0.6
+meleeDamage = 19
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.986212, 0)
+shape = SubResource("CapsuleShape3D_02k8a")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+height = 0.1
+radius = 0.1
+
+[node name="Eyes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73749, 0)
+
+[node name="PrisonerHitbox" type="Area3D" parent="." node_paths=PackedStringArray("ai") groups=["Hitbox"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_cas6u")
+maxHealth = 100
+ai = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PrisonerHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988639, 0)
+shape = SubResource("CapsuleShape3D_k163n")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1.695, 0, 0, 0, 1.695, 0, 0, 0, 1.695, 0, 0.0109769, 0)
+offset = Vector2(0, 60.645)
+billboard = 2
+shaded = true
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_k5f0x")
+animation = &"walk_front"
+autoplay = "walk_front"
+frame_progress = 0.0503614
+
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

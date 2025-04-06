@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name fps_controller
 
 @export var SPEED : float = 5.0
 @export var JUMP_VELOCITY : float = 7.0
@@ -16,6 +17,10 @@ var _player_rotation : Vector3
 var _camera_rotation : Vector3
 
 var _velocity : Vector3
+var isOnLadder: bool
+
+@onready var player: Player = $PlayerManager
+@onready var floorCheckRay: RayCast3D = $RayCast3D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -63,7 +68,7 @@ func _physics_process(delta):
 	_update_camera(delta)
 	
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() && !isOnLadder:
 		velocity.y -= gravity * delta
 
 	# Handle Jump.
@@ -85,9 +90,24 @@ func _physics_process(delta):
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
+		if isOnLadder:
+			velocity.y = 1 * SPEED
+		
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
 	_velocity = velocity
+	
+	if floorCheckRay.is_colliding():
+		player.playerFloorPoint = floorCheckRay.get_collision_point()
+	else:
+		player.playerFloorPoint = global_position
+	
 	move_and_slide()
+	
+
+func CheckForLadder():
+	get_slide_collision_count()
+	pass

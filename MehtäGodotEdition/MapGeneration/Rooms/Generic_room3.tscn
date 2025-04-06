@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c7vwo4y8oppct"]
+[gd_scene load_steps=16 format=3 uid="uid://c7vwo4y8oppct"]
 
 [ext_resource type="Script" path="res://MapGeneration/Room.gd" id="1_x5jle"]
 [ext_resource type="PackedScene" uid="uid://dv72humn7nsu1" path="res://MapGeneration/RoomParts/ceiling1.tscn" id="2_odiwr"]
@@ -12,8 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://c0a5iwts524ve" path="res://MapGeneration/RoomParts/arch_small.tscn" id="7_ysj50"]
 [ext_resource type="PackedScene" uid="uid://dnhns4clo4hsy" path="res://PackedScenes/MapObjects/Door.tscn" id="8_vynnh"]
 [ext_resource type="PackedScene" uid="uid://ck4w2rkm5bmeo" path="res://MapGeneration/RoomParts/stairs1.tscn" id="11_g1xpd"]
-[ext_resource type="PackedScene" uid="uid://ui23qvtulrrh" path="res://PackedScenes/EnemySpawners/ES_LakeHorror.tscn" id="13_ownkv"]
-[ext_resource type="PackedScene" uid="uid://3mo37j2hh8tg" path="res://PackedScenes/EnemySpawners/ES_Warden.tscn" id="14_8np0m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g5hfv"]
 size = Vector3(72.7698, 20.0803, 27.8729)
@@ -1145,15 +1143,3 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 50, 0,
 
 [node name="Seal4" parent="." instance=ExtResource("4_cunlr")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -40, 0, 68.8935)
-
-[node name="ES_LakeHorror" parent="." instance=ExtResource("13_ownkv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2264, -4, 29.8244)
-
-[node name="ES_Warden" parent="." instance=ExtResource("14_8np0m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.86764, -4, 60.6944)
-
-[node name="ES_Warden2" parent="." instance=ExtResource("14_8np0m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.3979, -4, 30.2237)
-
-[node name="ES_Warden3" parent="." instance=ExtResource("14_8np0m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.6547, -4, 40.7141)

@@ -18,7 +18,7 @@ func _process(delta):
 	pass
 
 func StartNewGame():
-	
+	Global.uiManager.CloseAll()
 	if gameOnGoing:
 		return
 	
@@ -43,7 +43,7 @@ func StartNewGame():
 	await get_tree().create_timer(3.0).timeout
 	
 	#prepare player
-	Global.player.character.global_position = Vector3(0,0,0)
+	#Global.player.character.global_position = Vector3(0,0,0)
 	Global.player.frozen = false
 	
 	#play

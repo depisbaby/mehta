@@ -10,6 +10,7 @@ var frozen: bool
 var blindness: float
 var walking: bool
 var aimPoint: Vector3
+var playerFloorPoint: Vector3
 
 func _enter_tree():
 	Global.player = self

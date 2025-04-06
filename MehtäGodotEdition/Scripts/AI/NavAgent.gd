@@ -33,7 +33,7 @@ var isWalking: bool
 var animationsOverridden: bool
 enum PlayerPerspective {FRONT,RIGHT,BACK,LEFT}
 var playerPerspective: PlayerPerspective
-enum Action {NONE, ATTACKING, FLEEING}
+enum Action {NONE, ATTACKING, FLEEING, STUNNED}
 var currentAction: Action
 var distanceToPlayer: float
 var wasDamaged: bool
@@ -85,6 +85,30 @@ func _process(delta):
 		#print(currentAction)
 		
 	pass
+
+func _physics_process(delta):
+	
+	
+	
+	if(sleeping == false):
+		
+		CheckHealth()
+		GetDistanceToPlayer()
+		LogicCycle(delta)
+		Move(delta) #this before animations
+		CheckPlayerPerspective()#this before animations
+		Animations()
+		#print(currentAction)
+	else:
+		if tick % 60 == 0:
+			CheckPlayerVisibility()
+			if knowsAboutPlayer:
+				WakeUp()
+	
+	if tick > 10000: # reset tick
+		tick = 0
+	
+	tick += 1	
 	
 func LogicCycle(delta):
 	
@@ -99,7 +123,7 @@ func LogicCycle(delta):
 	if tick % 3 == 0: #happens often
 		if Global.player != null:
 			if knowsAboutPlayer == true && currentAction != Action.FLEEING && player.health.health > 0:
-				targetMovePosition = Global.player.global_position
+				targetMovePosition = Global.player.playerFloorPoint
 	
 	if tick % 10 == 0: #happens less often
 		CheckPlayerVisibility()	
@@ -115,10 +139,6 @@ func LogicCycle(delta):
 				
 			Attack()
 		
-	if tick > 10000: # reset tick
-		tick = 0
-	
-	tick += 1
 	cycleProgress = 0.0
 	#print("tick: ", tick)
 	pass
@@ -306,7 +326,13 @@ func DoMeleeAttack():
 	
 	EndAction(meleeCooldown)
 	pass
-	
+
+func Stun(time):
+	currentAction = Action.STUNNED
+	await get_tree().create_timer(time).timeout
+	EndAction(0)
+	pass	
+
 func EndAction(timeInSeconds):
 	
 	await get_tree().create_timer(timeInSeconds).timeout
