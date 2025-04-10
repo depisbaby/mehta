@@ -24,6 +24,7 @@ var tick: int
 var customActionTick: int
 var cycleProgress:float
 var sleeping: bool
+var dead: bool
 var knowsAboutPlayer: bool
 var seesPlayer: bool
 var targetMovePosition: Vector3
@@ -37,21 +38,17 @@ enum Action {NONE, ATTACKING, FLEEING, STUNNED}
 var currentAction: Action
 var distanceToPlayer: float
 var wasDamaged: bool
-var originSpawnPoint: EnemySpawnPoints
+var originSpawnPoint: EnemySpawnPoint
 
 @onready var debug: PackedScene = preload("res://PackedScenes/Debug/debugsphere.tscn")
 
 func WakeUp():
-	health.SetHealth(health.maxHealth)
-	if health.health <= 0:
-		health.SetHealth(1)
-	targetMovePosition = global_position
 	sleeping = false
 	originSpawnPoint.occupied = false
 	pass
 	
 func Die():
-	sleeping = true
+	dead = true
 	
 	OverrideAnimation("death")
 	
@@ -59,28 +56,31 @@ func Die():
 	Despawn()
 	
 func  Despawn():
+	Global.enemyManager.RemoveEnemy()
 	queue_free()
 	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	health.SetHealth(health.maxHealth)
+	if health.health <= 0:
+		health.SetHealth(1)
+	targetMovePosition = global_position
 	if customActionTick == 0:
-		customActionTick = 1
+		customActionTick = 60
 	currentAction = Action.NONE
-	facingDirection = Vector3(1,0,0)
+	facingDirection = Vector3(randi_range(-1,1),0,randi_range(-1,1))
 	visionRaycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),1)
 	player = Global.player as Player
 	health.ownerName = displayName
+	Global.enemyManager.AddEnemy()
+	tick = randi_range(0,60)
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	
-	pass
 
 func _physics_process(delta):
 	
-	if(sleeping == false):
+	if(sleeping == false && dead == false):
 		
 		CheckHealth()
 		GetDistanceToPlayer()
@@ -89,14 +89,16 @@ func _physics_process(delta):
 		CheckPlayerPerspective()#this before animations
 		Animations()
 		#print(currentAction)
-	else:
+	elif(sleeping == true && dead == false):
 		if tick % 60 == 0:
 			CheckPlayerVisibility()
 			if knowsAboutPlayer:
 				WakeUp()
 	
-	if tick > 10000: # reset tick
+	if tick > 3600: # reset tick
 		tick = 0
+		if sleeping:
+			Despawn()
 	
 	tick += 1	
 	

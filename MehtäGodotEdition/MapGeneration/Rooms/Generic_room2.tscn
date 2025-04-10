@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bm2oqaue1awdi"]
+[gd_scene load_steps=19 format=3 uid="uid://bm2oqaue1awdi"]
 
 [ext_resource type="Script" path="res://MapGeneration/Room.gd" id="1_ohigw"]
 [ext_resource type="PackedScene" uid="uid://dv72humn7nsu1" path="res://MapGeneration/RoomParts/ceiling1.tscn" id="2_8gicu"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c2r0wxbl1honm" path="res://MapGeneration/RoomParts/rail1.tscn" id="7_tlvc8"]
 [ext_resource type="Material" uid="uid://b4qwjjpjrsnk1" path="res://Materials/Objects/ladder.material" id="10_6w51v"]
 [ext_resource type="ArrayMesh" uid="uid://d25qoxyfgnb1q" path="res://3D Models/ladder.obj" id="11_0cbu8"]
+[ext_resource type="PackedScene" uid="uid://ccf0efv1b07sq" path="res://PackedScenes/EnemySpawnPoint.tscn" id="12_1vnij"]
 [ext_resource type="Script" path="res://Scripts/Ladder.gd" id="12_8bykx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pvnvg"]
@@ -34,6 +35,9 @@ size = Vector3(1, 13.101, 1)
 script = ExtResource("1_ohigw")
 doors = [NodePath("Door"), NodePath("Door2"), NodePath("Door3"), NodePath("Door4")]
 overlapBoxes = [NodePath("OverlapBox"), NodePath("OverlapBox2"), NodePath("OverlapBox3"), NodePath("OverlapBox4")]
+roomGruntsIds = Array[int]([1])
+roomElitesIds = Array[int]([2])
+roomMinibossIds = Array[int]([3])
 
 [node name="Parts" type="Node3D" parent="."]
 
@@ -414,6 +418,38 @@ collision_mask = 16
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, -1.88738e-15, -7.74492e-13, 2.42029e-14, 1, 0, 6.05051, 0)
 shape = SubResource("BoxShape3D_mbv1h")
+
+[node name="EnemySpawnPoints" type="Node3D" parent="."]
+
+[node name="EnemySpawnPoint" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16022, -4, 10.4579)
+
+[node name="EnemySpawnPoint2" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.06192, -4, 21.4171)
+
+[node name="EnemySpawnPoint3" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.346, -4, 12.3913)
+
+[node name="EnemySpawnPoint4" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.50415, -4, -2.18948)
+
+[node name="EnemySpawnPoint5" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.6729, -4, 2.87801)
+
+[node name="EnemySpawnPoint6" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0181, -4, 12.4297)
+
+[node name="EnemySpawnPoint7" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.1391, -4, -1.3481)
+
+[node name="EnemySpawnPoint8" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3638, -4, 7.43036)
+
+[node name="EnemySpawnPoint9" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.471897, 5.01841, -1.41812)
+
+[node name="EnemySpawnPoint10" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.43037, 5.01841, -11.9276)
 
 [connection signal="body_entered" from="Ladder/Area3D" to="Ladder" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Ladder/Area3D" to="Ladder" method="_on_area_3d_body_exited"]

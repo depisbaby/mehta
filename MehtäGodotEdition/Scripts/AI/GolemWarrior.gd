@@ -13,9 +13,6 @@ func _ready() -> void:
 	
 	pass
 
-func _process(delta: float) -> void:
-	super._process(delta)
-	pass
 
 func DoRangedAttack():
 	

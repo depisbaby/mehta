@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7vwo4y8oppct"]
+[gd_scene load_steps=17 format=3 uid="uid://c7vwo4y8oppct"]
 
 [ext_resource type="Script" path="res://MapGeneration/Room.gd" id="1_x5jle"]
 [ext_resource type="PackedScene" uid="uid://dv72humn7nsu1" path="res://MapGeneration/RoomParts/ceiling1.tscn" id="2_odiwr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c0a5iwts524ve" path="res://MapGeneration/RoomParts/arch_small.tscn" id="7_ysj50"]
 [ext_resource type="PackedScene" uid="uid://dnhns4clo4hsy" path="res://PackedScenes/MapObjects/Door.tscn" id="8_vynnh"]
 [ext_resource type="PackedScene" uid="uid://ck4w2rkm5bmeo" path="res://MapGeneration/RoomParts/stairs1.tscn" id="11_g1xpd"]
+[ext_resource type="PackedScene" uid="uid://ccf0efv1b07sq" path="res://PackedScenes/EnemySpawnPoint.tscn" id="13_l75pv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g5hfv"]
 size = Vector3(72.7698, 20.0803, 27.8729)
@@ -26,6 +27,9 @@ size = Vector3(121.521, 20.177, 31.4211)
 script = ExtResource("1_x5jle")
 doors = [NodePath("Door"), NodePath("Door2"), NodePath("Door3"), NodePath("Door4")]
 overlapBoxes = [NodePath("OverlapBox"), NodePath("OverlapBox2"), NodePath("OverlapBox3")]
+roomGruntsIds = Array[int]([1])
+roomElitesIds = Array[int]([2])
+roomMinibossIds = Array[int]([3])
 
 [node name="Parts" type="Node3D" parent="."]
 metadata/_edit_lock_ = true
@@ -1143,3 +1147,107 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 50, 0,
 
 [node name="Seal4" parent="." instance=ExtResource("4_cunlr")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -40, 0, 68.8935)
+
+[node name="EnemySpawnPoints" type="Node3D" parent="."]
+
+[node name="EnemySpawnPoint" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9139, -4, -8.51166)
+
+[node name="EnemySpawnPoint2" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.07738, -4, 2.62215)
+
+[node name="EnemySpawnPoint3" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7883, -4, -2.60093)
+
+[node name="EnemySpawnPoint4" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.8407, -4, 2.08308)
+
+[node name="EnemySpawnPoint5" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.2506, -4, -2.16726)
+
+[node name="EnemySpawnPoint6" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.08273, -4, -2.19504)
+
+[node name="EnemySpawnPoint7" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.7389, -4, 19.4654)
+
+[node name="EnemySpawnPoint8" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.1787, -4, 41.5729)
+
+[node name="EnemySpawnPoint9" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7835, -4, 30.8204)
+
+[node name="EnemySpawnPoint10" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.4529, -4, 68.9659)
+
+[node name="EnemySpawnPoint11" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.5563, -4, 57.3694)
+
+[node name="EnemySpawnPoint12" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.8499, -4, 61.8414)
+
+[node name="EnemySpawnPoint13" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5976, -4, 59.88)
+
+[node name="EnemySpawnPoint14" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19016, -4, 27.7981)
+
+[node name="EnemySpawnPoint15" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2459, -4, 32.517)
+
+[node name="EnemySpawnPoint16" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.71495, -4, 27.4562)
+
+[node name="EnemySpawnPoint17" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0766, -4, 44.6827)
+
+[node name="EnemySpawnPoint18" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.7832, -4, 40.8526)
+
+[node name="EnemySpawnPoint19" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.6889, -4, 40.641)
+
+[node name="EnemySpawnPoint20" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3123, -4, 57.7139)
+
+[node name="EnemySpawnPoint21" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4134, -4, 57.4231)
+
+[node name="EnemySpawnPoint22" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.417, -4, 70.0173)
+
+[node name="EnemySpawnPoint23" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.7838, -4, 19.1689)
+
+[node name="EnemySpawnPoint24" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9183, -14, 9.19625)
+
+[node name="EnemySpawnPoint25" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.92291, -14, 30.9175)
+
+[node name="EnemySpawnPoint26" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5655, -14, 48.7133)
+
+[node name="EnemySpawnPoint27" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.27046, -14, 40.4021)
+
+[node name="EnemySpawnPoint28" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.95852, -14, 42.4113)
+
+[node name="EnemySpawnPoint29" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.4882, -14, 50.0702)
+
+[node name="EnemySpawnPoint30" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.855, -14, 31.6859)
+
+[node name="EnemySpawnPoint31" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.8676, -14, 21.5417)
+
+[node name="EnemySpawnPoint32" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3325, -14, 9.7325)
+
+[node name="EnemySpawnPoint33" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9558, -14, 21.5748)
+
+[node name="EnemySpawnPoint34" parent="EnemySpawnPoints" instance=ExtResource("13_l75pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.3937, -14, 52.1741)

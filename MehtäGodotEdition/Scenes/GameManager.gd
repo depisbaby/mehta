@@ -3,6 +3,7 @@ class_name GameManager
 
 var doors: Array[Door]
 var gameOnGoing: bool
+var preparationDone: bool
 
 func _enter_tree():
 	Global.gameManager = self
@@ -18,10 +19,9 @@ func _process(delta):
 	pass
 
 func StartNewGame():
-	Global.uiManager.CloseAll()
+	preparationDone = false
 	if gameOnGoing:
 		return
-	
 	gameOnGoing = true
 	
 	#generate new map
@@ -43,10 +43,11 @@ func StartNewGame():
 	await get_tree().create_timer(3.0).timeout
 	
 	#prepare player
-	#Global.player.character.global_position = Vector3(0,0,0)
+	Global.player.character.global_position = Vector3(0,0,0)
 	Global.player.frozen = false
 	
 	#play
 	Global.uiManager.CloseAll()
+	preparationDone = true
 	
 	pass

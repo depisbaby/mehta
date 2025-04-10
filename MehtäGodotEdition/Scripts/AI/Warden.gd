@@ -11,9 +11,6 @@ func _ready():
 	
 	pass
 	
-func _physics_process(delta):
-	super._process(delta)
-	pass
 
 func DoRangedAttack():
 	

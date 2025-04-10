@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfx7hqs2tog5m"]
+[gd_scene load_steps=11 format=3 uid="uid://bfx7hqs2tog5m"]
 
 [ext_resource type="Script" path="res://MapGeneration/Room.gd" id="1_y3fwa"]
 [ext_resource type="PackedScene" uid="uid://dv72humn7nsu1" path="res://MapGeneration/RoomParts/ceiling1.tscn" id="1_yuj3h"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cld0cmejecjhh" path="res://MapGeneration/RoomParts/wall_with_door1.tscn" id="4_6y2fm"]
 [ext_resource type="PackedScene" uid="uid://bhm4x42jwa8hg" path="res://MapGeneration/RoomParts/pilar1.tscn" id="5_puogf"]
 [ext_resource type="PackedScene" uid="uid://dnhns4clo4hsy" path="res://PackedScenes/MapObjects/Door.tscn" id="6_f0fti"]
+[ext_resource type="PackedScene" uid="uid://ccf0efv1b07sq" path="res://PackedScenes/EnemySpawnPoint.tscn" id="8_qi3s0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pvnvg"]
 size = Vector3(40.0202, 10.0701, 12.7001)
@@ -18,6 +19,9 @@ size = Vector3(10.0959, 10.0907, 8.46652)
 script = ExtResource("1_y3fwa")
 doors = [NodePath("Door"), NodePath("Door2"), NodePath("Door3")]
 overlapBoxes = [NodePath("OverlapBox"), NodePath("OverlapBox2")]
+roomGruntsIds = Array[int]([1])
+roomElitesIds = Array[int]([2])
+roomMinibossIds = Array[int]([3])
 
 [node name="Parts" type="Node3D" parent="."]
 
@@ -139,3 +143,20 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.906
 
 [node name="Seal3" parent="." instance=ExtResource("3_wx68m")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.21761e-06, 0, 8.9278)
+
+[node name="EnemySpawns" type="Node3D" parent="."]
+
+[node name="EnemySpawnPoint" parent="EnemySpawns" instance=ExtResource("8_qi3s0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.75752, 0)
+
+[node name="EnemySpawnPoint2" parent="EnemySpawns" instance=ExtResource("8_qi3s0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.89781, -3.75752, 10.5347)
+
+[node name="EnemySpawnPoint3" parent="EnemySpawns" instance=ExtResource("8_qi3s0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.638, -3.75752, 2.8294)
+
+[node name="EnemySpawnPoint4" parent="EnemySpawns" instance=ExtResource("8_qi3s0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.68947, -3.75752, -2.7772)
+
+[node name="EnemySpawnPoint5" parent="EnemySpawns" instance=ExtResource("8_qi3s0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2828, -3.75752, 3.32175)

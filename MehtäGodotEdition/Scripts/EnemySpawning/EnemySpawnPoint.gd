@@ -1,21 +1,17 @@
 extends Node3D
-class_name EnemySpawnPoints
+class_name EnemySpawnPoint
 
-@export var enemyScene: PackedScene
+@export var top: Node3D
 
 @onready var devSprite: Sprite3D = $Sprite3D
 
 var occupied
 
 func _ready():
-	Global.enemyManager.AddSpawnPoint(self)
-	pass
+	get_parent().get_parent().enemySpawnPoints.push_back(self)
+	devSprite.hide()
 
-func _process(delta):
-	
-	pass
-
-func Spawn():
+func Spawn(enemyScene:PackedScene):
 	var enemy:NavAgent = enemyScene.instantiate()
 	get_tree().root.add_child(enemy)
 	enemy.global_position = global_position

@@ -31,13 +31,12 @@ func Die():
 	pass
 
 func _process(delta):
-	super._process(delta)
 	if !sleeping:
 		ball1.rotate_object_local(Vector3(0.0,1.0, 0.0),delta)
 		ball2.rotate_object_local(Vector3(0.0,1.0, 0.0),-delta)
 		
 		if distanceToPlayer < 10.0:
-			Global.hud.MakeBlinder(delta)
+			Global.hud.MakeBlinder(delta*0.2)
 			pass
 			
 		healTick += delta

@@ -53,7 +53,7 @@ projectilePackedScene = ExtResource("7_otc4a")
 
 [node name="DefaultSpellMods" type="Node" parent="."]
 script = ExtResource("7_xmg0t")
-damage = 11
+damage = 16
 speed = 30.0
 coolDown = 0.2
 lifeSpan = 5.0
