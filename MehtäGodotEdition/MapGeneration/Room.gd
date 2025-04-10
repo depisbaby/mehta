@@ -3,7 +3,7 @@ class_name Room
 
 @export var doors : Array[Door]
 @export var overlapBoxes : Array[Area3D]
-
+@export var enemySpawnPoints : Array[EnemySpawnPoints]
 #
 var id: int
 
@@ -17,7 +17,6 @@ func _process(delta):
 	pass
 
 func Place(mapGenerator: MapGenerator):
-	
 	for door in doors:
 		door.parentRoom = self
 		if door.filled:
@@ -26,6 +25,8 @@ func Place(mapGenerator: MapGenerator):
 		else :
 			mapGenerator.AddOpenDoor(door)
 			pass
+	
+	Global.enemyManager.AddRoom(self)
 		
 	pass
 

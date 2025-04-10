@@ -1,14 +1,14 @@
 extends Node3D
+class_name EnemySpawnPoints
 
 @export var enemyScene: PackedScene
 
 @onready var devSprite: Sprite3D = $Sprite3D
 
-var exhausted: bool
+var occupied
 
 func _ready():
-	await get_tree().create_timer(1).timeout
-	Spawn()
+	Global.enemyManager.AddSpawnPoint(self)
 	pass
 
 func _process(delta):
@@ -16,12 +16,10 @@ func _process(delta):
 	pass
 
 func Spawn():
-	exhausted = true
-	var enemy = enemyScene.instantiate()
+	var enemy:NavAgent = enemyScene.instantiate()
 	get_tree().root.add_child(enemy)
 	enemy.global_position = global_position
-	enemy.WakeUp()
-	
-	
+	enemy.originSpawnPoint = self
+	occupied = true
 	pass
 	

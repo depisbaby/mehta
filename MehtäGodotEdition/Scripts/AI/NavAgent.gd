@@ -37,6 +37,7 @@ enum Action {NONE, ATTACKING, FLEEING, STUNNED}
 var currentAction: Action
 var distanceToPlayer: float
 var wasDamaged: bool
+var originSpawnPoint: EnemySpawnPoints
 
 @onready var debug: PackedScene = preload("res://PackedScenes/Debug/debugsphere.tscn")
 
@@ -46,6 +47,7 @@ func WakeUp():
 		health.SetHealth(1)
 	targetMovePosition = global_position
 	sleeping = false
+	originSpawnPoint.occupied = false
 	pass
 	
 func Die():
@@ -74,21 +76,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if(sleeping == false):
-		
-		CheckHealth()
-		GetDistanceToPlayer()
-		LogicCycle(delta)
-		Move(delta) #this before animations
-		CheckPlayerPerspective()#this before animations
-		Animations()
-		#print(currentAction)
-		
 	pass
 
 func _physics_process(delta):
-	
-	
 	
 	if(sleeping == false):
 		
