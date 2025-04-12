@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bo8y4qxqcpctu"
+path="res://.godot/imported/circle.obj-878759e71091145b593930797205e4c8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/circle.obj-878759e71091145b593930797205e4c8.mesh"]
+
+source_file="res://3D Models/Curio/ContainmentSphere/circle.obj"
+dest_files=["res://.godot/imported/circle.obj-878759e71091145b593930797205e4c8.mesh", "res://.godot/imported/circle.obj-878759e71091145b593930797205e4c8.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

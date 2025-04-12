@@ -1,15 +1,18 @@
 extends Node
 class_name MapGenerator
 
+var tyrmaStartingRoom:PackedScene = preload("res://MapGeneration/Rooms/Starting_room.tscn")
 var tyrmaRoomSet: Array[PackedScene] = [
 	preload("res://MapGeneration/Rooms/Generic_room1.tscn"),
 	preload("res://MapGeneration/Rooms/Generic_room2.tscn"),
-	preload("res://MapGeneration/Rooms/Generic_room3.tscn")
+	preload("res://MapGeneration/Rooms/Generic_room3.tscn"),
+	preload("res://MapGeneration/Rooms/Generic_room4.tscn"),
+	preload("res://MapGeneration/Rooms/Generic_room5.tscn"),
+	preload("res://MapGeneration/Rooms/Generic_room6.tscn"),
 ]
 
 var roomLibrary: Array[Room]
 var seed: int
-var isGodMap: bool
 var rng = RandomNumberGenerator.new()
 var openDoors: Array[Door]
 var numOfRoomsGenerated: int
@@ -19,7 +22,6 @@ func _enter_tree():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	pass # Replace with function body.
 
 
@@ -28,19 +30,12 @@ func _process(delta):
 	
 	pass
 
+
 func GenerateMap(mapName: String, _seed: String):
 	
-	#random
-	if _seed == "": 
-		var my_random_number = rng.randf_range(-9223372036854775808, 9223372036854775807)
-		if  my_random_number == 0: #literally never happening XD
-			isGodMap = true
-			my_random_number = rng.randf_range(1, 9223372036854775807)
-		seed = my_random_number
-		rng.seed = my_random_number 
-	else:
-		seed = hash(_seed)
-		rng.seed = seed
+	seed = hash(_seed)
+	rng.seed = seed
+	rng.state = 0
 	
 	#wait
 	await get_tree().create_timer(0.1).timeout
@@ -55,7 +50,6 @@ func GenerateMap(mapName: String, _seed: String):
 	print("map generation done")
 	
 	
-
 func AddOpenDoor(door: Door):
 	
 	print("adding open door...")
@@ -141,14 +135,15 @@ func GenerateTyrma():
 	InitalizeTyrmaRooms()
 	
 	#place first
-	var startingRoom: Room = roomLibrary[0].duplicate(8)
+	var startingRoom:Room = tyrmaStartingRoom.instantiate()
+	get_tree().root.add_child(startingRoom)
 	Global.navMesh.add_child(startingRoom)
 	startingRoom.visible = true
 	startingRoom.global_position = Vector3(0,0,0)
 	startingRoom.Place(self)
 	
 	#generate
-	while openDoors.size() > 0 && numOfRoomsGenerated < 20:
+	while openDoors.size() > 0 && numOfRoomsGenerated < 10:
 		
 		var door: Door #pick door to close next
 		if rng.randi_range(0,1) == 0:
@@ -157,7 +152,19 @@ func GenerateTyrma():
 			door = openDoors.pop_front()
 		
 		await GenerateRoomAt(door)
-		
+	
+	#enemypool
+	Global.enemyManager.InitializeTyrmaPool()
+	
+	#bake navmesh
+	await Global.navMesh.BakeNavMesh()
+	var _seconds: int
+	while !Global.navMesh.navMeshBaked:
+		await get_tree().create_timer(1.0).timeout
+		_seconds = _seconds + 1
+	print("baking done after ", _seconds, " seconds")
+	
+	
 	pass
 
 #init methods

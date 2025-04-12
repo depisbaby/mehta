@@ -5,6 +5,7 @@ extends Projectile
 func _ready():
 	super._ready()
 	visible = false
+	name = "Mancacher"
 	pass # Replace with function body.
 
 

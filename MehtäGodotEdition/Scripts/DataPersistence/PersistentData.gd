@@ -1,11 +1,16 @@
 extends Resource
 class_name PersistentData
 
-#player character data
+#saveData
+@export var seed: String
 @export var playerPosition: Vector3
-
-#inventory
 @export var inventory: Array[PackedScene]
+
+
+
+#currentGameState
+@export var playerCurrentMap: String
+
 
 func _init():
 	inventory.resize(25)

@@ -8,7 +8,7 @@ var cageUsed: bool
 
 func _ready():
 	super._ready()
-	
+	name = "Warden"
 	pass
 	
 
@@ -47,17 +47,17 @@ func DoRangedAttack():
 
 func ReactToDamage():
 	
-	if rng.randi_range(0, 2) == 0:
-		return
-	
-	MoveToRandomPlace()
 	
 	pass
 
 func DoCustomAction():
 	
 	pass
-	
+
+func Despawn():
+	mancatcherProjectilePool.ReturnAllProjectiles()	
+	super.Despawn()
+
 func DoCageAbility():
 	
 	if !seesPlayer:

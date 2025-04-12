@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://pj3bpeuc0nel"]
+[gd_scene load_steps=49 format=3 uid="uid://pj3bpeuc0nel"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ViewModel.gd" id="1_uob2v"]
 [ext_resource type="Texture2D" uid="uid://d12wbgpjg5jlj" path="res://Sprites/ui/healthbar_fill.png" id="2_0uj4p"]
@@ -36,11 +36,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/UIManager.gd" id="29_iu8gt"]
 [ext_resource type="Script" path="res://Scenes/GameManager.gd" id="31_jxgre"]
 [ext_resource type="Script" path="res://Scripts/EnemySpawning/EnemyManager.gd" id="32_5uwml"]
-[ext_resource type="PackedScene" uid="uid://blh0gcm0ojmry" path="res://PackedScenes/Enemies/enemy_golemwarrior.tscn" id="33_rxnpk"]
-[ext_resource type="PackedScene" uid="uid://buc8h4l8cgk48" path="res://PackedScenes/Enemies/enemy_prisoner.tscn" id="34_i8xc5"]
-[ext_resource type="PackedScene" uid="uid://b7my1t21wxjbq" path="res://PackedScenes/Enemies/enemy_warden.tscn" id="35_tsjyp"]
 [ext_resource type="Script" path="res://Scripts/AI/NavMesh.gd" id="36_80yqo"]
-[ext_resource type="PackedScene" uid="uid://bptrygk761rva" path="res://PackedScenes/Enemies/enemy_lakehorror.tscn" id="36_lgumw"]
 [ext_resource type="PackedScene" uid="uid://b47sog4girrp3" path="res://PackedScenes/Items/Wands/item_vitutus.tscn" id="38_n4e21"]
 [ext_resource type="PackedScene" uid="uid://pl0utrdh1jha" path="res://PackedScenes/MapObjects/WandTuner.tscn" id="38_r4agk"]
 
@@ -75,6 +71,9 @@ fog_enabled = true
 fog_light_color = Color(0.242154, 0.55029, 0.585925, 1)
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_hd2va"]
+agent_height = 0.1
+agent_radius = 0.1
+agent_max_climb = 0.3
 
 [node name="root" type="Node"]
 
@@ -638,12 +637,11 @@ script = ExtResource("31_jxgre")
 
 [node name="EnemyManager" type="Node3D" parent="Managers"]
 script = ExtResource("32_5uwml")
-maxSpawnDistance = 50
-maxAmountOfEnemies = 60
+maxSpawnDistance = 100
+maxAmountOfEnemies = 30
 gruntsRatio = 75
 elitesRatio = 20
 minibossRatio = 5
-enemyScenes = Array[PackedScene]([ExtResource("33_rxnpk"), ExtResource("34_i8xc5"), ExtResource("35_tsjyp"), ExtResource("36_lgumw")])
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("CAMERA_CONTROLLER")]
 unique_name_in_owner = true
@@ -651,7 +649,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35013, 0)
 collision_layer = 16
 collision_mask = 385
 script = ExtResource("3_tg7rf")
-SPEED = 10.0
+SPEED = 8.0
 MOUSE_SENSITIVITY = 0.3
 CAMERA_CONTROLLER = NodePath("Camera3D")
 
@@ -717,10 +715,10 @@ navigation_mesh = SubResource("NavigationMesh_hd2va")
 script = ExtResource("36_80yqo")
 
 [node name="item_vitutus" parent="." instance=ExtResource("38_n4e21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.261434, -4, 8.66228)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2538, -4, 0.0919775)
 
 [node name="WandTuner2" parent="." instance=ExtResource("38_r4agk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.72758, -3.94834, 4.76312)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50958, -3.94834, 4.02021)
 
 [connection signal="mouse_entered" from="WandTuner/base/InventorySlot" to="WandTuner/base/InventorySlot" method="_on_mouse_entered"]
 [connection signal="pressed" from="WandTuner/base/ApplyButton" to="WandTuner" method="_on_apply_button_pressed"]

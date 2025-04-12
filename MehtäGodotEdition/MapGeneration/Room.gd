@@ -44,35 +44,17 @@ func GetOverLapping()-> bool:
 	return false
 	pass
 
-func SpawnGrunt():
+func Spawn():
 	var spawnPoint:EnemySpawnPoint = GetEnemySpawnPoint()
 	if spawnPoint == null:
 		return
-	var rng = randi_range(0,roomGruntsIds.size()-1)
-	var chosen: PackedScene = Global.enemyManager.enemyScenes[roomGruntsIds[rng]]
-	spawnPoint.Spawn(chosen)
-		
+	spawnPoint.Spawn()
 	pass
-	
-func SpawnElite():
-	var spawnPoint:EnemySpawnPoint = GetEnemySpawnPoint()
-	if spawnPoint == null:
-		return
-	var rng = randi_range(0,roomElitesIds.size()-1)
-	var chosen: PackedScene = Global.enemyManager.enemyScenes[roomElitesIds[rng]]
-	spawnPoint.Spawn(chosen)
-	pass
-	
-func SpawnMiniboss():
-	var spawnPoint:EnemySpawnPoint = GetEnemySpawnPoint()
-	if spawnPoint == null:
-		return
-	var rng = randi_range(0,roomMinibossIds.size()-1)
-	var chosen: PackedScene = Global.enemyManager.enemyScenes[roomMinibossIds[rng]]
-	spawnPoint.Spawn(chosen)
-	pass
+
 	
 func GetEnemySpawnPoint()-> EnemySpawnPoint:
+	if enemySpawnPoints.size() == 0:
+		return null
 	var rng = randi_range(0,enemySpawnPoints.size()-1)
 	var chosen:EnemySpawnPoint = enemySpawnPoints[rng]
 	

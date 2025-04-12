@@ -139,7 +139,7 @@ mancatcherSpeed = 60.0
 mancatcherProjectilePool = NodePath("ManCatcherProjectilePool")
 cageAbility = ExtResource("2_e8ovw")
 displayName = "Warden"
-speed = 3.0
+speed = 5.0
 accel = 10.0
 stoppingDistance = 2.0
 eyes = NodePath("Eyes")
@@ -181,9 +181,8 @@ shaded = true
 alpha_cut = 1
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_k5f0x")
-animation = &"idle_back"
-autoplay = "walk_front"
-frame_progress = 0.263118
+animation = &"idle_front"
+autoplay = "idle_front"
 
 [node name="SpellMods" type="Node" parent="."]
 script = ExtResource("31_vf4le")

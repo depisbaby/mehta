@@ -13,7 +13,7 @@ var healTick: float
 
 func _ready():
 	super._ready()
-	
+	name = "Lake horror"
 	#projectilePool.ReinitializePool(Global.magicManager.GetSpell("Wasgul", spellMods), 5)
 	
 	customActionTick = 50
@@ -31,10 +31,13 @@ func Die():
 	pass
 
 func _process(delta):
-	if !sleeping:
+	if !spawned:
+		return
+	
+	if !dead:
 		ball1.rotate_object_local(Vector3(0.0,1.0, 0.0),delta)
 		ball2.rotate_object_local(Vector3(0.0,1.0, 0.0),-delta)
-		
+
 		if distanceToPlayer < 10.0:
 			Global.hud.MakeBlinder(delta*0.2)
 			pass
@@ -53,7 +56,7 @@ func CheckPlayerPerspective():
 	pass
 	
 func Despawn():
-	projectilePool.DeleteProjectiles()	
+	projectilePool.ReturnAllProjectiles()	
 	super.Despawn()
 	
 func DoCustomAction():

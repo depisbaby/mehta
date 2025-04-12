@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bm2oqaue1awdi"]
+[gd_scene load_steps=15 format=3 uid="uid://bm2oqaue1awdi"]
 
 [ext_resource type="Script" path="res://MapGeneration/Room.gd" id="1_ohigw"]
 [ext_resource type="PackedScene" uid="uid://dv72humn7nsu1" path="res://MapGeneration/RoomParts/ceiling1.tscn" id="2_8gicu"]
@@ -8,10 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bhm4x42jwa8hg" path="res://MapGeneration/RoomParts/pilar1.tscn" id="6_he8k6"]
 [ext_resource type="PackedScene" uid="uid://dnhns4clo4hsy" path="res://PackedScenes/MapObjects/Door.tscn" id="7_gtj2a"]
 [ext_resource type="PackedScene" uid="uid://c2r0wxbl1honm" path="res://MapGeneration/RoomParts/rail1.tscn" id="7_tlvc8"]
-[ext_resource type="Material" uid="uid://b4qwjjpjrsnk1" path="res://Materials/Objects/ladder.material" id="10_6w51v"]
-[ext_resource type="ArrayMesh" uid="uid://d25qoxyfgnb1q" path="res://3D Models/ladder.obj" id="11_0cbu8"]
+[ext_resource type="PackedScene" uid="uid://dvya8brxtt5wb" path="res://PackedScenes/MapObjects/Ladder.tscn" id="9_4lka2"]
 [ext_resource type="PackedScene" uid="uid://ccf0efv1b07sq" path="res://PackedScenes/EnemySpawnPoint.tscn" id="12_1vnij"]
-[ext_resource type="Script" path="res://Scripts/Ladder.gd" id="12_8bykx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pvnvg"]
 size = Vector3(60.0849, 20.1199, 12.3292)
@@ -24,12 +22,6 @@ size = Vector3(10.1533, 20.0908, 9.15655)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ormmt"]
 size = Vector3(10.1596, 11.0002, 9.07672)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_q2jj7"]
-data = PackedVector3Array(-0.1586, 12.7394, -1, 0.1586, 12.7394, -1, -0.1586, 12.7394, 1, -0.1586, 12.7394, 1, 0.1586, 12.7394, -1, 0.1586, 12.7394, 1, 0.1586, 12.7394, 1, 0.1586, -1, 1, -0.1586, 12.7394, 1, -0.1586, 12.7394, 1, 0.1586, -1, 1, -0.1586, -1, 1, -0.1586, 12.7394, 1, -0.1586, -1, 1, -0.1586, 12.7394, -1, -0.1586, 12.7394, -1, -0.1586, -1, 1, -0.1586, -1, -1, 0.1586, -1, -1, -0.1586, -1, -1, 0.1586, -1, 1, 0.1586, -1, 1, -0.1586, -1, -1, -0.1586, -1, 1, 0.1586, 12.7394, -1, 0.1586, -1, -1, 0.1586, 12.7394, 1, 0.1586, 12.7394, 1, 0.1586, -1, -1, 0.1586, -1, 1, -0.1586, 12.7394, -1, -0.1586, -1, -1, 0.1586, 12.7394, -1, 0.1586, 12.7394, -1, -0.1586, -1, -1, 0.1586, -1, -1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_mbv1h"]
-size = Vector3(1, 13.101, 1)
 
 [node name="GenericRoom2" type="Node3D" node_paths=PackedStringArray("doors", "overlapBoxes")]
 script = ExtResource("1_ohigw")
@@ -399,25 +391,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 [node name="Seal4" parent="." instance=ExtResource("4_frv8t")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 10.094, 9, -8.8864)
 
-[node name="Ladder" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0.0356495, 0.999364, -1.55829e-09, 0.999364, -0.0356495, -4.36836e-08, 7.41881, -5.98251, 6.11574)
-material_override = ExtResource("10_6w51v")
-mesh = ExtResource("11_0cbu8")
-script = ExtResource("12_8bykx")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Ladder"]
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_q2jj7")
-
-[node name="Area3D" type="Area3D" parent="Ladder"]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ladder/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, -1.88738e-15, -7.74492e-13, 2.42029e-14, 1, 0, 6.05051, 0)
-shape = SubResource("BoxShape3D_mbv1h")
+[node name="Ladder" parent="." instance=ExtResource("9_4lka2")]
 
 [node name="EnemySpawnPoints" type="Node3D" parent="."]
 
@@ -450,6 +424,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.471897, 5.01841, -1.41812)
 
 [node name="EnemySpawnPoint10" parent="EnemySpawnPoints" instance=ExtResource("12_1vnij")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.43037, 5.01841, -11.9276)
-
-[connection signal="body_entered" from="Ladder/Area3D" to="Ladder" method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Ladder/Area3D" to="Ladder" method="_on_area_3d_body_exited"]

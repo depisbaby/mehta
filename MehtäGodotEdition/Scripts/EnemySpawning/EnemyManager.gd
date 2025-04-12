@@ -6,7 +6,17 @@ class_name EnemyManager
 @export var gruntsRatio: int
 @export var elitesRatio: int
 @export var minibossRatio: int
-@export var enemyScenes: Array[PackedScene]
+var gruntScenes: Array[PackedScene] = [
+	preload("res://PackedScenes/Enemies/enemy_prisoner.tscn"),
+]
+var eliteScenes: Array[PackedScene] = [
+	preload("res://PackedScenes/Enemies/enemy_warden.tscn"),
+]
+var minibossScenes: Array[PackedScene]= [
+	preload("res://PackedScenes/Enemies/enemy_lakehorror.tscn"),
+]
+
+var enemyPool: Array[NavAgent]
 
 var tick: int
 var amountOfSpawnedEnemies: int
@@ -30,12 +40,12 @@ func _physics_process(delta):
 		
 	tick = tick + 1
 	
-	if tick % 60*10 == 0:
-		AttemptSpawn()
+	if tick % (60) == 0:
+		AmbientSpawning()
 	
 	pass
 
-func AttemptSpawn():
+func AmbientSpawning():
 	if amountOfSpawnedEnemies >= maxAmountOfEnemies:
 		return
 	
@@ -51,16 +61,7 @@ func AttemptSpawn():
 	if room == null:
 		return
 	
-	var total = gruntsRatio + elitesRatio + minibossRatio
-	var rng = randi_range(0,total)
-	if rng <= gruntsRatio:
-		room.SpawnGrunt()
-	
-	elif  rng > gruntsRatio && rng < (gruntsRatio + elitesRatio):
-		room.SpawnElite()
-		
-	elif rng >= (gruntsRatio + elitesRatio):
-		room.SpawnMiniboss()
+	room.Spawn()
 	
 	pass
 
@@ -70,6 +71,46 @@ func AddRoom(room:Room):
 	
 func AddEnemy():
 	amountOfSpawnedEnemies = amountOfSpawnedEnemies + 1
+	print("Enemy spawned. Amount of enemies: ", amountOfSpawnedEnemies)
 	
 func RemoveEnemy():
 	amountOfSpawnedEnemies = amountOfSpawnedEnemies - 1
+	print("Enemy despawned. Amount of enemies: ", amountOfSpawnedEnemies)
+
+func InitializeTyrmaPool():
+	for i in 30:
+		
+		var total = gruntsRatio + elitesRatio + minibossRatio
+		var rng = randi_range(0,total)
+		var instance:NavAgent
+		if rng <= gruntsRatio:
+			var rng1 = randi_range(0, gruntScenes.size()-1)
+			instance = gruntScenes[rng1].instantiate()
+		
+		elif  rng > gruntsRatio && rng < (gruntsRatio + elitesRatio):
+			var rng1 = randi_range(0, eliteScenes.size()-1)
+			instance = eliteScenes[rng1].instantiate()
+			
+		elif rng >= (gruntsRatio + elitesRatio):
+			var rng1 = randi_range(0, minibossScenes.size()-1)
+			instance = minibossScenes[rng1].instantiate()
+		
+		add_child(instance)
+		enemyPool.push_back(instance) 
+		instance.hide()
+		instance.global_position = Vector3(1000,1000,1000)
+	pass
+
+func ReturnToPool(enemy: NavAgent):
+	enemy.spawned = false
+	enemy.hide()
+	enemy.global_position = Vector3(1000,1000,1000)
+	enemyPool.push_back(enemy)
+	pass
+	
+func PopFromPool()->NavAgent:
+	if enemyPool.size() == 0:
+		return null
+	var enemy: NavAgent = enemyPool.pop_front()
+	enemy.show()
+	return enemy

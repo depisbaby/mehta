@@ -25,6 +25,7 @@ var customActionTick: int
 var cycleProgress:float
 var sleeping: bool
 var dead: bool
+var spawned: bool
 var knowsAboutPlayer: bool
 var seesPlayer: bool
 var targetMovePosition: Vector3
@@ -42,6 +43,7 @@ var originSpawnPoint: EnemySpawnPoint
 
 @onready var debug: PackedScene = preload("res://PackedScenes/Debug/debugsphere.tscn")
 
+
 func WakeUp():
 	sleeping = false
 	originSpawnPoint.occupied = false
@@ -56,32 +58,47 @@ func Die():
 	Despawn()
 	
 func  Despawn():
+	spawned = false
+	sleeping = true
+	dead = false
 	Global.enemyManager.RemoveEnemy()
-	queue_free()
+	Global.enemyManager.ReturnToPool(self)
+	
 	pass
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func Spawn():
 	health.SetHealth(health.maxHealth)
 	if health.health <= 0:
 		health.SetHealth(1)
 	targetMovePosition = global_position
 	if customActionTick == 0:
-		customActionTick = 60
+		customActionTick = 1
 	currentAction = Action.NONE
 	facingDirection = Vector3(randi_range(-1,1),0,randi_range(-1,1))
 	visionRaycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),1)
 	player = Global.player as Player
+	knowsAboutPlayer = false
 	health.ownerName = displayName
 	Global.enemyManager.AddEnemy()
 	tick = randi_range(0,60)
+	spawned = true
+	sleeping = true
+	dead = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	visionRaycast = PhysicsRayQueryParameters3D.create(Vector3(0,0,0), Vector3(0,0,0),1)
 	pass # Replace with function body.
 
 
 func _physics_process(delta):
 	
+	if !spawned:
+		return
+	
 	if(sleeping == false && dead == false):
 		
+		print(name, " awake!")
 		CheckHealth()
 		GetDistanceToPlayer()
 		LogicCycle(delta)
@@ -159,6 +176,7 @@ func Move(delta):
 	if !nav.is_target_reachable():
 		#print("not reachable")
 		currentAction = Action.NONE
+		isWalking = false
 		return
 	
 	direction = nav.get_next_path_position() - global_position

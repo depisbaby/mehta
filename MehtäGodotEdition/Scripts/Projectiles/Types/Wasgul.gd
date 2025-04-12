@@ -1,6 +1,9 @@
 extends Projectile
 var overrideSpeed: float
 
+func _ready():
+	name = "Wasgul"
+
 func Shoot(startPosition: Vector3, startDirection: Vector3):
 	super.Shoot(startPosition, startDirection)
 	overrideSpeed = 2.0

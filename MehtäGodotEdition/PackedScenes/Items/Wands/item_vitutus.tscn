@@ -55,5 +55,5 @@ projectilePackedScene = ExtResource("7_otc4a")
 script = ExtResource("7_xmg0t")
 damage = 16
 speed = 30.0
-coolDown = 0.2
+coolDown = 0.01
 lifeSpan = 5.0

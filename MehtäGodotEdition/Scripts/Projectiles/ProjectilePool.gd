@@ -37,18 +37,17 @@ func GetProjectile() -> Projectile:
 	var projectile = projectileQueue.pop_front()
 	return projectile
 
-func DeleteProjectiles():
+func ReturnAllProjectiles():
 	for i in projectilePool:
-		i.DeleteFromMemory()
+		i.Despawn()
 		
-	projectilePrefab.DeleteFromMemory()
 	
 		
 func ReinitializePool(_projectilePrefab:Projectile, size:int):
 	
 	#clear the previous pool
 	if !projectilePool.is_empty():
-		DeleteProjectiles()
+		ReturnAllProjectiles()
 		projectilePool.clear()
 		projectileQueue.clear()
 	

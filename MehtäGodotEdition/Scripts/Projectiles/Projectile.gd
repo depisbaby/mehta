@@ -127,9 +127,7 @@ func DespawnAfterTime(time: float):
 	if _awake:
 		Despawn()
 	pass
-	
-func DeleteFromMemory():
-	queue_free()
+
 
 func ApplySpellMods(_spellMods):
 	spellMods = _spellMods

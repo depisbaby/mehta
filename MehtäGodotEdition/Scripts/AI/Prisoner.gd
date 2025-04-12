@@ -3,6 +3,7 @@ extends NavAgent
 func _ready():
 	super._ready()
 	speed = speed + randf_range(-1.0, 1.0)
+	name = "Prisoner"
 
 func ReactToDamage():
 	

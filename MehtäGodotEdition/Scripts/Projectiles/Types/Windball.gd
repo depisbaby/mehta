@@ -8,6 +8,7 @@ var rng = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
+	name = "Windball"
 	pass # Replace with function body.
 
 func Shoot(startPosition: Vector3, startDirection: Vector3):
